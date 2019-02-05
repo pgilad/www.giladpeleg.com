@@ -1,0 +1,32 @@
+.link {
+    margin-top: 10px;
+    text-align: justify;
+}
+
+.me-tag {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.main-wrapper {
+    display: flex;
+    flex-direction: row;
+    padding-top: 40px;
+}
+
+.blog-post-link {
+    box-shadow: none;
+    color: seagreen;
+    text-decoration: underline;
+}
+
+.link-icon {
+    height: 20px;
+    margin: 0 0 0 10px;
+    vertical-align: text-bottom;
+    width: 20px;
+}
+
+.blog-post {
+    margin-bottom: 30px;
+}

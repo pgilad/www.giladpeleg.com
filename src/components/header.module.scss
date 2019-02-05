@@ -1,0 +1,43 @@
+.header {
+    display: block;
+    height: 300px;
+    position: relative;
+}
+
+.top-image {
+    bottom: 0;
+    height: auto;
+    left: 0;
+    position: absolute !important;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+
+.home-link {
+    background-color: white;
+    box-shadow: none;
+    color: seagreen;
+    font-size: 18px;
+    left: 0;
+    padding: 4px;
+    position: absolute;
+    text-decoration: none;
+    top: 0;
+}
+
+.title-container {
+    background-color: white;
+    display: inline-block;
+    left: 100px;
+    padding: 20px 50px;
+    position: relative;
+    top: 100px;
+    vertical-align: middle;
+}
+
+.title {
+    color: seagreen;
+    margin: 0;
+    text-decoration: none;
+}

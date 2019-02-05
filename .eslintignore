@@ -1,0 +1,5 @@
+# node_modules ignored by default
+.cache/
+public/
+node_modules/
+src/generated/
