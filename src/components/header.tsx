@@ -1,5 +1,5 @@
 import { graphql, Link, StaticQuery } from 'gatsby';
-import Img from 'gatsby-image';
+import Img, { GatsbyImageProps } from 'gatsby-image';
 import React from 'react';
 
 import styles from './header.module.scss';
@@ -9,12 +9,18 @@ const query = graphql`
         topImage: file(relativePath: { eq: "top-image.png" }) {
             childImageSharp {
                 fluid(maxWidth: 1280) {
-                    ...GatsbyImageSharpFluid
+                    ...GatsbyImageSharpFluid_withWebp
                 }
             }
         }
     }
 `;
+
+interface Data {
+    topImage: {
+        childImageSharp: GatsbyImageProps;
+    };
+}
 
 interface Props {
     title: string;
@@ -23,7 +29,7 @@ interface Props {
 export const Header: React.FC<Props> = props => (
     <StaticQuery
         query={query}
-        render={data => {
+        render={(data: Data) => {
             return (
                 <header className={styles.header}>
                     <Img fluid={data.topImage.childImageSharp.fluid} className={styles.topImage} />
