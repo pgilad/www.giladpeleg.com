@@ -5,7 +5,7 @@ import { rhythm } from '../utils/typography';
 
 import styles from './home-recent-posts.module.scss';
 
-interface RecentProps {
+interface Props {
     posts: {
         node: {
             excerpt: string;
@@ -20,7 +20,7 @@ interface RecentProps {
     }[];
 }
 
-export const HomeRecentPosts: React.FC<RecentProps> = ({ posts }) => {
+export const HomeRecentPosts: React.FC<Props> = ({ posts }) => {
     return (
         <div style={{ paddingRight: '50px' }}>
             {posts.map(({ node }) => {
