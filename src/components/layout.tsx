@@ -2,7 +2,6 @@ import { graphql, Link, StaticQuery } from 'gatsby';
 import React from 'react';
 
 import { Header } from './header';
-import './layout.css';
 
 const query = graphql`
     query {
