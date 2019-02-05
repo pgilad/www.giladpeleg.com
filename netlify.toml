@@ -2,6 +2,24 @@
     publish = "public/"
     command = "gatsby build"
 
+[[redirects]]
+    from = "http://giladpeleg.com/*"
+    to = "https://www.giladpeleg.com/:splat"
+    status = 301
+    force = true
+
+[[redirects]]
+    from = "https://giladpeleg.com/*"
+    to = "https://www.giladpeleg.com/:splat"
+    status = 301
+    force = true
+
+[[redirects]]
+    from = "http://www.giladpeleg.com/*"
+    to = "https://www.giladpeleg.com/:splat"
+    status = 301
+    force = true
+
 [[headers]]
   for = "/*"
 
