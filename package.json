@@ -52,7 +52,8 @@
     "start": "npm run develop",
     "format": "prettier --write 'src/**/*.{js,css,ts,tsx,scss}'",
     "lint": "eslint . --fix && tslint 'src/**/*.{ts,tsx}' --fix",
-    "codegen": "gql-gen --config codegen.yml"
+    "codegen": "gql-gen --config codegen.yml",
+    "prepare:release": "rm -rf public && npm run build"
   },
   "devDependencies": {
     "@types/node": "^10.12.21",
