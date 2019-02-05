@@ -20,6 +20,12 @@
     status = 301
     force = true
 
+[[redirects]]
+    from = "http://elastic-hamilton-a5c549.netlify.com/*"
+    to = "https://www.giladpeleg.com/:splat"
+    status = 301
+    force = true
+
 [[headers]]
   for = "/*"
 
