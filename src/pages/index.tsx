@@ -6,8 +6,7 @@ import { HomeRightOverview } from '../components/home-right-overview';
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
 
-import './index.css';
-import styles from './index.module.scss';
+import styles from './index.module.css';
 
 export const pageQuery = graphql`
     query {

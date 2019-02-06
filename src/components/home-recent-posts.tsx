@@ -1,9 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 
-import { rhythm } from '../utils/typography';
-
-import styles from './home-recent-posts.module.scss';
+import styles from './home-recent-posts.module.css';
 
 interface Props {
     posts: {
@@ -30,7 +28,7 @@ export const HomeRecentPosts: React.FC<Props> = ({ posts }) => {
                         <div>{node.frontmatter.date}</div>
                         <h3
                             style={{
-                                marginBottom: rhythm(1 / 4),
+                                marginBottom: '0.4375rem',
                             }}>
                             <Link className={styles.blogPostLink} to={node.fields.slug}>
                                 {title}

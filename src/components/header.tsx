@@ -2,7 +2,7 @@ import { graphql, Link, StaticQuery } from 'gatsby';
 import Img, { GatsbyImageProps } from 'gatsby-image';
 import React from 'react';
 
-import styles from './header.module.scss';
+import styles from './header.module.css';
 
 const query = graphql`
     query {

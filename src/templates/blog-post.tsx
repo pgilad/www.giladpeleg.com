@@ -3,9 +3,8 @@ import React from 'react';
 
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
-import { rhythm, scale } from '../utils/typography';
 
-import styles from './blog-post.module.scss';
+import styles from './blog-post.module.css';
 
 export const pageQuery = graphql`
     query($slug: String!) {
@@ -56,21 +55,9 @@ const BlogTemplate: React.FC<Props> = props => {
     return (
         <Layout headerTitle={post.frontmatter.title}>
             <SEO title={post.frontmatter.title} description={post.excerpt} />
-            <p
-                style={{
-                    ...scale(1 / 5),
-                    display: 'block',
-                    marginBottom: rhythm(1),
-                    marginTop: rhythm(1),
-                }}>
-                {post.frontmatter.date}
-            </p>
+            <p className={styles.postDate}>{post.frontmatter.date}</p>
             <div dangerouslySetInnerHTML={{ __html: post.html }} />
-            <hr
-                style={{
-                    marginBottom: rhythm(1),
-                }}
-            />
+            <hr className={styles.bottomSeparator} />
             <ul className={styles.listContainer}>
                 <li>
                     {previous && previous.fields && (

@@ -6,7 +6,8 @@ import githubIcon from '../images/icons/iconmonstr-github-1.svg';
 import linkedinIcon from '../images/icons/iconmonstr-linkedin-3.svg';
 import postsIcon from '../images/icons/iconmonstr-note-19.svg';
 import twitterIcon from '../images/icons/iconmonstr-twitter-1.svg';
-import styles from './home-right-overview.module.scss';
+
+import styles from './home-right-overview.module.css';
 
 export const HomeRightOverview = () => {
     return (
