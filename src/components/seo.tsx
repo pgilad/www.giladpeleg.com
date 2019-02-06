@@ -21,7 +21,7 @@ interface Props {
     keywords?: string[];
     lang?: string;
     meta?: any[];
-    title: string;
+    title?: string;
 }
 
 interface Data {
@@ -41,7 +41,7 @@ export const SEO: React.FC<Props> = ({
     keywords = [],
     lang = 'en',
     meta = [],
-    title,
+    title = '',
 }) => {
     return (
         <StaticQuery
@@ -56,6 +56,7 @@ export const SEO: React.FC<Props> = ({
                         htmlAttributes={{
                             lang,
                         }}
+                        defaultTitle={data.site.siteMetadata.title}
                         title={title}
                         titleTemplate={`%s | ${data.site.siteMetadata.title}`}
                         meta={[

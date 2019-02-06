@@ -60,10 +60,7 @@ interface Props {
 const IndexPage: React.FC<Props> = props => {
     return (
         <Layout>
-            <SEO
-                title={props.data.site.siteMetadata.title}
-                keywords={['blog', 'personal', 'adventures']}
-            />
+            <SEO />
             <div className={styles.mainWrapper}>
                 <HomeRecentPosts posts={props.data.allMarkdownRemark.edges} />
                 <HomeRightOverview />
