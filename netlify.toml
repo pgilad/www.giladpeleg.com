@@ -30,10 +30,21 @@
   for = "/*"
 
   [headers.values]
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
-    Content-Security-Policy = "default-src 'self'; object-src 'none'; connect-src 'self'; img-src 'self' data:; media-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; worker-src 'self'; report-uri https://giladpeleg.report-uri.com/r/d/csp/enforce"
-    Report-To = '{"group":"default","max_age":31536000,"endpoints":[{"url":"https://giladpeleg.report-uri.com/a/d/g"}],"include_subdomains":true}'
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
     Feature-Policy = "fullscreen 'self'"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy = '''
+        connect-src 'self';
+        default-src 'self';
+        img-src 'self' data:;
+        media-src 'self';
+        object-src 'none';
+        script-src 'self' 'unsafe-inline';
+        style-src 'self' 'unsafe-inline';
+        worker-src 'self';
+        report-uri https://giladpeleg.report-uri.com/r/d/csp/enforce
+        '''
+    Report-To = '{"group":"default","max_age":31536000,"endpoints":[{"url":"https://giladpeleg.report-uri.com/a/d/g"}],"include_subdomains":true}'
