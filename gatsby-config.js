@@ -1,21 +1,16 @@
+const pkg = require('./package');
+const PAGE_TITLE = 'Gilad Peleg';
+
 const targetAddress = new URL(process.env.TARGET_ADDRESS || 'https://www.giladpeleg.com');
 
 module.exports = {
     siteMetadata: {
-        title: 'Gilad Peleg',
-        description: 'Read about my technological and life adventures',
-        author: 'Gilad Peleg',
+        title: PAGE_TITLE,
+        description: pkg.description,
+        author: PAGE_TITLE,
         siteUrl: targetAddress.href,
         twitterUsername: '@GiladPeleg',
-        keywords: [
-            'blog',
-            'personal',
-            'technology',
-            'writings',
-            'creative',
-            'developer',
-            'manager',
-        ],
+        keywords: pkg.keywords,
     },
     plugins: [
         'gatsby-plugin-typescript',
@@ -68,7 +63,7 @@ module.exports = {
             resolve: 'gatsby-plugin-manifest',
             options: {
                 name: 'Gilad Peleg - My Personal Page',
-                short_name: 'Gilad Peleg',
+                short_name: PAGE_TITLE,
                 start_url: '/',
                 background_color: '#663399',
                 theme_color: '#663399',
@@ -77,6 +72,6 @@ module.exports = {
                 include_favicon: true,
             },
         },
-        'gatsby-plugin-offline'
+        'gatsby-plugin-offline',
     ],
 };

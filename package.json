@@ -1,7 +1,7 @@
 {
   "name": "gilad-peleg-website",
   "private": true,
-  "description": "My Personal Blog",
+  "description": "My personal blog, where I write about technology, development methodologies and general thoughts about life",
   "version": "1.0.0",
   "author": "Gilad Peleg <gilad@giladpeleg.com> (https://www.giladpeleg.com)",
   "repo": "pgilad/personal-site",
@@ -35,10 +35,18 @@
   },
   "keywords": [
     "blog",
-    "static",
-    "gatsby",
+    "personal",
+    "technology",
+    "writings",
+    "creative",
+    "developer",
+    "thoughts",
+    "manager",
+    "gilad",
+    "peleg",
     "typescript",
-    "personal"
+    "static",
+    "gatsby"
   ],
   "license": "MIT",
   "scripts": {

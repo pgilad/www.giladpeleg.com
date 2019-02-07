@@ -65,8 +65,12 @@ export const SEO: React.FC<Props> = ({
                                 content: metaDescription,
                             },
                             {
+                                name: 'author',
+                                content: data.site.siteMetadata.author,
+                            },
+                            {
                                 property: 'og:title',
-                                content: title,
+                                content: title || data.site.siteMetadata.title,
                             },
                             {
                                 property: 'og:description',
@@ -86,11 +90,15 @@ export const SEO: React.FC<Props> = ({
                             },
                             {
                                 name: 'twitter:title',
-                                content: title,
+                                content: title || data.site.siteMetadata.title,
                             },
                             {
                                 name: 'twitter:description',
                                 content: metaDescription,
+                            },
+                            {
+                                name: 'robots',
+                                content: 'index, follow',
                             },
                         ]
                             .concat(
