@@ -59,6 +59,12 @@ module.exports = {
         'gatsby-transformer-sharp',
         'gatsby-plugin-sharp',
         {
+            resolve: 'gatsby-plugin-netlify',
+            options: {
+                mergeSecurityHeaders: false,
+            },
+        },
+        {
             resolve: 'gatsby-plugin-manifest',
             options: {
                 name: 'Gilad Peleg - My Personal Page',
@@ -71,12 +77,6 @@ module.exports = {
                 include_favicon: true,
             },
         },
-        'gatsby-plugin-offline',
-        {
-            resolve: 'gatsby-plugin-netlify',
-            options: {
-                mergeSecurityHeaders: false,
-            },
-        },
+        'gatsby-plugin-offline'
     ],
 };
