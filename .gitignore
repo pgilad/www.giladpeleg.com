@@ -71,3 +71,4 @@ yarn-error.log
 src/generated
 .netlify/
 .idea/
+*.iml
