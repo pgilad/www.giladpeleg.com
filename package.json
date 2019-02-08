@@ -53,7 +53,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "start": "npm run develop",
-    "format": "prettier --write 'src/**/*.{js,css,ts,tsx}'",
+    "format": "prettier --write 'src/**/*.{js,css,ts,tsx}' '*.js'",
     "lint": "npm run eslint && npm run tslint && npm run stylelint",
     "eslint": "eslint . --fix",
     "tslint": "tslint 'src/**/*.{ts,tsx}' --fix",
