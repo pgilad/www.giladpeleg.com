@@ -40,7 +40,7 @@ export const Layout: React.FC<Props> = ({ headerTitle, children }) => (
                         paddingTop: 0,
                     }}>
                     {children}
-                    <footer>
+                    <footer style={{ marginTop: '30px' }}>
                         © {new Date().getFullYear()} by <Link to="/">Gilad Peleg</Link>
                     </footer>
                 </div>
