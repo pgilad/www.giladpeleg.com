@@ -1,5 +1,6 @@
-.idea/
 .cache/
-public/
+.idea/
+.netlify/
 node_modules/
+public/
 src/generated/
