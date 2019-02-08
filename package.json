@@ -6,20 +6,20 @@
   "author": "Gilad Peleg <gilad@giladpeleg.com> (https://www.giladpeleg.com)",
   "repo": "pgilad/personal-site",
   "dependencies": {
-    "gatsby": "^2.0.116",
+    "gatsby": "^2.0.117",
     "gatsby-cli": "^2.4.9",
     "gatsby-image": "^2.0.29",
     "gatsby-plugin-catch-links": "^2.0.10",
     "gatsby-plugin-feed": "^2.0.13",
     "gatsby-plugin-manifest": "^2.0.17",
     "gatsby-plugin-netlify": "^2.0.9",
-    "gatsby-plugin-offline": "^2.0.22",
+    "gatsby-plugin-offline": "^2.0.23",
     "gatsby-plugin-react-helmet": "^3.0.6",
     "gatsby-plugin-robots-txt": "^1.4.0",
     "gatsby-plugin-sharp": "^2.0.20",
     "gatsby-plugin-sitemap": "^2.0.5",
     "gatsby-plugin-typescript": "^2.0.7",
-    "gatsby-remark-autolink-headers": "^2.0.13",
+    "gatsby-remark-autolink-headers": "^2.0.14",
     "gatsby-remark-copy-linked-files": "^2.0.9",
     "gatsby-remark-images": "^3.0.3",
     "gatsby-remark-prismjs": "^3.2.4",
@@ -31,7 +31,7 @@
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-helmet": "^5.2.0",
-    "typescript": "^3.3.1"
+    "typescript": "^3.3.3"
   },
   "keywords": [
     "blog",
@@ -62,7 +62,7 @@
     "prepare:release": "rm -rf public && npm run build"
   },
   "devDependencies": {
-    "@types/node": "^10.12.21",
+    "@types/node": "^10.12.23",
     "@types/react": "^16.8.2",
     "@types/react-dom": "^16.8.0",
     "@types/react-helmet": "^5.0.8",
