@@ -63,7 +63,7 @@
     "prerelease:dev": "rm -rf public && npm run build",
     "prerelease:prod": "npm run prerelease:dev",
     "release:dev": "netlify deploy",
-    "release:prod": "npm run prepare:release && netlify deploy --prod"
+    "release:prod": "netlify deploy --prod"
   },
   "devDependencies": {
     "@types/node": "^10.12.24",
