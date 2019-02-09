@@ -26,13 +26,20 @@ interface Props {
     title: string;
 }
 
+const imgTitle = 'A picture of me sitting next to a melting iceberg in Landmannalaugar, Iceland';
+
 export const Header: React.FC<Props> = props => (
     <StaticQuery
         query={query}
         render={(data: Data) => {
             return (
                 <header className={styles.header}>
-                    <Img fluid={data.topImage.childImageSharp.fluid} className={styles.topImage} />
+                    <Img
+                        fluid={data.topImage.childImageSharp.fluid}
+                        className={styles.topImage}
+                        alt={imgTitle}
+                        title={imgTitle}
+                    />
                     <Link className={styles.homeLink} title="Go to main page" to="/">
                         GP
                     </Link>
