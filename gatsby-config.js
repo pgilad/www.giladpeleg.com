@@ -2,15 +2,16 @@ const pkg = require('./package');
 const PAGE_TITLE = 'Gilad Peleg';
 
 const targetAddress = new URL(process.env.TARGET_ADDRESS || 'https://www.giladpeleg.com');
+const siteUrl = targetAddress.href.replace(/\/$/, '');
 
 module.exports = {
     siteMetadata: {
-        title: PAGE_TITLE,
-        description: pkg.description,
         author: PAGE_TITLE,
-        siteUrl: targetAddress.href,
-        twitterUsername: '@GiladPeleg',
+        description: pkg.description,
         keywords: pkg.keywords,
+        siteUrl: siteUrl,
+        title: PAGE_TITLE,
+        twitterUsername: '@GiladPeleg',
     },
     plugins: [
         'gatsby-plugin-typescript',
@@ -51,6 +52,12 @@ module.exports = {
         'gatsby-plugin-feed',
         'gatsby-plugin-catch-links',
         'gatsby-plugin-react-helmet',
+        {
+            resolve: 'gatsby-plugin-canonical-urls',
+            options: {
+                siteUrl: siteUrl,
+            },
+        },
         'gatsby-transformer-sharp',
         'gatsby-plugin-sharp',
         {
