@@ -50,15 +50,16 @@ export const SEO: React.FC<Props> = ({
                 const metaDescription = description || data.site.siteMetadata.description;
                 const metaKeywords =
                     keywords.length > 0 ? keywords : data.site.siteMetadata.keywords;
+                const pageTitle = title
+                    ? `${title} | ${data.site.siteMetadata.title}`
+                    : data.site.siteMetadata.title;
 
                 return (
                     <Helmet
                         htmlAttributes={{
                             lang,
                         }}
-                        defaultTitle={data.site.siteMetadata.title}
-                        title={title}
-                        titleTemplate={`%s | ${data.site.siteMetadata.title}`}
+                        title={pageTitle}
                         meta={[
                             {
                                 name: 'description',
@@ -70,7 +71,7 @@ export const SEO: React.FC<Props> = ({
                             },
                             {
                                 property: 'og:title',
-                                content: title || data.site.siteMetadata.title,
+                                content: pageTitle,
                             },
                             {
                                 property: 'og:description',
@@ -90,7 +91,7 @@ export const SEO: React.FC<Props> = ({
                             },
                             {
                                 name: 'twitter:title',
-                                content: title || data.site.siteMetadata.title,
+                                content: pageTitle,
                             },
                             {
                                 name: 'twitter:description',
