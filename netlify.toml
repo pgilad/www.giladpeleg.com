@@ -39,10 +39,10 @@
     Content-Security-Policy = '''
         connect-src 'self';
         default-src 'self';
-        img-src 'self' data:;
+        img-src 'self' www.google-analytics.com data:;
         media-src 'self';
         object-src 'none';
-        script-src 'self' 'unsafe-inline';
+        script-src 'self' 'unsafe-inline' www.google-analytics.com;
         style-src 'self' 'unsafe-inline';
         worker-src 'self';
         report-uri https://giladpeleg.report-uri.com/r/d/csp/enforce
