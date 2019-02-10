@@ -60,7 +60,7 @@
     "tslint": "tslint 'src/**/*.{ts,tsx}' --fix",
     "stylelint": "stylelint 'src/**/*.css' --fix",
     "codegen": "gql-gen --config codegen.yml",
-    "prerelease:dev": "rm -rf public && npm run build",
+    "prerelease:dev": "rm -rf public .cache && npm run build",
     "prerelease:prod": "npm run prerelease:dev",
     "release:dev": "netlify deploy",
     "release:prod": "netlify deploy --prod"
