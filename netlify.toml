@@ -42,7 +42,7 @@
         img-src 'self' www.google-analytics.com data:;
         media-src 'self';
         object-src 'none';
-        prefetch-src 'self' https://www.google-analytics.com;
+        prefetch-src 'self' www.google-analytics.com;
         script-src 'self' 'unsafe-inline' www.google-analytics.com;
         style-src 'self' 'unsafe-inline';
         worker-src 'self';
