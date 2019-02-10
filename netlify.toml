@@ -37,7 +37,7 @@
     Feature-Policy = "fullscreen 'self'"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Content-Security-Policy = '''
-        connect-src 'self';
+        connect-src 'self' www.google-analytics.com;
         default-src 'self';
         img-src 'self' www.google-analytics.com data:;
         media-src 'self';
