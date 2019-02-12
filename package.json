@@ -67,7 +67,7 @@
     "release:prod": "netlify deploy --prod"
   },
   "devDependencies": {
-    "@types/node": "^11.9.1",
+    "@types/node": "^11.9.2",
     "@types/react": "^16.8.2",
     "@types/react-dom": "^16.8.0",
     "@types/react-helmet": "^5.0.8",
