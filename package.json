@@ -6,11 +6,11 @@
   "author": "Gilad Peleg <gilad@giladpeleg.com> (https://www.giladpeleg.com)",
   "repo": "pgilad/personal-site",
   "dependencies": {
-    "gatsby": "^2.0.118",
-    "gatsby-cli": "^2.4.9",
+    "gatsby": "^2.0.119",
+    "gatsby-cli": "^2.4.10",
     "gatsby-image": "^2.0.29",
     "gatsby-plugin-canonical-urls": "^2.0.10",
-    "gatsby-plugin-catch-links": "^2.0.10",
+    "gatsby-plugin-catch-links": "^2.0.11",
     "gatsby-plugin-feed": "^2.0.13",
     "gatsby-plugin-google-analytics": "^2.0.13",
     "gatsby-plugin-manifest": "^2.0.17",
@@ -26,7 +26,7 @@
     "gatsby-remark-images": "^3.0.3",
     "gatsby-remark-prismjs": "^3.2.4",
     "gatsby-source-filesystem": "^2.0.20",
-    "gatsby-transformer-remark": "^2.2.4",
+    "gatsby-transformer-remark": "^2.2.5",
     "gatsby-transformer-sharp": "^2.1.13",
     "prism-themes": "^1.0.1",
     "prismjs": "^1.15.0",
@@ -67,7 +67,7 @@
     "release:prod": "netlify deploy --prod"
   },
   "devDependencies": {
-    "@types/node": "^10.12.24",
+    "@types/node": "^11.9.1",
     "@types/react": "^16.8.2",
     "@types/react-dom": "^16.8.0",
     "@types/react-helmet": "^5.0.8",
