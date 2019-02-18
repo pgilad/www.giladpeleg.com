@@ -12,6 +12,13 @@ const query = graphql`
                 twitterUsername
             }
         }
+        siteImage: file(relativePath: { eq: "top-image.png" }) {
+            childImageSharp {
+                fluid(maxWidth: 1280) {
+                    ...GatsbyImageSharpFluid
+                }
+            }
+        }
     }
 `;
 
@@ -24,6 +31,13 @@ interface Props {
 }
 
 interface Data {
+    siteImage: {
+        childImageSharp: {
+            fluid: {
+                src: string;
+            };
+        };
+    };
     site: {
         siteMetadata: {
             author: string;
@@ -50,60 +64,75 @@ export const SEO: React.FC<Props> = ({
                     ? `${title} | ${data.site.siteMetadata.title}`
                     : data.site.siteMetadata.title;
 
-                return (
-                    <Helmet
-                        htmlAttributes={{
-                            lang,
-                        }}
-                        title={pageTitle}
-                        meta={[
-                            {
-                                name: 'description',
-                                content: metaDescription,
-                            },
-                            {
-                                name: 'author',
-                                content: data.site.siteMetadata.author,
-                            },
-                            {
-                                property: 'og:title',
-                                content: pageTitle,
-                            },
-                            {
-                                property: 'og:description',
-                                content: metaDescription,
-                            },
-                            {
-                                property: 'og:type',
-                                content: 'website',
-                            },
-                            {
-                                property: 'og:url',
-                                content: url,
-                            },
-                            {
-                                name: 'twitter:card',
-                                content: 'summary',
-                            },
-                            {
-                                name: 'twitter:creator',
-                                content: data.site.siteMetadata.twitterUsername,
-                            },
-                            {
-                                name: 'twitter:title',
-                                content: pageTitle,
-                            },
-                            {
-                                name: 'twitter:description',
-                                content: metaDescription,
-                            },
-                            {
-                                name: 'robots',
-                                content: 'index, follow',
-                            },
-                        ].concat(meta)}
-                    />
-                );
+                const htmlAttributes = { lang };
+                const imageUrl = url + data.siteImage.childImageSharp.fluid.src;
+
+                const twitterMetaTags: any[] = [
+                    {
+                        name: 'twitter:card',
+                        content: 'summary',
+                    },
+                    {
+                        name: 'twitter:creator',
+                        content: data.site.siteMetadata.twitterUsername,
+                    },
+                    {
+                        name: 'twitter:site',
+                        content: data.site.siteMetadata.twitterUsername,
+                    },
+                    {
+                        name: 'twitter:title',
+                        content: pageTitle,
+                    },
+                    {
+                        name: 'twitter:description',
+                        content: metaDescription,
+                    },
+                ];
+
+                const openGraphMetaTags: any[] = [
+                    {
+                        property: 'og:title',
+                        content: pageTitle,
+                    },
+                    {
+                        property: 'og:site_name',
+                        content: data.site.siteMetadata.title,
+                    },
+                    {
+                        property: 'og:description',
+                        content: metaDescription,
+                    },
+                    {
+                        property: 'og:type',
+                        content: 'website',
+                    },
+                    {
+                        property: 'og:url',
+                        content: url,
+                    },
+                    {
+                        property: 'og:image',
+                        content: imageUrl,
+                    },
+                ];
+
+                const metaTags: any[] = [
+                    {
+                        name: 'description',
+                        content: metaDescription,
+                    },
+                    {
+                        name: 'author',
+                        content: data.site.siteMetadata.author,
+                    },
+                    {
+                        name: 'robots',
+                        content: 'index, follow',
+                    },
+                ].concat(openGraphMetaTags, twitterMetaTags, meta);
+
+                return <Helmet htmlAttributes={htmlAttributes} title={pageTitle} meta={metaTags} />;
             }}
         />
     );
