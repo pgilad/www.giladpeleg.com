@@ -39,6 +39,7 @@ interface Page {
 }
 
 interface Props {
+    location: Location;
     data: {
         markdownRemark: Page;
     };
@@ -54,7 +55,11 @@ const BlogTemplate: React.FC<Props> = props => {
 
     return (
         <Layout headerTitle={post.frontmatter.title}>
-            <SEO title={post.frontmatter.title} description={post.excerpt} />
+            <SEO
+                title={post.frontmatter.title}
+                description={post.excerpt}
+                url={props.location.href}
+            />
             <p className={styles.postDate}>{post.frontmatter.date}</p>
             <div dangerouslySetInnerHTML={{ __html: post.html }} />
             <hr className={styles.bottomSeparator} />
