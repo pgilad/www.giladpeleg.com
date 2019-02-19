@@ -15,7 +15,6 @@ export const pageQuery = graphql`
             }
         }
         markdownRemark(fields: { slug: { eq: $slug } }) {
-            id
             excerpt(pruneLength: 160)
             html
             frontmatter {
@@ -80,6 +79,7 @@ const BlogTemplate: React.FC<Props> = props => {
                         : undefined
                 }
                 imageAlt={post.frontmatter.coverAlt || undefined}
+                origin={props.location.origin}
                 title={post.frontmatter.title}
                 url={props.location.href}
             />

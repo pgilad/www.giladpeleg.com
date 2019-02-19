@@ -11,6 +11,7 @@ const NotFoundPage: React.FC<Props> = props => (
     <Layout>
         <SEO
             description="Your requested page was not found"
+            origin={props.location.origin}
             title="404: Not found"
             url={props.location.href}
         />

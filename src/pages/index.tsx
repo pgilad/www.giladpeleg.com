@@ -59,7 +59,7 @@ interface Props {
 const IndexPage: React.FC<Props> = props => {
     return (
         <Layout>
-            <SEO url={props.location.href} />
+            <SEO url={props.location.href} origin={props.location.origin} />
             <div className={styles.mainWrapper}>
                 <HomeRecentPosts posts={props.data.allMarkdownRemark.edges} />
                 <HomeRightOverview />

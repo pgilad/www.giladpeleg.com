@@ -33,6 +33,7 @@ interface Props {
     imageSrc?: string;
     lang?: string;
     meta?: any[];
+    origin: string;
     title?: string;
     url: string;
 }
@@ -61,6 +62,7 @@ export const SEO: React.FC<Props> = ({
     imageSrc = null,
     lang = 'en',
     meta = [],
+    origin,
     title = '',
     url,
 }) => {
@@ -76,9 +78,10 @@ export const SEO: React.FC<Props> = ({
                 const htmlAttributes = { lang };
 
                 const imageUrl = combineURLs(
-                    document.location.origin,
+                    origin,
                     imageSrc || data.siteImage.childImageSharp.fixed.src
                 );
+                console.log(imageUrl);
                 const imageDescription = imageAlt || DEFAULT_IMAGE_ALT;
 
                 const twitterMetaTags: any[] = [
