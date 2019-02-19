@@ -57,6 +57,7 @@
     "start": "npm run develop",
     "format": "prettier --write 'src/**/*.{js,css,ts,tsx}' '*.js'",
     "lint": "npm run eslint && npm run tslint && npm run stylelint",
+    "type-check": "tsc --project . --noEmit",
     "eslint": "eslint . --fix",
     "tslint": "tslint 'src/**/*.{ts,tsx}' --fix",
     "stylelint": "stylelint 'src/**/*.css' --fix",
