@@ -3,18 +3,9 @@ import React from 'react';
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
 
-interface Props {
-    location: Location;
-}
-
-const NotFoundPage: React.FC<Props> = props => (
+const NotFoundPage: React.FC<{}> = () => (
     <Layout>
-        <SEO
-            description="Your requested page was not found"
-            origin={props.location.origin}
-            title="404: Not found"
-            url={props.location.href}
-        />
+        <SEO description="Your requested page was not found" title="404: Not found" />
         <br />
         <h1>NOT FOUND</h1>
         <p>You just hit a route that doesn't exist... the sadness.</p>

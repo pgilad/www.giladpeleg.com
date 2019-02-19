@@ -13,6 +13,7 @@ const query = graphql`
             siteMetadata {
                 author
                 description
+                siteUrl
                 title
                 twitterUsername
             }
@@ -33,9 +34,8 @@ interface Props {
     imageSrc?: string;
     lang?: string;
     meta?: any[];
-    origin: string;
+    pathname?: string;
     title?: string;
-    url: string;
 }
 
 interface Data {
@@ -50,6 +50,7 @@ interface Data {
         siteMetadata: {
             author: string;
             description: string;
+            siteUrl: string;
             title: string;
             twitterUsername: string;
         };
@@ -62,9 +63,8 @@ export const SEO: React.FC<Props> = ({
     imageSrc = null,
     lang = 'en',
     meta = [],
-    origin,
+    pathname = '/',
     title = '',
-    url,
 }) => {
     return (
         <StaticQuery
@@ -78,10 +78,11 @@ export const SEO: React.FC<Props> = ({
                 const htmlAttributes = { lang };
 
                 const imageUrl = combineURLs(
-                    origin,
+                    data.site.siteMetadata.siteUrl,
                     imageSrc || data.siteImage.childImageSharp.fixed.src
                 );
                 const imageDescription = imageAlt || DEFAULT_IMAGE_ALT;
+                const url = combineURLs(data.site.siteMetadata.siteUrl, pathname || '/');
 
                 const twitterMetaTags: any[] = [
                     {

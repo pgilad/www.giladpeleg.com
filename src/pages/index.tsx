@@ -32,7 +32,6 @@ export const pageQuery = graphql`
 `;
 
 interface Props {
-    location: Location;
     data: {
         site: {
             siteMetadata: {
@@ -59,7 +58,7 @@ interface Props {
 const IndexPage: React.FC<Props> = props => {
     return (
         <Layout>
-            <SEO url={props.location.href} origin={props.location.origin} />
+            <SEO />
             <div className={styles.mainWrapper}>
                 <HomeRecentPosts posts={props.data.allMarkdownRemark.edges} />
                 <HomeRightOverview />
