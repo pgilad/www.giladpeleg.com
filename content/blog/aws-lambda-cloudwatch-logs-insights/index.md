@@ -18,11 +18,11 @@ This is basically a stream of events, also randomly partitioned by some sort of 
 You first select a "Log Group", which is the output of a certain AWS Lambda, and then you browse
 through the log stream:
 
-![AWS Cloudwatch Log Group](./cloudwatch-log-group-streams.png "AWS Cloudwatch Log Group")
+![AWS Cloudwatch Log Group](cloudwatch-log-group-streams.png "AWS Cloudwatch Log Group")
 
 Let's say that we select one of the log streams, then we see a stream of events (logs):
 
-![AWS Cloudwatch Log Stream Events](./cloudwatch-log-stream.png "AWS Cloudwatch Log Stream")
+![AWS Cloudwatch Log Stream Events](cloudwatch-log-stream.png "AWS Cloudwatch Log Stream")
 
 So these are your log output. Some of them are produced by AWS Lambda on lifecycle events (start, error, end),
 but most of these would probably be your `console.log` equivalent. There are several ways 
@@ -74,7 +74,7 @@ fields @timestamp, @message
 | stats count() by @entityId
 ```
 
-![Entity Count](./entity-count.png "Entity Count Example Output")
+![Entity Count](entity-count.png "Entity Count Example Output")
 
 - Plot distinct count of `@entityId` by `10 minute` bins:
 
@@ -85,7 +85,7 @@ fields @timestamp, @message
 | stats count_distinct(@entityId) by bin(10m)
 ```
 
-![Distinct Count of Entities by 10m bins](./entity-distinct-count-graph.png "Entities distinct count by 10minute bins")
+![Distinct Count of Entities by 10m bins](entity-distinct-count-graph.png "Entities distinct count by 10minute bins")
 
 So there you go. With very simple examples we can extract and plot very powerful data. 
 From the last graph, I deduce there is a decreasing number of entities in the log events over time.

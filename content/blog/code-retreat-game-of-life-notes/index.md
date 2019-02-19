@@ -11,7 +11,7 @@ cover: "./code-retreat-cover.png"
 coverAlt: "A possible Python solution to Conway's Game of Life"
 ---
 
-Today we had a [code retreat](https://www.coderetreat.org/) day at the office. I had a really good learning experience 
+Today we had a [code retreat](https://www.coderetreat.org/) at the office. I had a really good learning experience 
 and wanted to share my thoughts.
 
 In general, a developer's most important skill (and perhaps everyone's) is the ability to constantly
@@ -53,7 +53,7 @@ The constraints on the game are ways to make it more challenging (especially nea
 - Write regular code
 - Write [TDD](https://en.wikipedia.org/wiki/Test-driven_development), mostly using [Emerging Design](https://en.wikipedia.org/wiki/Emergent_Design)
 - Switch between who writes code and who writes tests
-- Practice the now popular [test && commit || revert](https://medium.com/@kentbeck_7670/test-commit-revert-870bbd756864)
+- Practice the popular [test && commit || revert](https://medium.com/@kentbeck_7670/test-commit-revert-870bbd756864)
 - 3-way pair
 
 My overall thoughts - great way to structure the drills, lots to learn and people to pair with.
@@ -133,7 +133,7 @@ it? Good question. Do developers throw away code in real life?
 Only when they consider it [legacy](https://en.wikipedia.org/wiki/Legacy_code) and refactor it away,
 or product decides to deprecate a feature (when would they do that??) with the relevant code.
 
-Deleting code is very common, just not deleting changes or code that you believe are needed. During the
+Deleting code is common, just not deleting changes or code that you believe are needed. During the
 day, keeping the code would mean making the pairs more comfortable, not something we want.
 
 A more serious take on deleting code comes with `test && commit || revert`. In this session the pairs
@@ -157,7 +157,7 @@ Got carried away I guess :)
 
 Micro-commits are a big leap forward in the developer's skills. Too many developers I see spending
 hours, or even days without a single commit. Just hacking and slashing, they try to make everything
-work. Their pull-request, amounting to numerous changed lines, would also be very hard to review later,
+work. Their pull-request, amounting to numerous changed lines, would also be hard to review later,
 gathering several hours or days (or weeks) of work.
 That's how people end up receiving comments, such as the famous "[LGTM](https://medium.freecodecamp.org/what-do-cryptic-github-comments-mean-9c1912bcc0a4)".
 
@@ -204,9 +204,9 @@ Thus most pairing is limited in learning experience for both parties.
 
 The instructor asked about how it was to switch partners. Most reactions were that people preferred
 working for a long time with the same buddy (getting comfortable again). Partner familiarity is
-very important, especially for velocity, but learning new things and getting new insights is rare
-if you've been pairing since forever (Unique exceptions apply). People were very surprised to hear
-that effective pairing is very short-term. To them, it seems that pairing is an extension, or 
+important, especially for velocity, but learning new things and getting new insights is rare
+if you've been pairing since forever (Unique exceptions apply). People were surprised to hear
+that effective pairing is short-term. To them, it seems that pairing is an extension, or 
 improvement to the steady-state path they have been walking. I haven't seen enough pairing
 to tell whether it's true or not, but my gut tells me that being pair-agile correlates with being
 agile in general, and probably correlates with openness to learn and getting real/honest feedback.
@@ -225,7 +225,7 @@ time. Either by their choice, or (evil grin) by a random choice.
 
 Another code retreat **should** be scheduled in temporal proximity. This one should focus on harder challenges, and new
 and exciting constraints and development methodologies. People have a tendency to quickly forget even important
-lessons, and this is one lesson that can very positively affect their skills (and career). 1-2 months ahead max.
+lessons, and this is one lesson that can positively affect their skills (and career). 1-2 months ahead max.
 
 Perhaps instead of attempting to crack Conway's game for the entire day, it's possible to swap
 puzzles on each session. Maybe trying [Advent of Code](https://adventofcode.com/).
