@@ -3,7 +3,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 const query = graphql`
-    query {
+    query SEO {
         site {
             siteMetadata {
                 author

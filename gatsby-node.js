@@ -6,7 +6,7 @@ const getPreviousPost = (index, posts) =>
 const getNextPost = (index, posts) => (index === 0 ? null : posts[index - 1].node);
 
 exports.createPages = async ({ graphql, actions }) => {
-    const blogPost = path.resolve(__dirname, 'src/templates/blog-post.tsx');
+    const blogPostTemplate = path.resolve(__dirname, 'src/templates/blog-post.tsx');
 
     const result = await graphql(`
         {
@@ -40,7 +40,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
         actions.createPage({
             path: slug,
-            component: blogPost,
+            component: blogPostTemplate,
             context: {
                 slug,
                 previous,
