@@ -14,8 +14,8 @@ const query = graphql`
         }
         siteImage: file(relativePath: { eq: "top-image.png" }) {
             childImageSharp {
-                fluid(maxWidth: 1280) {
-                    ...GatsbyImageSharpFluid
+                fixed(width: 1200, height: 630) {
+                    ...GatsbyImageSharpFixed
                 }
             }
         }
@@ -33,7 +33,7 @@ interface Props {
 interface Data {
     siteImage: {
         childImageSharp: {
-            fluid: {
+            fixed: {
                 src: string;
             };
         };
@@ -65,7 +65,12 @@ export const SEO: React.FC<Props> = ({
                     : data.site.siteMetadata.title;
 
                 const htmlAttributes = { lang };
-                const imageUrl = url + data.siteImage.childImageSharp.fluid.src;
+
+                // TODO: this should come from page metadata
+                const imageUrl = url + data.siteImage.childImageSharp.fixed.src;
+                // TODO: this should come from page metadata
+                const imageDescription =
+                    'A picture of me sitting next to a melting iceberg in Landmannalaugar, Iceland';
 
                 const twitterMetaTags: any[] = [
                     {
@@ -87,6 +92,14 @@ export const SEO: React.FC<Props> = ({
                     {
                         name: 'twitter:description',
                         content: metaDescription,
+                    },
+                    {
+                        property: 'twitter:image',
+                        content: imageUrl,
+                    },
+                    {
+                        property: 'twitter:image:alt',
+                        content: imageDescription,
                     },
                 ];
 
@@ -114,6 +127,22 @@ export const SEO: React.FC<Props> = ({
                     {
                         property: 'og:image',
                         content: imageUrl,
+                    },
+                    {
+                        property: 'og:image:alt',
+                        content: imageDescription,
+                    },
+                    {
+                        property: 'og:image:type',
+                        content: 'image/png',
+                    },
+                    {
+                        property: 'og:image:width',
+                        content: '1200',
+                    },
+                    {
+                        property: 'og:image:height',
+                        content: '630',
                     },
                 ];
 

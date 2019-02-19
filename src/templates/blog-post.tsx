@@ -56,8 +56,8 @@ const BlogTemplate: React.FC<Props> = props => {
     return (
         <Layout headerTitle={post.frontmatter.title}>
             <SEO
-                title={post.frontmatter.title}
                 description={post.excerpt}
+                title={post.frontmatter.title}
                 url={props.location.href}
             />
             <p className={styles.postDate}>{post.frontmatter.date}</p>

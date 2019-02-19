@@ -9,7 +9,7 @@ tags:
     - game-of-life
 ---
 
-Today we had a [code retreat](https://www.coderetreat.org/) day at the office. I had a really good learning experience,
+Today we had a [code retreat](https://www.coderetreat.org/) day at the office. I had a really good learning experience 
 and wanted to share my thoughts.
 
 In general, a developer's most important skill (and perhaps everyone's) is the ability to constantly
