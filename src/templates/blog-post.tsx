@@ -21,6 +21,14 @@ export const pageQuery = graphql`
             frontmatter {
                 date(formatString: "MMMM DD, YYYY")
                 title
+                cover {
+                    childImageSharp {
+                        fixed(width: 1280, height: 630) {
+                            src
+                        }
+                    }
+                }
+                coverAlt
             }
         }
     }
@@ -31,6 +39,14 @@ interface Page {
         title: string;
         date: string;
         description?: string;
+        coverAlt?: string;
+        cover?: {
+            childImageSharp: {
+                fixed: {
+                    src: string;
+                };
+            };
+        };
     };
     fields: {
         slug: string;
@@ -58,6 +74,12 @@ const BlogTemplate: React.FC<Props> = props => {
         <Layout headerTitle={post.frontmatter.title}>
             <SEO
                 description={post.frontmatter.description || post.excerpt}
+                imageSrc={
+                    post.frontmatter.cover
+                        ? post.frontmatter.cover.childImageSharp.fixed.src
+                        : undefined
+                }
+                imageAlt={post.frontmatter.coverAlt || undefined}
                 title={post.frontmatter.title}
                 url={props.location.href}
             />

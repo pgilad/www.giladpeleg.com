@@ -7,6 +7,8 @@ tags:
     - pairing
     - development
     - game-of-life
+cover: "./code-retreat-cover.png"
+coverAlt: "A possible Python solution to Conway's Game of Life"
 ---
 
 Today we had a [code retreat](https://www.coderetreat.org/) day at the office. I had a really good learning experience 

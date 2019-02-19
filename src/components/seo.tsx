@@ -2,6 +2,11 @@ import { graphql, StaticQuery } from 'gatsby';
 import React from 'react';
 import Helmet from 'react-helmet';
 
+import { combineURLs } from '../utils/urls';
+
+const DEFAULT_IMAGE_ALT =
+    'A picture of me sitting next to a melting iceberg in Landmannalaugar, Iceland';
+
 const query = graphql`
     query SEO {
         site {
@@ -24,6 +29,8 @@ const query = graphql`
 
 interface Props {
     description?: string;
+    imageAlt?: string;
+    imageSrc?: string;
     lang?: string;
     meta?: any[];
     title?: string;
@@ -50,6 +57,8 @@ interface Data {
 
 export const SEO: React.FC<Props> = ({
     description = '',
+    imageAlt = null,
+    imageSrc = null,
     lang = 'en',
     meta = [],
     title = '',
@@ -66,11 +75,11 @@ export const SEO: React.FC<Props> = ({
 
                 const htmlAttributes = { lang };
 
-                // TODO: this should come from page metadata
-                const imageUrl = url + data.siteImage.childImageSharp.fixed.src;
-                // TODO: this should come from page metadata
-                const imageDescription =
-                    'A picture of me sitting next to a melting iceberg in Landmannalaugar, Iceland';
+                const imageUrl = combineURLs(
+                    document.location.origin,
+                    imageSrc || data.siteImage.childImageSharp.fixed.src
+                );
+                const imageDescription = imageAlt || DEFAULT_IMAGE_ALT;
 
                 const twitterMetaTags: any[] = [
                     {
