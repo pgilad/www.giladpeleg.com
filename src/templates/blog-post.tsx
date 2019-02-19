@@ -30,6 +30,7 @@ interface Page {
     frontmatter: {
         title: string;
         date: string;
+        description?: string;
     };
     fields: {
         slug: string;
@@ -56,7 +57,7 @@ const BlogTemplate: React.FC<Props> = props => {
     return (
         <Layout headerTitle={post.frontmatter.title}>
             <SEO
-                description={post.excerpt}
+                description={post.frontmatter.description || post.excerpt}
                 title={post.frontmatter.title}
                 url={props.location.href}
             />
