@@ -38,6 +38,7 @@
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Content-Security-Policy = '''
         default-src 'self' www.google-analytics.com www.giladpeleg.com;
+        font-src 'self' www.google-analytics.com www.giladpeleg.com data:;
         img-src 'self' www.google-analytics.com www.giladpeleg.com data:;
         media-src 'self' www.giladpeleg.com;
         object-src 'none';
