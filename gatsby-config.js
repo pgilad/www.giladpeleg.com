@@ -8,6 +8,7 @@ module.exports = {
     siteMetadata: {
         author: PAGE_TITLE,
         description: pkg.description,
+        disqusShortName: 'gilad-peleg-blog',
         keywords: pkg.keywords,
         siteUrl: siteUrl,
         title: PAGE_TITLE,

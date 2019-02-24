@@ -1,21 +1,26 @@
+import { DiscussionEmbed } from 'disqus-react';
 import { graphql, Link } from 'gatsby';
 import React from 'react';
 
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
+import { combineURLs } from '../utils/urls';
 
 import styles from './blog-post.module.css';
 
 export const pageQuery = graphql`
-    query($slug: String!) {
+    query BlogPostQuery($slug: String!) {
         site {
             siteMetadata {
-                title
                 author
+                disqusShortName
+                siteUrl
+                title
             }
         }
         markdownRemark(fields: { slug: { eq: $slug } }) {
             excerpt(pruneLength: 160)
+            id
             html
             frontmatter {
                 date(formatString: "MMMM DD, YYYY")
@@ -47,6 +52,7 @@ interface Page {
             };
         };
     };
+    id: string;
     excerpt: string;
     html: string;
 }
@@ -63,6 +69,12 @@ interface ExternalPage {
 interface Props {
     data: {
         markdownRemark: Page;
+        site: {
+            siteMetadata: {
+                disqusShortName: string;
+                siteUrl: string;
+            };
+        };
     };
     pageContext: {
         next?: ExternalPage;
@@ -74,6 +86,14 @@ interface Props {
 const BlogTemplate: React.FC<Props> = props => {
     const post = props.data.markdownRemark;
     const { previous, next } = props.pageContext;
+
+    const url = combineURLs(props.data.site.siteMetadata.siteUrl, props.pageContext.slug || '/');
+
+    const disqusConfig = {
+        identifier: post.id,
+        title: post.frontmatter.title,
+        url,
+    };
 
     return (
         <Layout headerTitle={post.frontmatter.title}>
@@ -107,6 +127,10 @@ const BlogTemplate: React.FC<Props> = props => {
                     )}
                 </li>
             </ul>
+            <DiscussionEmbed
+                shortname={props.data.site.siteMetadata.disqusShortName}
+                config={disqusConfig}
+            />
         </Layout>
     );
 };

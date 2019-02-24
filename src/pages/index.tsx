@@ -9,7 +9,7 @@ import { SEO } from '../components/seo';
 import styles from './index.module.css';
 
 export const pageQuery = graphql`
-    query {
+    query IndexQuery {
         site {
             siteMetadata {
                 title

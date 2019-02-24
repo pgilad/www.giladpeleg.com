@@ -4,7 +4,7 @@ import React from 'react';
 import { Header } from './header';
 
 const query = graphql`
-    query {
+    query Layout {
         site {
             siteMetadata {
                 title

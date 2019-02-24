@@ -5,7 +5,7 @@ import React from 'react';
 import styles from './header.module.css';
 
 const query = graphql`
-    query {
+    query Header {
         topImage: file(relativePath: { eq: "top-image.png" }) {
             childImageSharp {
                 fluid(maxWidth: 1280) {
