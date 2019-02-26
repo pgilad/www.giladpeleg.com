@@ -58,7 +58,7 @@
     "start": "npm run develop",
     "format": "prettier --write 'src/**/*.{js,css,ts,tsx}' '*.js'",
     "lint": "npm run eslint && npm run tslint && npm run stylelint",
-    "type-check": "tsc --project . --noEmit",
+    "typecheck": "tsc --project . --noEmit",
     "eslint": "eslint . --fix",
     "tslint": "tslint 'src/**/*.{ts,tsx}' --fix",
     "stylelint": "stylelint 'src/**/*.css' --fix",
@@ -66,7 +66,8 @@
     "prerelease:dev": "rm -rf public .cache && npm run build",
     "prerelease:prod": "npm run prerelease:dev",
     "release:dev": "netlify deploy",
-    "release:prod": "netlify deploy --prod"
+    "release:prod": "netlify deploy --prod",
+    "verify": "npm run format && npm run lint && npm run stylelint && npm run typecheck"
   },
   "devDependencies": {
     "@types/node": "^11.9.5",
@@ -75,6 +76,7 @@
     "@types/react-helmet": "^5.0.8",
     "@types/typography": "^0.16.2",
     "babel-eslint": "^10.0.1",
+    "csp-builder": "^1.0.1",
     "eslint": "^5.14.1",
     "eslint-plugin-react": "^7.12.4",
     "graphql-code-generator": "^0.17.0",
