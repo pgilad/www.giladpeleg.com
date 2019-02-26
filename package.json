@@ -4,7 +4,7 @@
   "description": "My personal blog, where I write about technology, development methodologies and general thoughts about life",
   "version": "1.0.0",
   "author": "Gilad Peleg <gilad@giladpeleg.com> (https://www.giladpeleg.com)",
-  "repo": "pgilad/personal-site",
+  "repo": "pgilad/www.giladpeleg.com",
   "dependencies": {
     "gatsby": "^2.1.18",
     "gatsby-cli": "^2.4.11",
@@ -62,10 +62,9 @@
     "tslint": "tslint 'src/**/*.{ts,tsx}' --fix",
     "stylelint": "stylelint 'src/**/*.css' --fix",
     "codegen": "gql-gen --config codegen.yml",
-    "prerelease:dev": "rm -rf public .cache && npm run build",
-    "prerelease:prod": "npm run prerelease:dev",
-    "release:dev": "netlify deploy",
-    "release:prod": "netlify deploy --prod",
+    "release-prepare": "rm -rf public && npm run build",
+    "release:dev": "GATSBY_ENV=staging npm run release-prepare && netlify deploy",
+    "release:prod": "GATSBY_ENV=production npm run release-prepare && netlify deploy --prod",
     "verify": "npm run format && npm run lint && npm run stylelint && npm run typecheck"
   },
   "devDependencies": {

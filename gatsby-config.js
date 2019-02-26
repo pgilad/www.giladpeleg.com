@@ -4,6 +4,16 @@ const PAGE_TITLE = 'Gilad Peleg';
 const targetAddress = new URL(process.env.TARGET_ADDRESS || 'https://www.giladpeleg.com');
 const siteUrl = targetAddress.href.replace(/\/$/, '');
 
+const getTrackingId = () => {
+    if (process.env.GATSBY_ENV === 'production') {
+        return 'UA-58310464-1';
+    }
+    if (process.env.GATSBY_ENV === 'staging') {
+        return 'UA-58310464-2';
+    }
+    return '';
+};
+
 module.exports = {
     siteMetadata: {
         author: PAGE_TITLE,
@@ -70,7 +80,7 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-google-analytics',
             options: {
-                trackingId: 'UA-58310464-1',
+                trackingId: getTrackingId(),
             },
         },
         {
