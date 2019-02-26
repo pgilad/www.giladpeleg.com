@@ -30,22 +30,26 @@
   for = "/*"
 
   [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
     Feature-Policy = "fullscreen 'self'"
+    Referrer-Policy = "no-referrer-when-downgrade"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-UA-Compatible = "IE=Edge,chrome=1"
+    X-XSS-Protection = "1; mode=block"
     Content-Security-Policy = '''
+        child-src 'self' *.disqus.com disqus.com;
+        connect-src 'self' www.google-analytics.com www.giladpeleg.com *.disqus.com c.disquscdn.com disqus.com;
         default-src 'self' www.google-analytics.com www.giladpeleg.com;
         font-src 'self' www.google-analytics.com www.giladpeleg.com data:;
-        img-src 'self' www.google-analytics.com www.giladpeleg.com data:;
+        img-src 'self' www.google-analytics.com www.giladpeleg.com data: *.disqus.com *.disquscdn.com disqus.com;
         media-src 'self' www.giladpeleg.com;
         object-src 'none';
-        prefetch-src 'self' www.google-analytics.com www.giladpeleg.com;
-        script-src 'self' 'unsafe-inline' www.google-analytics.com www.giladpeleg.com;
-        style-src 'self' 'unsafe-inline' www.giladpeleg.com;
+        prefetch-src 'self' www.google-analytics.com www.giladpeleg.com c.disquscdn.com disqus.com;
+        script-src 'self' 'unsafe-inline' www.google-analytics.com www.giladpeleg.com *.disqus.com c.disquscdn.com disqus.com;
+        style-src 'self' 'unsafe-inline' www.giladpeleg.com *.disqus.com c.disquscdn.com disqus.com;
         worker-src 'self' www.giladpeleg.com;
+        report-to default;
         report-uri https://giladpeleg.report-uri.com/r/d/csp/enforce
         '''
     Report-To = '{"group":"default","max_age":31536000,"endpoints":[{"url":"https://giladpeleg.report-uri.com/a/d/g"}],"include_subdomains":true}'
