@@ -6,6 +6,8 @@ tags:
     - data-science
     - meta
     - power-law
+cover: "./power-law-distribution.png"
+coverAlt: "Our own codebase follows a power law distribution of conditions"
 ---
 
 I read Kent Beck's [Conditions Are Power-Law Distributed: An Example](https://medium.com/@kentbeck_7670/conditions-are-power-law-distributed-an-example-61fa4e0d3500)
