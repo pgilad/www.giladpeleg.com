@@ -3,6 +3,7 @@ import React from 'react';
 
 import { Layout } from '../components/layout';
 import { SEO } from '../components/seo';
+import { combineURLs } from '../utils/urls';
 
 import styles from './blog-post.module.css';
 
@@ -80,9 +81,12 @@ interface Props {
     };
 }
 
+const GITHUB_CONTENT_URL = 'https://github.com/pgilad/www.giladpeleg.com/blob/master/content';
+
 const BlogTemplate: React.FC<Props> = props => {
     const post = props.data.markdownRemark;
-    const { previous, next } = props.pageContext;
+    const { previous, next, slug } = props.pageContext;
+    const githubEditUrl = combineURLs(GITHUB_CONTENT_URL, combineURLs(slug, 'index.md'));
 
     return (
         <Layout headerTitle={post.frontmatter.title}>
@@ -99,6 +103,12 @@ const BlogTemplate: React.FC<Props> = props => {
             />
             <p className={styles.postDate}>{post.frontmatter.date}</p>
             <div dangerouslySetInnerHTML={{ __html: post.html }} />
+            <a
+                className={styles.suggestAnEdit}
+                title="Suggest an edit to this post on Github"
+                href={githubEditUrl}>
+                Suggest an edit to this post
+            </a>
             <hr className={styles.bottomSeparator} />
             <ul className={styles.listContainer}>
                 <li>

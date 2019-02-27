@@ -4,7 +4,7 @@
     position: relative;
 }
 
-.top-image {
+.topImage {
     bottom: 0;
     height: auto;
     left: 0;
@@ -14,7 +14,7 @@
     width: 100%;
 }
 
-.home-link {
+.homeLink {
     background-color: white;
     box-shadow: none;
     color: #2b8653;
@@ -26,7 +26,7 @@
     top: 0;
 }
 
-.title-container {
+.titleContainer {
     background-color: white;
     display: inline-block;
     left: 7%;
@@ -53,7 +53,7 @@
         font-size: 1.2rem;
     }
 
-    .title-container {
+    .titleContainer {
         margin-right: 14%;
     }
 }

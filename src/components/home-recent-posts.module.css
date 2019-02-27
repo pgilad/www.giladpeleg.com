@@ -1,9 +1,9 @@
-.blog-post-link {
+.blogPostLink {
     box-shadow: none;
     color: seagreen;
     text-decoration: underline;
 }
 
-.blog-post {
+.blogPost {
     margin-bottom: 30px;
 }

@@ -1,4 +1,4 @@
-.list-container {
+.listContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -7,7 +7,7 @@
     padding: 0;
 }
 
-.post-date {
+.postDate {
     display: block;
     font-size: 1.1rem;
     line-height: 1.75rem;
@@ -15,6 +15,15 @@
     margin-top: 1.75rem;
 }
 
-.bottom-separator {
+.bottomSeparator {
     margin-bottom: 1.75rem;
+}
+
+.suggestAnEdit {
+    color: seagreen;
+    display: block;
+    font-size: 15px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    text-decoration-color: black;
 }
