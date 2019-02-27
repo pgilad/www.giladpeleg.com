@@ -6,9 +6,9 @@ const getPreviousPost = (index, posts) =>
 const getNextPost = (index, posts) => (index === 0 ? null : posts[index - 1].node);
 
 exports.createPages = async ({ graphql, actions }) => {
-    const blogPostTemplate = path.resolve(__dirname, 'src/templates/blog-post.tsx');
+    const BlogPostTemplate = path.resolve(__dirname, 'src/templates/blog-post.tsx');
 
-    const result = await graphql(`
+    const allMarkdown = await graphql(`
         {
             allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
                 edges {
@@ -17,6 +17,7 @@ exports.createPages = async ({ graphql, actions }) => {
                             slug
                         }
                         frontmatter {
+                            tags
                             title
                         }
                     }
@@ -25,29 +26,38 @@ exports.createPages = async ({ graphql, actions }) => {
         }
     `);
 
-    if (result.errors) {
-        throw result.errors;
+    if (allMarkdown.errors) {
+        throw allMarkdown.errors;
     }
 
-    // Create blog posts pages.
-    const posts = result.data.allMarkdownRemark.edges;
+    const markdownFiles = allMarkdown.data.allMarkdownRemark.edges;
 
-    posts.forEach((post, index) => {
-        const previous = getPreviousPost(index, posts);
-        const next = getNextPost(index, posts);
-
-        const slug = post.node.fields.slug;
-
+    // Generate blog pages
+    markdownFiles.forEach((post, index) => {
         actions.createPage({
-            path: slug,
-            component: blogPostTemplate,
+            component: BlogPostTemplate,
+            path: post.node.fields.slug,
             context: {
-                slug,
-                previous,
-                next,
+                next: getNextPost(index, markdownFiles),
+                previous: getPreviousPost(index, markdownFiles),
+                slug: post.node.fields.slug,
+                tags: post.node.fields.tags,
             },
         });
     });
+
+    // const uniqueTags = new Set(markdownFiles.flatMap(page => page.node.frontmatter.tags || []));
+
+    // TODO: Generate tags
+    // uniqueTags.forEach(tag => {
+    //     actions.createPage({
+    //         path: `tags/${tag}`,
+    //         component: PostsByTagTemplate,
+    //         context: {
+    //             tag: tag,
+    //         },
+    //     });
+    // });
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
