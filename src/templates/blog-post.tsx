@@ -104,12 +104,10 @@ const BlogTemplate: React.FC<Props> = props => {
                 imageAlt={post.frontmatter.coverAlt || undefined}
                 pathname={props.pageContext.slug}
                 title={post.frontmatter.title}
-                article={
-                    {
-                        publishedDate: post.frontmatter.isoDate,
-                        tags: post.frontmatter.tags
-                    }
-                }
+                article={{
+                    publishedDate: post.frontmatter.isoDate,
+                    tags: post.frontmatter.tags,
+                }}
             />
             <p className={styles.postDate}>{post.frontmatter.date}</p>
             <div dangerouslySetInnerHTML={{ __html: post.html }} />
