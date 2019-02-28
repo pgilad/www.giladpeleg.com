@@ -22,7 +22,9 @@ export const pageQuery = graphql`
             html
             frontmatter {
                 date(formatString: "MMMM DD, YYYY")
+                isoDate: date
                 title
+                tags
                 coverAlt
                 cover {
                     childImageSharp {
@@ -38,10 +40,6 @@ export const pageQuery = graphql`
 
 interface Page {
     frontmatter: {
-        title: string;
-        date: string;
-        description?: string;
-        coverAlt?: string;
         cover?: {
             childImageSharp: {
                 fixed: {
@@ -49,6 +47,12 @@ interface Page {
                 };
             };
         };
+        coverAlt?: string;
+        date: string;
+        description?: string;
+        isoDate: string;
+        tags?: string[];
+        title: string;
     };
     id: string;
     excerpt: string;
@@ -100,6 +104,12 @@ const BlogTemplate: React.FC<Props> = props => {
                 imageAlt={post.frontmatter.coverAlt || undefined}
                 pathname={props.pageContext.slug}
                 title={post.frontmatter.title}
+                article={
+                    {
+                        publishedDate: post.frontmatter.isoDate,
+                        tags: post.frontmatter.tags
+                    }
+                }
             />
             <p className={styles.postDate}>{post.frontmatter.date}</p>
             <div dangerouslySetInnerHTML={{ __html: post.html }} />

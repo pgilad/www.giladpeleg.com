@@ -52,6 +52,11 @@ interface Props {
     meta?: any[];
     pathname?: string;
     title?: string;
+    article?: {
+        modifiedDate?: string;
+        publishedDate: string;
+        tags?: string[];
+    };
 }
 
 interface Data {
@@ -81,6 +86,7 @@ export const SEO: React.FC<Props> = ({
     meta = [],
     pathname = '/',
     title = '',
+    article,
 }) => {
     return (
         <StaticQuery
@@ -147,10 +153,6 @@ export const SEO: React.FC<Props> = ({
                         content: metaDescription,
                     },
                     {
-                        property: 'og:type',
-                        content: 'website',
-                    },
-                    {
                         property: 'og:url',
                         content: url,
                     },
@@ -179,6 +181,34 @@ export const SEO: React.FC<Props> = ({
                         content: 'en_US',
                     },
                 ];
+
+                if (article) {
+                    openGraphMetaTags.push(
+                        {
+                            property: 'og:type',
+                            content: 'article',
+                        },
+                        {
+                            property: 'og:article:author',
+                            content: data.site.siteMetadata.author,
+                        },
+                        {
+                            property: 'og:article:published_time',
+                            content: article.publishedDate,
+                        }
+                    );
+                    new Set(article.tags).forEach(tag => {
+                        openGraphMetaTags.push({
+                            property: 'og:article:tag',
+                            content: tag,
+                        });
+                    });
+                } else {
+                    openGraphMetaTags.push({
+                        property: 'og:type',
+                        content: 'website',
+                    });
+                }
 
                 const generalMetaTags: MetaTag[] = [
                     {
