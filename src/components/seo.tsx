@@ -158,6 +158,10 @@ export const SEO: React.FC<Props> = ({
                         property: 'og:image:height',
                         content: openGraphImageHeight,
                     },
+                    {
+                        property: 'og:locale',
+                        content: 'en_US',
+                    },
                 ];
 
                 const metaTags: any[] = [
