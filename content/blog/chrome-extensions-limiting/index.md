@@ -21,10 +21,10 @@ in that case it's obvious why the extension wants access to your browsing data.
 
 In any case, it's possible to limit the extension by yourself, if you still want to use it.
 
-1. Goto [chrome://extensions](chrome://extensions) and find your extension ![Violating extension](./extension-details.png)
+1. Goto [chrome://extensions](chrome://extensions) and find your extension ![Violating extension](extension-details.png)
 2. Click on Details
 3. Browse down to the `Permissions` section
-4. On the right there is a drop down allowing you to toggle between modes of site access. ![Mode dropdown](./on-specific-sites.png)
+4. On the right there is a drop down allowing you to toggle between modes of site access. ![Mode dropdown](on-specific-sites.png)
 5. The safest option (besides disabling/removing the extension) is to select `On click`. This means the extension would work only if you click on it on the right hand icon bar.
 6. Your next best option is to select `On specific sites` and enter the sites your want the extension to work on. Sometimes the extension would run communications with it's background page and a 3rd party domain. This is acceptable as long as it's the service backend url, or a known analytics party (and the extension declared it). If the extension is mis-behaving you might need to find this backend url, it's sometimes found in JS errors, or in the background page (Click on the background page to inspect it).
 
