@@ -26,6 +26,8 @@ module.exports = {
     },
     plugins: [
         'gatsby-plugin-typescript',
+        'gatsby-transformer-sharp',
+        'gatsby-plugin-sharp',
         {
             resolve: 'gatsby-source-filesystem',
             options: {
@@ -44,17 +46,23 @@ module.exports = {
             resolve: 'gatsby-transformer-remark',
             options: {
                 plugins: [
-                    'gatsby-plugin-sharp',
                     {
                         resolve: 'gatsby-remark-images',
                         options: {
-                            maxWidth: 800,
-                            withWebp: true,
                             backgroundColor: 'transparent',
+                            linkImagesToOriginal: true,
+                            maxWidth: 700,
+                            quality: 90,
+                            withWebp: true,
                         },
                     },
                     'gatsby-remark-prismjs',
-                    'gatsby-remark-copy-linked-files',
+                    {
+                        resolve: 'gatsby-remark-copy-linked-files',
+                        options: {
+                            ignoreFileExtensions: [],
+                        },
+                    },
                     'gatsby-remark-autolink-headers',
                 ],
             },
@@ -70,8 +78,6 @@ module.exports = {
                 siteUrl: siteUrl,
             },
         },
-        'gatsby-transformer-sharp',
-        'gatsby-plugin-sharp',
         {
             resolve: 'gatsby-plugin-netlify',
             options: {
