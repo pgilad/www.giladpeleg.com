@@ -44,17 +44,18 @@ module.exports = {
             resolve: 'gatsby-transformer-remark',
             options: {
                 plugins: [
+                    'gatsby-plugin-sharp',
                     {
                         resolve: 'gatsby-remark-images',
                         options: {
-                            maxWidth: 590,
+                            maxWidth: 800,
                             withWebp: true,
                             backgroundColor: 'transparent',
                         },
                     },
-                    'gatsby-remark-autolink-headers',
                     'gatsby-remark-prismjs',
                     'gatsby-remark-copy-linked-files',
+                    'gatsby-remark-autolink-headers',
                 ],
             },
         },
