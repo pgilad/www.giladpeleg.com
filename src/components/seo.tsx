@@ -7,6 +7,22 @@ import { combineURLs } from '../utils/urls';
 const DEFAULT_IMAGE_ALT =
     'A picture of me sitting next to a melting iceberg in Landmannalaugar, Iceland';
 
+interface OpenGraphMetaTag extends MetaTag {
+    content: string;
+    property: string;
+}
+
+interface TwitterMetaTag extends MetaTag {
+    content: string;
+    name: string;
+}
+
+interface MetaTag {
+    content?: string;
+    name?: string;
+    property?: string;
+}
+
 const query = graphql`
     query SEO {
         site {
@@ -84,7 +100,7 @@ export const SEO: React.FC<Props> = ({
                 const imageDescription = imageAlt || DEFAULT_IMAGE_ALT;
                 const url = combineURLs(data.site.siteMetadata.siteUrl, pathname || '/');
 
-                const twitterMetaTags: any[] = [
+                const twitterMetaTags: TwitterMetaTag[] = [
                     {
                         name: 'twitter:card',
                         content: 'summary',
@@ -106,18 +122,18 @@ export const SEO: React.FC<Props> = ({
                         content: metaDescription,
                     },
                     {
-                        property: 'twitter:image',
+                        name: 'twitter:image',
                         content: imageUrl,
                     },
                     {
-                        property: 'twitter:image:alt',
+                        name: 'twitter:image:alt',
                         content: imageDescription,
                     },
                 ];
 
                 const openGraphImageWidth = '1200';
                 const openGraphImageHeight = '630';
-                const openGraphMetaTags: any[] = [
+                const openGraphMetaTags: OpenGraphMetaTag[] = [
                     {
                         property: 'og:title',
                         content: pageTitle,
@@ -164,7 +180,7 @@ export const SEO: React.FC<Props> = ({
                     },
                 ];
 
-                const metaTags: any[] = [
+                const generalMetaTags: MetaTag[] = [
                     {
                         name: 'description',
                         content: metaDescription,
@@ -177,7 +193,13 @@ export const SEO: React.FC<Props> = ({
                         name: 'robots',
                         content: 'index, follow',
                     },
-                ].concat(openGraphMetaTags, twitterMetaTags, meta);
+                ];
+
+                const metaTags: any[] = generalMetaTags.concat(
+                    openGraphMetaTags,
+                    twitterMetaTags,
+                    meta
+                );
 
                 return <Helmet htmlAttributes={htmlAttributes} title={pageTitle} meta={metaTags} />;
             }}
