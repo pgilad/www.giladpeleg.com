@@ -58,6 +58,6 @@ ggplot(data, aes(Appearances, Count)) + geom_point() +
 This already adjusts the scales to be log2 based and we get a very similar power law distribution
 to Kent Beck's results.
 
-![Our own codebase conditions are power law distributed](power-law-distribution.png "Power law distribution of our conditions")
+![Our own codebase conditions are power law distributed](./power-law-distribution.png "Power law distribution of our conditions")
 
 Awesome!
