@@ -115,6 +115,8 @@ export const SEO: React.FC<Props> = ({
                     },
                 ];
 
+                const openGraphImageWidth = '1200';
+                const openGraphImageHeight = '630';
                 const openGraphMetaTags: any[] = [
                     {
                         property: 'og:title',
@@ -150,11 +152,11 @@ export const SEO: React.FC<Props> = ({
                     },
                     {
                         property: 'og:image:width',
-                        content: '1200',
+                        content: openGraphImageWidth,
                     },
                     {
                         property: 'og:image:height',
-                        content: '630',
+                        content: openGraphImageHeight,
                     },
                 ];
 

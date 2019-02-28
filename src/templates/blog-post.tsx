@@ -26,7 +26,7 @@ export const pageQuery = graphql`
                 coverAlt
                 cover {
                     childImageSharp {
-                        fixed(width: 1280, height: 630) {
+                        fixed(width: 1200, height: 630) {
                             src
                         }
                     }

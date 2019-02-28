@@ -1,11 +1,11 @@
-.main-wrapper {
+.mainWrapper {
     display: flex;
     flex-direction: row;
     padding-top: 40px;
 }
 
 @media only screen and (max-width: 860px) {
-    .main-wrapper {
+    .mainWrapper {
         display: block;
     }
 }
