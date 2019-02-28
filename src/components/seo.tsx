@@ -189,17 +189,17 @@ export const SEO: React.FC<Props> = ({
                             content: 'article',
                         },
                         {
-                            property: 'og:article:author',
+                            property: 'article:author',
                             content: data.site.siteMetadata.author,
                         },
                         {
-                            property: 'og:article:published_time',
+                            property: 'article:published_time',
                             content: article.publishedDate,
                         }
                     );
                     new Set(article.tags).forEach(tag => {
                         openGraphMetaTags.push({
-                            property: 'og:article:tag',
+                            property: 'article:tag',
                             content: tag,
                         });
                     });
