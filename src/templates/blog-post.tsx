@@ -2,6 +2,7 @@ import { graphql, Link } from 'gatsby';
 import React from 'react';
 
 import { Layout } from '../components/layout';
+import { PostTags } from '../components/post-tags';
 import { SEO } from '../components/seo';
 import { combineURLs } from '../utils/urls';
 
@@ -110,6 +111,7 @@ const BlogTemplate: React.FC<Props> = props => {
                 }}
             />
             <p className={styles.postDate}>{post.frontmatter.date}</p>
+            <PostTags tags={post.frontmatter.tags} />
             <div dangerouslySetInnerHTML={{ __html: post.html }} />
             <a
                 className={styles.suggestAnEdit}
@@ -118,7 +120,7 @@ const BlogTemplate: React.FC<Props> = props => {
                 Suggest an edit to this post
             </a>
             <hr className={styles.bottomSeparator} />
-            <ul className={styles.listContainer}>
+            <ul className={styles.postNavigation}>
                 <li>
                     {previous && previous.fields && (
                         <Link to={previous.fields.slug} rel="prev">

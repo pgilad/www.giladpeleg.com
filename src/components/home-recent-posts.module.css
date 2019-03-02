@@ -7,3 +7,11 @@
 .blogPost {
     margin-bottom: 30px;
 }
+
+.blogPostList {
+    padding-right: 50px;
+}
+
+.blogPostTitle {
+    margin-bottom: 0.4375rem;
+}

@@ -18,25 +18,19 @@ interface Props {
     }[];
 }
 
-export const HomeRecentPosts: React.FC<Props> = ({ posts }) => {
-    return (
-        <div style={{ paddingRight: '50px' }}>
-            {posts.map(({ node }) => {
-                const title = node.frontmatter.title || node.fields.slug;
-                return (
-                    <div key={node.fields.slug} className={styles.blogPost}>
-                        <div>{node.frontmatter.date}</div>
-                        <h3
-                            style={{
-                                marginBottom: '0.4375rem',
-                            }}>
-                            <Link className={styles.blogPostLink} to={node.fields.slug}>
-                                {title}
-                            </Link>
-                        </h3>
-                    </div>
-                );
-            })}
-        </div>
-    );
-};
+export const HomeRecentPosts: React.FC<Props> = props => (
+    <div className={styles.blogPostList}>
+        {props.posts.map(({ node }) => {
+            return (
+                <div key={node.fields.slug} className={styles.blogPost}>
+                    <div>{node.frontmatter.date}</div>
+                    <h3 className={styles.blogPostTitle}>
+                        <Link className={styles.blogPostLink} to={node.fields.slug}>
+                            {node.frontmatter.title || node.fields.slug}
+                        </Link>
+                    </h3>
+                </div>
+            );
+        })}
+    </div>
+);
