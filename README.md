@@ -19,6 +19,14 @@
 
 `npm run release:prod`
 
+## TODO
+
+- Tags in blog list
+- Tags in blog post
+- Tag pages
+- Social post share buttons
+- Post pagination
+
 ## License
 
 MIT

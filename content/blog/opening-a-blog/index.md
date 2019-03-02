@@ -1,11 +1,13 @@
 ---
 date: "2019-02-04T11:14:30.694Z"
 title: "Opening A Blog"
+tags:
+    - introduction
 ---
 
 Always wanted to open a blog and write about life, adventure & technology.
 
-The blogosphere was hot early 2010s, but now, it kind of seems late to the game.
+The blog-o-sphere was hot early 2010s, but now, it kind of seems late to the game.
 
 Adding to that, being primarily a web developer, I didn't want to use a turn-key blog of which I have no control of. To make things worse the frameworks and technologies keep rapidly changing. I tried several blogging frameworks, including Jekyll (too much magic), Hugo (super-fast, but not web optimized), Ghost and finally Gatsby.
 

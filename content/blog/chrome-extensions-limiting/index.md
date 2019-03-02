@@ -1,6 +1,13 @@
 ---
 date: "2019-02-04T18:40:31+0000"
 title: "Limiting Chrome Extensions Malicious Scope"
+tags:
+    - chrome extensions
+    - malicious
+    - security
+    - sandbox
+    - permissions
+    - scope
 ---
 
 Chrome Extensions have access to a wide range of native Chrome APIs, some which require special permission
