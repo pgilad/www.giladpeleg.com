@@ -93,22 +93,23 @@ const BlogTemplate: React.FC<Props> = props => {
     const { previous, next, slug } = props.pageContext;
     const githubEditUrl = combineURLs(GITHUB_CONTENT_URL, combineURLs(slug, 'index.md'));
 
+    const seoImageSource = post.frontmatter.cover
+        ? post.frontmatter.cover.childImageSharp.fixed.src
+        : undefined;
+    const seoArticleMetadata = {
+        publishedDate: post.frontmatter.isoDate,
+        tags: post.frontmatter.tags,
+    };
+
     return (
         <Layout headerTitle={post.frontmatter.title}>
             <SEO
+                article={seoArticleMetadata}
                 description={post.frontmatter.description || post.excerpt}
-                imageSrc={
-                    post.frontmatter.cover
-                        ? post.frontmatter.cover.childImageSharp.fixed.src
-                        : undefined
-                }
                 imageAlt={post.frontmatter.coverAlt || undefined}
+                imageSrc={seoImageSource}
                 pathname={props.pageContext.slug}
                 title={post.frontmatter.title}
-                article={{
-                    publishedDate: post.frontmatter.isoDate,
-                    tags: post.frontmatter.tags,
-                }}
             />
             <h2 className={styles.postDate}>{post.frontmatter.date}</h2>
             <PostTags tags={post.frontmatter.tags} />
