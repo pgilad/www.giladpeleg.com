@@ -112,7 +112,7 @@ const BlogTemplate: React.FC<Props> = props => {
             />
             <h2 className={styles.postDate}>{post.frontmatter.date}</h2>
             <PostTags tags={post.frontmatter.tags} />
-            <div style={{ textAlign: 'justify' }} dangerouslySetInnerHTML={{ __html: post.html }} />
+            <div className={styles.blogContent} dangerouslySetInnerHTML={{ __html: post.html }} />
             <a
                 className={styles.suggestAnEdit}
                 title="Suggest an edit to this post on Github"
