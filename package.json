@@ -58,7 +58,7 @@
     "eslint": "eslint . --fix",
     "format": "prettier --write '{src,gatsby}/**/*.{js,css,ts,tsx}' '*.js'",
     "lint": "npm run eslint && npm run tslint && npm run stylelint",
-    "release-prepare": "rm -rf public .cache && npm run build",
+    "release-prepare": "gatsby clean && npm run build",
     "release:dev": "GATSBY_ENV=staging npm run release-prepare && netlify deploy",
     "release:prod": "GATSBY_ENV=production npm run release-prepare && netlify deploy --prod",
     "start": "npm run develop",
