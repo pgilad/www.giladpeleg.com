@@ -68,10 +68,15 @@
     "verify": "npm run format && npm run lint && npm run stylelint && npm run typecheck"
   },
   "devDependencies": {
+    "@types/eslint": "^4.16.6",
     "@types/node": "^11.10.4",
+    "@types/prettier": "^1.16.1",
+    "@types/prismjs": "^1.9.1",
     "@types/react": "^16.8.6",
     "@types/react-dom": "^16.8.2",
     "@types/react-helmet": "^5.0.8",
+    "@types/source-map-support": "^0.4.2",
+    "@types/stylelint": "^9.4.2",
     "@types/typography": "^0.16.2",
     "babel-eslint": "^10.0.1",
     "csp-builder": "^1.0.1",
