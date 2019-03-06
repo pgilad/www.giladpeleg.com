@@ -483,14 +483,6 @@ pre code {
     line-height: 1.42;
 }
 
-code:before,
-code:after,
-tt:before,
-tt:after {
-    content: ' ';
-    letter-spacing: -0.2em;
-}
-
 pre code:before,
 pre code:after,
 pre tt:before,
