@@ -57,6 +57,13 @@ module.exports = {
                         },
                     },
                     {
+                        resolve: 'gatsby-remark-embed-gist',
+                        options: {
+                            username: 'pgilad',
+                            includeDefaultCss: true,
+                        },
+                    },
+                    {
                         resolve: 'gatsby-remark-prismjs',
                         options: {
                             noInlineHighlight: false,
