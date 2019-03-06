@@ -2,10 +2,10 @@ import * as CSP from 'csp-builder';
 
 const csp = new CSP.Builder();
 
-const analyticsDomain = 'www.google-analytics.com';
-const ownDomain = 'www.giladpeleg.com';
+const analyticsDomain = 'https://www.google-analytics.com';
+const ownDomain = 'httpd://www.giladpeleg.com';
 const reportUri = 'https://giladpeleg.report-uri.com/r/d/csp/enforce';
-const githubAssets = 'github.githubassets.com';
+const githubAssets = 'https://github.githubassets.com';
 
 const extensiveSourceDirective = [
     CSP.PredefinedSource.Self,
@@ -20,7 +20,7 @@ const localSourceDirective = [CSP.PredefinedSource.Self, ownDomain];
 csp.addDirective(new CSP.ConnectSource().addValue(regularSourceDirective))
     .addDirective(new CSP.DefaultSource().addValue([...regularSourceDirective, githubAssets]))
     .addDirective(new CSP.FontSource().addValue(extensiveSourceDirective))
-    .addDirective(new CSP.FrameSource().addValue([CSP.PredefinedSource.Self]))
+    .addDirective(new CSP.FrameSource().addValue(CSP.PredefinedSource.Self))
     .addDirective(
         new CSP.ImageSource().addValue([...regularSourceDirective, CSP.SchemaSource.Data])
     )
