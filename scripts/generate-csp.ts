@@ -18,7 +18,7 @@ const regularSourceDirective = [CSP.PredefinedSource.Self, analyticsDomain, ownD
 const localSourceDirective = [CSP.PredefinedSource.Self, ownDomain];
 
 csp.addDirective(new CSP.ConnectSource().addValue(regularSourceDirective))
-    .addDirective(new CSP.DefaultSource().addValue(regularSourceDirective))
+    .addDirective(new CSP.DefaultSource().addValue([...regularSourceDirective, githubAssets]))
     .addDirective(new CSP.FontSource().addValue(extensiveSourceDirective))
     .addDirective(new CSP.FrameSource().addValue([CSP.PredefinedSource.Self]))
     .addDirective(
