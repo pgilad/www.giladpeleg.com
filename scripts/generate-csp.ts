@@ -5,6 +5,7 @@ const csp = new CSP.Builder();
 const analyticsDomain = 'www.google-analytics.com';
 const ownDomain = 'www.giladpeleg.com';
 const reportUri = 'https://giladpeleg.report-uri.com/r/d/csp/enforce';
+const githubAssets = 'github.githubassets.com';
 
 const extensiveSourceDirective = [
     CSP.PredefinedSource.Self,
@@ -33,7 +34,7 @@ csp.addDirective(new CSP.ConnectSource().addValue(regularSourceDirective))
     )
     .addDirective(
         new CSP.StyleSource().addValue(
-            regularSourceDirective.concat(CSP.PredefinedSource.UnsafeInline)
+            regularSourceDirective.concat(CSP.PredefinedSource.UnsafeInline, githubAssets)
         )
     )
     .addDirective(new CSP.WorkerSource().addValue(localSourceDirective))
