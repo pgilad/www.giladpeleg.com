@@ -6,7 +6,7 @@ tags:
     - data-science
     - meta
     - power-law
-cover: "./cover.png"
+cover: "cover.png"
 coverAlt: "Our own codebase follows a power law distribution of conditions"
 ---
 

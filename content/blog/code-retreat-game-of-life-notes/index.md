@@ -7,7 +7,7 @@ tags:
     - pairing
     - development
     - game-of-life
-cover: "./code-retreat-cover.png"
+cover: "code-retreat-cover.png"
 coverAlt: "A possible Python solution to Conway's Game of Life"
 ---
 

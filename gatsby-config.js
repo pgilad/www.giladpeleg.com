@@ -51,7 +51,7 @@ module.exports = {
                         options: {
                             backgroundColor: 'transparent',
                             linkImagesToOriginal: true,
-                            maxWidth: 700,
+                            maxWidth: 590,
                             quality: 90,
                             withWebp: true,
                         },
