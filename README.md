@@ -26,6 +26,7 @@
 - Tag pages
 - Social post share buttons
 - Post pagination
+- Json-LD schema
 
 ## License
 
