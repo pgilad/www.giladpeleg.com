@@ -6,7 +6,7 @@
   "author": "Gilad Peleg <gilad@giladpeleg.com> (https://www.giladpeleg.com)",
   "repo": "pgilad/www.giladpeleg.com",
   "dependencies": {
-    "gatsby": "^2.1.23",
+    "gatsby": "^2.1.24",
     "gatsby-cli": "^2.4.13",
     "gatsby-image": "^2.0.31",
     "gatsby-plugin-canonical-urls": "^2.0.10",
@@ -71,10 +71,10 @@
   },
   "devDependencies": {
     "@types/eslint": "^4.16.6",
-    "@types/node": "^11.10.4",
+    "@types/node": "^11.10.5",
     "@types/prettier": "^1.16.1",
     "@types/prismjs": "^1.9.1",
-    "@types/react": "^16.8.6",
+    "@types/react": "^16.8.7",
     "@types/react-dom": "^16.8.2",
     "@types/react-helmet": "^5.0.8",
     "@types/source-map-support": "^0.5.0",
@@ -93,7 +93,7 @@
     "stylelint": "^9.10.1",
     "stylelint-config-recommended": "^2.1.0",
     "stylelint-order": "^2.1.0",
-    "ts-node": "^8.0.2",
+    "ts-node": "^8.0.3",
     "tslint": "^5.13.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^3.6.0"

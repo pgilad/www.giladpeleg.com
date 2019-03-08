@@ -22,7 +22,7 @@
 ## TODO
 
 - Tags in blog list
-- Tags in blog post
+- ~~Tags in blog post~~
 - Tag pages
 - Social post share buttons
 - Post pagination
