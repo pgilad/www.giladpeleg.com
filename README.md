@@ -21,12 +21,12 @@
 
 ## TODO
 
-- Tags in blog list
+- ~~Json-LD schema~~
 - ~~Tags in blog post~~
-- Tag pages
 - Social post share buttons
+- Tags in blog list
+- Tag pages
 - Post pagination
-- Json-LD schema
 
 ## License
 
