@@ -97,19 +97,19 @@ const BlogTemplate: React.FC<Props> = props => {
         ? post.frontmatter.cover.childImageSharp.fixed.src
         : undefined;
     const seoArticleMetadata = {
+        description: post.frontmatter.description || post.excerpt,
         publishedDate: post.frontmatter.isoDate,
         tags: post.frontmatter.tags,
+        title: post.frontmatter.title,
     };
 
     return (
         <Layout headerTitle={post.frontmatter.title}>
             <SEO
                 article={seoArticleMetadata}
-                description={post.frontmatter.description || post.excerpt}
                 imageAlt={post.frontmatter.coverAlt || undefined}
                 imageSrc={seoImageSource}
                 pathname={props.pageContext.slug}
-                title={post.frontmatter.title}
             />
             <h2 className={styles.postDate}>{post.frontmatter.date}</h2>
             <div className={styles.blogContent} dangerouslySetInnerHTML={{ __html: post.html }} />
