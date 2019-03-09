@@ -1,5 +1,7 @@
 import { Article, Data } from '../components/seo';
 
+import { combineURLs } from './urls';
+
 export interface OpenGraphMetaTag extends MetaTag {
     content: string;
     property: string;
@@ -188,16 +190,34 @@ export const getSchemaOrgJSONLD = (options: {
                 name: options.data.site.siteMetadata.author,
                 url: options.data.site.siteMetadata.siteUrl,
             },
+            dateModified: options.article.publishedDate,
             datePublished: options.article.publishedDate,
             description: options.article.description,
             headline: options.article.title,
             image: {
                 '@type': 'ImageObject',
                 url: options.imageUrl,
+                width: 1200,
+                height: 630,
             },
             mainEntityOfPage: options.url,
             name: options.article.title,
             url: options.url,
+            publisher: {
+                '@id': options.data.site.siteMetadata.siteUrl,
+                '@type': 'Organization',
+                name: options.data.site.siteMetadata.author,
+                url: options.data.site.siteMetadata.siteUrl,
+                logo: {
+                    '@type': 'ImageObject',
+                    url: combineURLs(
+                        options.data.site.siteMetadata.siteUrl,
+                        '/icons/icon-48x48.png'
+                    ),
+                    width: 48,
+                    height: 48,
+                },
+            },
         };
 
         const breadcrumbList = {
