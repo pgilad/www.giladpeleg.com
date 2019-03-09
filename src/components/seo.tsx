@@ -3,8 +3,11 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import {
+    getDescription,
     getGeneralMetaTags,
     getOpenGraphMetaTags,
+    getPageTitle,
+    getSchemaOrgJSONLD,
     getTwitterMetaTags,
     MetaTag,
 } from '../utils/seo';
@@ -71,89 +74,6 @@ export interface Data {
         };
     };
 }
-
-interface Entity {
-    '@context': string;
-    '@type': string;
-    [key: string]: any;
-}
-
-const getSchemaOrgJSONLD = (options: {
-    article?: Article;
-    data: Data;
-    imageUrl: string;
-    url: string;
-}) => {
-    const website = {
-        '@context': 'http://schema.org',
-        '@type': 'WebSite',
-        name: options.data.site.siteMetadata.title,
-        url: options.data.site.siteMetadata.siteUrl,
-    };
-    const schema: Entity[] = [website];
-
-    if (options.article) {
-        const blogPosting = {
-            '@context': 'http://schema.org',
-            '@type': 'BlogPosting',
-            author: {
-                '@type': 'Person',
-                name: options.data.site.siteMetadata.author,
-                url: options.data.site.siteMetadata.siteUrl,
-            },
-            datePublished: options.article.publishedDate,
-            description: options.article.description,
-            headline: options.article.title,
-            image: {
-                '@type': 'ImageObject',
-                url: options.imageUrl,
-            },
-            mainEntityOfPage: options.url,
-            name: options.article.title,
-            url: options.url,
-        };
-
-        const breadcrumbList = {
-            '@context': 'http://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-                {
-                    '@type': 'ListItem',
-                    position: 1,
-                    item: {
-                        '@id': options.url,
-                        image: options.imageUrl,
-                        name: options.article.title,
-                    },
-                },
-            ],
-        };
-
-        schema.push(breadcrumbList, blogPosting);
-    }
-
-    return schema;
-};
-
-const getDescription = (data: Data, overrideDescription?: string, article?: Article) => {
-    if (overrideDescription) {
-        return overrideDescription;
-    }
-    if (article) {
-        return article.description;
-    }
-    return data.site.siteMetadata.description;
-};
-
-const getPageTitle = (data: Data, article?: Article, overrideTitle?: string): string => {
-    if (overrideTitle) {
-        return `${overrideTitle} | ${data.site.siteMetadata.title}`;
-    }
-    if (article) {
-        return `${article.title} | ${data.site.siteMetadata.title}`;
-    }
-    return data.site.siteMetadata.title;
-};
 
 export const SEO: React.FC<Props> = ({
     article,
