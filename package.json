@@ -6,8 +6,8 @@
   "author": "Gilad Peleg <gilad@giladpeleg.com> (https://www.giladpeleg.com)",
   "repo": "pgilad/www.giladpeleg.com",
   "dependencies": {
-    "gatsby": "^2.1.24",
-    "gatsby-cli": "^2.4.13",
+    "gatsby": "^2.1.27",
+    "gatsby-cli": "^2.4.14",
     "gatsby-image": "^2.0.31",
     "gatsby-plugin-canonical-urls": "^2.0.10",
     "gatsby-plugin-catch-links": "^2.0.12",
@@ -71,7 +71,7 @@
   },
   "devDependencies": {
     "@types/eslint": "^4.16.6",
-    "@types/node": "^11.10.5",
+    "@types/node": "^11.11.0",
     "@types/prettier": "^1.16.1",
     "@types/prismjs": "^1.9.1",
     "@types/react": "^16.8.7",
