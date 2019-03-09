@@ -13,8 +13,6 @@ cover: "local-jar-jconsole-overview.png"
 coverAlt: "Using jconsole to monitor your JVM process"
 ---
 
-## Prefix
-
 Debugging applications is a key part in any developer's toolkit. Debugging applications in non-development environment is
 an even harder and more difficult challenge. It is only after your production application crashes, or you find yourself
 spending many hours (or days) trying to reproduce the customer's state in your local development environment, you understand
