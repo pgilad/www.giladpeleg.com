@@ -4,25 +4,6 @@ import Helmet from 'react-helmet';
 
 import { combineURLs } from '../utils/urls';
 
-const DEFAULT_IMAGE_ALT =
-    'A picture of me sitting next to a melting iceberg in Landmannalaugar, Iceland';
-
-interface OpenGraphMetaTag extends MetaTag {
-    content: string;
-    property: string;
-}
-
-interface TwitterMetaTag extends MetaTag {
-    content: string;
-    name: string;
-}
-
-interface MetaTag {
-    content?: string;
-    name?: string;
-    property?: string;
-}
-
 const query = graphql`
     query SEO {
         site {
@@ -44,7 +25,33 @@ const query = graphql`
     }
 `;
 
+const DEFAULT_IMAGE_ALT =
+    'A picture of me sitting next to a melting iceberg in Landmannalaugar, Iceland';
+
+interface OpenGraphMetaTag extends MetaTag {
+    content: string;
+    property: string;
+}
+
+interface TwitterMetaTag extends MetaTag {
+    content: string;
+    name: string;
+}
+
+interface MetaTag {
+    content?: string;
+    name?: string;
+    property?: string;
+}
+
+interface Article {
+    modifiedDate?: string;
+    publishedDate: string;
+    tags?: string[];
+}
+
 interface Props {
+    article?: Article;
     description?: string;
     imageAlt?: string;
     imageSrc?: string;
@@ -52,11 +59,6 @@ interface Props {
     meta?: any[];
     pathname?: string;
     title?: string;
-    article?: {
-        modifiedDate?: string;
-        publishedDate: string;
-        tags?: string[];
-    };
 }
 
 interface Data {
@@ -78,7 +80,150 @@ interface Data {
     };
 }
 
+const getTwitterMetaTags = (options: {
+    data: Data;
+    imageDescription: string;
+    imageUrl: string;
+    metaDescription: string;
+    pageTitle: string;
+}) => {
+    return [
+        {
+            name: 'twitter:card',
+            content: 'summary',
+        },
+        {
+            name: 'twitter:creator',
+            content: options.data.site.siteMetadata.twitterUsername,
+        },
+        {
+            name: 'twitter:site',
+            content: options.data.site.siteMetadata.twitterUsername,
+        },
+        {
+            name: 'twitter:title',
+            content: options.pageTitle,
+        },
+        {
+            name: 'twitter:description',
+            content: options.metaDescription,
+        },
+        {
+            name: 'twitter:image',
+            content: options.imageUrl,
+        },
+        {
+            name: 'twitter:image:alt',
+            content: options.imageDescription,
+        },
+    ] as TwitterMetaTag[];
+};
+
+const getOpenGraphMetaTags = (options: {
+    article?: Article;
+    data: Data;
+    imageDescription: string;
+    imageUrl: string;
+    metaDescription: string;
+    pageTitle: string;
+    url: string;
+}) => {
+    const openGraphImageWidth = '1200';
+    const openGraphImageHeight = '630';
+
+    const tags: OpenGraphMetaTag[] = [
+        {
+            property: 'og:title',
+            content: options.pageTitle,
+        },
+        {
+            property: 'og:site_name',
+            content: options.data.site.siteMetadata.title,
+        },
+        {
+            property: 'og:description',
+            content: options.metaDescription,
+        },
+        {
+            property: 'og:url',
+            content: options.url,
+        },
+        {
+            property: 'og:image',
+            content: options.imageUrl,
+        },
+        {
+            property: 'og:image:alt',
+            content: options.imageDescription,
+        },
+        {
+            property: 'og:image:type',
+            content: 'image/png',
+        },
+        {
+            property: 'og:image:width',
+            content: openGraphImageWidth,
+        },
+        {
+            property: 'og:image:height',
+            content: openGraphImageHeight,
+        },
+        {
+            property: 'og:locale',
+            content: 'en_US',
+        },
+    ];
+
+    if (options.article) {
+        tags.push(
+            {
+                property: 'og:type',
+                content: 'article',
+            },
+            {
+                property: 'article:author',
+                content: options.data.site.siteMetadata.author,
+            },
+            {
+                property: 'article:published_time',
+                content: options.article.publishedDate,
+            }
+        );
+        new Set(options.article.tags).forEach(tag => {
+            tags.push({
+                property: 'article:tag',
+                content: tag,
+            });
+        });
+    } else {
+        tags.push({
+            property: 'og:type',
+            content: 'website',
+        });
+    }
+
+    return tags;
+};
+
+const getGeneralMetaTags = (metaDescription: string, data: Data) => {
+    return [
+        {
+            name: 'description',
+            content: metaDescription,
+        },
+        {
+            name: 'author',
+            content: data.site.siteMetadata.author,
+        },
+        {
+            name: 'robots',
+            content: 'index, follow',
+        },
+    ] as MetaTag[];
+};
+
 export const SEO: React.FC<Props> = ({
+    article,
     description = '',
     imageAlt = null,
     imageSrc = null,
@@ -86,7 +231,6 @@ export const SEO: React.FC<Props> = ({
     meta = [],
     pathname = '/',
     title = '',
-    article,
 }) => {
     return (
         <StaticQuery
@@ -106,126 +250,27 @@ export const SEO: React.FC<Props> = ({
                 const imageDescription = imageAlt || DEFAULT_IMAGE_ALT;
                 const url = combineURLs(data.site.siteMetadata.siteUrl, pathname || '/');
 
-                const twitterMetaTags: TwitterMetaTag[] = [
-                    {
-                        name: 'twitter:card',
-                        content: 'summary',
-                    },
-                    {
-                        name: 'twitter:creator',
-                        content: data.site.siteMetadata.twitterUsername,
-                    },
-                    {
-                        name: 'twitter:site',
-                        content: data.site.siteMetadata.twitterUsername,
-                    },
-                    {
-                        name: 'twitter:title',
-                        content: pageTitle,
-                    },
-                    {
-                        name: 'twitter:description',
-                        content: metaDescription,
-                    },
-                    {
-                        name: 'twitter:image',
-                        content: imageUrl,
-                    },
-                    {
-                        name: 'twitter:image:alt',
-                        content: imageDescription,
-                    },
-                ];
+                const twitterMetaTags = getTwitterMetaTags({
+                    data,
+                    imageDescription,
+                    imageUrl,
+                    metaDescription,
+                    pageTitle,
+                });
 
-                const openGraphImageWidth = '1200';
-                const openGraphImageHeight = '630';
-                const openGraphMetaTags: OpenGraphMetaTag[] = [
-                    {
-                        property: 'og:title',
-                        content: pageTitle,
-                    },
-                    {
-                        property: 'og:site_name',
-                        content: data.site.siteMetadata.title,
-                    },
-                    {
-                        property: 'og:description',
-                        content: metaDescription,
-                    },
-                    {
-                        property: 'og:url',
-                        content: url,
-                    },
-                    {
-                        property: 'og:image',
-                        content: imageUrl,
-                    },
-                    {
-                        property: 'og:image:alt',
-                        content: imageDescription,
-                    },
-                    {
-                        property: 'og:image:type',
-                        content: 'image/png',
-                    },
-                    {
-                        property: 'og:image:width',
-                        content: openGraphImageWidth,
-                    },
-                    {
-                        property: 'og:image:height',
-                        content: openGraphImageHeight,
-                    },
-                    {
-                        property: 'og:locale',
-                        content: 'en_US',
-                    },
-                ];
+                const openGraphMetaTags = getOpenGraphMetaTags({
+                    article,
+                    data,
+                    imageDescription,
+                    imageUrl,
+                    metaDescription,
+                    pageTitle,
+                    url,
+                });
 
-                if (article) {
-                    openGraphMetaTags.push(
-                        {
-                            property: 'og:type',
-                            content: 'article',
-                        },
-                        {
-                            property: 'article:author',
-                            content: data.site.siteMetadata.author,
-                        },
-                        {
-                            property: 'article:published_time',
-                            content: article.publishedDate,
-                        }
-                    );
-                    new Set(article.tags).forEach(tag => {
-                        openGraphMetaTags.push({
-                            property: 'article:tag',
-                            content: tag,
-                        });
-                    });
-                } else {
-                    openGraphMetaTags.push({
-                        property: 'og:type',
-                        content: 'website',
-                    });
-                }
+                const generalMetaTags = getGeneralMetaTags(metaDescription, data);
 
-                const generalMetaTags: MetaTag[] = [
-                    {
-                        name: 'description',
-                        content: metaDescription,
-                    },
-                    {
-                        name: 'author',
-                        content: data.site.siteMetadata.author,
-                    },
-                    {
-                        name: 'robots',
-                        content: 'index, follow',
-                    },
-                ];
-
-                const metaTags: any[] = generalMetaTags.concat(
+                const metaTags: MetaTag[] = generalMetaTags.concat(
                     openGraphMetaTags,
                     twitterMetaTags,
                     meta
