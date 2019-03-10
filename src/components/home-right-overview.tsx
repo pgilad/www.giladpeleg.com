@@ -11,7 +11,7 @@ import styles from './home-right-overview.module.css';
 
 export const HomeRightOverview = () => {
     return (
-        <div>
+        <div style={{ minWidth: '250px' }}>
             <Link to="/">Gilad Peleg</Link>
             <div className={styles.meTag}>Developer and manager.</div>
             <div className={styles.link}>

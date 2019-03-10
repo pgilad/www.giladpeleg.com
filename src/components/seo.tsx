@@ -2,7 +2,13 @@ import { graphql, StaticQuery } from 'gatsby';
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import { getDescription, getMetaTags, getPageTitle, getSchemaOrgJSONLD, MetaTag } from '../utils/seo';
+import {
+    getDescription,
+    getMetaTags,
+    getPageTitle,
+    getSchemaOrgJSONLD,
+    MetaTag,
+} from '../utils/seo';
 import { combineURLs } from '../utils/urls';
 
 const query = graphql`
