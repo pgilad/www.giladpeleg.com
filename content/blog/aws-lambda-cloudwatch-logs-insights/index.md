@@ -39,7 +39,7 @@ formatted log event, with a structure of the following:
 We can use our knowledge of the event to do some interesting manipulations on it, 
 let's start with a basic Insights filter (make sure you are working on the correct Log Group):
 
-```text
+```bash
 fields @timestamp, @message
 | filter @message like /scheduling key/
 | sort @timestamp desc
@@ -52,7 +52,7 @@ we know that our filter is working correctly.
 Next we'll want to extract relevant variables from each event, we don't have to be over-precise, and
 focus only on the variables we care about:
 
-```text
+```bash
 fields @timestamp, @message
 | filter @message like /scheduling key/
 | parse @message 'scheduling key: raw:1:*:*:*' @ts, @entityId, @contextId
@@ -67,7 +67,7 @@ The fun just started. Now we can do basic graph manipulations, some examples:
 
 - Count appearances of each `@entityId`:
 
-```text
+```bash
 fields @timestamp, @message
 | filter @message like /scheduling key/
 | parse @message 'scheduling key: raw:1:*:*:*' @ts, @entityId, @labelId
@@ -78,7 +78,7 @@ fields @timestamp, @message
 
 - Plot distinct count of `@entityId` by `10 minute` bins:
 
-```text
+```bash
 fields @timestamp, @message
 | filter @message like /scheduling key/
 | parse @message 'scheduling key: raw:1:*:*:*' @ts, @entityId, @labelId
