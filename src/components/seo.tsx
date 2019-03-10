@@ -2,15 +2,7 @@ import { graphql, StaticQuery } from 'gatsby';
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import {
-    getDescription,
-    getGeneralMetaTags,
-    getOpenGraphMetaTags,
-    getPageTitle,
-    getSchemaOrgJSONLD,
-    getTwitterMetaTags,
-    MetaTag,
-} from '../utils/seo';
+import { getDescription, getMetaTags, getPageTitle, getSchemaOrgJSONLD, MetaTag } from '../utils/seo';
 import { combineURLs } from '../utils/urls';
 
 const query = graphql`
@@ -50,7 +42,7 @@ interface Props {
     imageAlt?: string;
     imageSrc?: string;
     lang?: string;
-    meta?: any[];
+    meta?: MetaTag[];
     overrideDescription?: string;
     overrideTitle?: string;
     pathname?: string;
@@ -89,43 +81,22 @@ export const SEO: React.FC<Props> = ({
         <StaticQuery
             query={query}
             render={(data: Data) => {
-                const description = getDescription(data, overrideDescription, article);
-                const pageTitle = getPageTitle(data, article, overrideTitle);
-
-                const htmlAttributes = { lang };
-
                 const imageUrl = combineURLs(
                     data.site.siteMetadata.siteUrl,
                     imageSrc || data.siteImage.childImageSharp.fixed.src
                 );
-                const imageDescription = imageAlt || DEFAULT_IMAGE_ALT;
                 const url = combineURLs(data.site.siteMetadata.siteUrl, pathname || '/');
 
-                const twitterMetaTags = getTwitterMetaTags({
-                    data,
-                    description,
-                    imageDescription,
-                    imageUrl,
-                    pageTitle,
-                });
-
-                const openGraphMetaTags = getOpenGraphMetaTags({
+                const metaTags = getMetaTags({
                     article,
                     data,
-                    description,
-                    imageDescription,
+                    description: getDescription(data, overrideDescription, article),
+                    imageDescription: imageAlt || DEFAULT_IMAGE_ALT,
                     imageUrl,
-                    pageTitle,
+                    meta,
+                    pageTitle: getPageTitle(data, article, overrideTitle),
                     url,
                 });
-
-                const generalMetaTags = getGeneralMetaTags(description, data);
-
-                const metaTags: MetaTag[] = generalMetaTags.concat(
-                    openGraphMetaTags,
-                    twitterMetaTags,
-                    meta
-                );
 
                 const schemaOrgJSONLD = getSchemaOrgJSONLD({
                     article,
@@ -136,7 +107,7 @@ export const SEO: React.FC<Props> = ({
 
                 return (
                     <Helmet
-                        htmlAttributes={htmlAttributes}
+                        htmlAttributes={{ lang }}
                         meta={metaTags}
                         script={[
                             {
@@ -144,7 +115,7 @@ export const SEO: React.FC<Props> = ({
                                 innerHTML: JSON.stringify(schemaOrgJSONLD),
                             },
                         ]}
-                        title={pageTitle}
+                        title={getPageTitle(data, article, overrideTitle)}
                     />
                 );
             }}

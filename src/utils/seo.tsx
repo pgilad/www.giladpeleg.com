@@ -261,3 +261,36 @@ export const getPageTitle = (data: Data, article?: Article, overrideTitle?: stri
     }
     return data.site.siteMetadata.title;
 };
+
+export const getMetaTags = (options: {
+    article?: Article;
+    data: Data;
+    description: string;
+    imageDescription: string;
+    imageUrl: string;
+    meta: MetaTag[];
+    pageTitle: string;
+    url: string;
+}): MetaTag[] => {
+    const twitterMetaTags = getTwitterMetaTags({
+        data: options.data,
+        description: options.description,
+        imageDescription: options.imageDescription,
+        imageUrl: options.imageUrl,
+        pageTitle: options.pageTitle,
+    });
+
+    const openGraphMetaTags = getOpenGraphMetaTags({
+        article: options.article,
+        data: options.data,
+        description: options.description,
+        imageDescription: options.imageDescription,
+        imageUrl: options.imageUrl,
+        pageTitle: options.pageTitle,
+        url: options.url,
+    });
+
+    const generalMetaTags = getGeneralMetaTags(options.description, options.data);
+
+    return generalMetaTags.concat(openGraphMetaTags, twitterMetaTags, options.meta);
+};
