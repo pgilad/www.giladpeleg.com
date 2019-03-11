@@ -15,10 +15,9 @@ coverAlt: "AWS SNS Subscription Https Endpoint with Pagerduty"
 ---
 
 Automatically reporting alerts using AWS SNS Subscription to Pagerduty is super easy,
-especially with Terraform. I recently attempted to integrate the services using email,
+especially with Terraform. I recently attempted to integrate the services using email subscription,
 but found that because of the async nature of email confirmation it isn't supported
 on [Terraform](https://www.terraform.io/docs/providers/aws/r/sns_topic_subscription.html#email).
-
 I found various [hacks](https://groups.google.com/forum/#!topic/terraform-tool/X1CFPcdRXIA) on how to 
 bypass it, but they all felt dirty, and had leftovers when you deleted the resource.
 
@@ -52,7 +51,7 @@ resource "aws_cloudwatch_metric_alarm" "ingestor_fan_out" {
 
 This is an alarm we automatically setup to alert when a specific AWS lambda function starts to error.
 The important point to note is the `alarm_actions` which binds this alarm to the sns topic we'll see in the
-next section
+next section.
 
 ## SNS Topic For Alerts
 
@@ -67,13 +66,12 @@ to connect our Pagerduty service to it.
 
 ## Pagerduty Service
 
-Create a new Service in Pagerduty with your favorite definitions.
-Then add a new `Amazon Cloudwatch` integration:
+Create a new Service in Pagerduty with your favorite definitions. Then add a new `Amazon Cloudwatch` integration:
 
 ![Pagerduty service adding a new integration](pagerduty-add-integration.png)
 
 The next step is to find the integration endpoint. Click on the integration name when inside the
-service "Service Details" page. Then you'll find your integration endpoint:
+"Service Details" page. Then you'll find your integration endpoint:
 
 ![Pagerduty integration endpoint](pagerduty-integration-endpoint.png)
 
@@ -106,7 +104,7 @@ resource "aws_sns_topic_subscription" "cloudwatch_alarms" {
 ```
 
 We use the annoying yet working<sup>TM</sup> "play" on the `count` property, so that if the endpoint
-variable is unset (or is the empty string) we don't perform the subscription.
+variable is unset (is the empty string) we don't perform the subscription.
 
 Also note the `endpoint_auto_confirms` which is a required flag for Terraform when using `https` integration
 with an endpoint that can auto-confirm the subscription, like Pagerduty does.
@@ -123,9 +121,9 @@ Check out `AWS SNS -> Subscriptions`:
 And we can see that our subscription was automatically setup and confirmed with Pagerduty.
 
 To the grand finale, let's simulate our alarm going berserk and verify our Pagerduty integration works
-(You will need to have aws cli configured for that account):
+(You will need to have `aws cli` configured for that account):
 
-**Make sure to alert your team mates beforehand as to prevent panic** :wink:
+**Make sure to alert your team mates beforehand to prevent panic** :wink:
 
 ```bash
 $ aws cloudwatch set-alarm-state --alarm-name "prod lambda errors" --state-value ALARM --state-reason "testing purposes"
