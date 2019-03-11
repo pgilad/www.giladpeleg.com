@@ -29,7 +29,7 @@ but most of these would probably be your `console.log` equivalent. There are sev
 to filter this log, but with the aid of Insights, we can do some really cool
 stuff with it. Take this log line for example:
 
-`[INFO] scheduling key: raw:1:1549824523:18974356:35f991d2d0d21b2c52208ccd53d028d99ed94932bdb368f8c88c290f8f29507b in 15 seconds`
+`[INFO] scheduling key: raw:1:1549824523:18974356:333bbf in 15 seconds`
 
 Don't mind the random numbers (they have some significance in our system), but assuming this is a real
 formatted log event, with a structure of the following:
