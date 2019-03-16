@@ -11,8 +11,8 @@ cover: "lambda-directory-structure.png"
 coverAlt: "The usual directory structure of a Python project"
 ---
 
-In this guide I'll explain how to package (zip) your AWS Lambda Python 2.7 code for deploying
-it to your Lambda function. The main issue I stumbled upon was using [Pipenv](https://pipenv.readthedocs.io/en/latest/),
+In this guide I'll explain how to package (zip) your AWS Lambda Python 2.7 (**Edit**: Included Python 3.7 as well)
+code for deploying it to your Lambda function. The main issue I stumbled upon was using [Pipenv](https://pipenv.readthedocs.io/en/latest/),
 most of the guides explain how to handle dependencies with `requirements.txt`, but not with `Pipfile`.
 
 I also like to fine-tune the process so that the Docker creation has optimized layers for caching.
@@ -38,7 +38,7 @@ without having to install all required dependencies on their system, we want to 
 
 ## The Dockerfile
 
-Let's checkout the `Dockerfile` and explain afterwards:
+`Dockerfile` for Python 2.7:
 
 ```docker
 FROM amazonlinux:2
@@ -62,18 +62,32 @@ RUN find . -type f -iname '*.pyc' -delete && rm Pipfile*
 RUN zip -r /tmp/code.zip .
 ```
 
-Do note that the code might need minor adjustments if you use Python 3.
- 
-The code is self-explanatory, the key elements are:
+**NOTE**: I've update the `Dockerfile` and updated the Python version to 3.7:
 
-- `COPY Pipfile* ./` - this will copy `Pipfile` and `Pipfile.lock` to the workdir. The reason
-not to copy all files, is to create a caching layer for `pipenv lock`. This layer will only need to change
-if the `Pipfile*` files changed.
+```docker
+FROM amazonlinux:2
 
-- `RUN pipenv lock -r | sed 's/-e //g' | pip install -r /dev/stdin --target .` - This evil nasty
-hack will create a list of dependencies and then use `pip install --target` to install them to workdir
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+ENV PYTHONDONTWRITEBYTECODE 1
 
-I also like to make sure there aren't any leftover `.pyc` files. At the end I zip all the code
+RUN yum -y update && yum -y install gcc python3-devel python3 zip
+
+RUN curl https://bootstrap.pypa.io/get-pip.py | python3 -
+RUN pip install pipenv
+
+WORKDIR /app
+COPY Pipfile* ./
+
+RUN pipenv install --deploy && cp -r $(pipenv --venv)/lib/python3.7/site-packages/. ./
+COPY lambdas ./
+
+RUN find . -type f -iname '*.pyc' -delete -o -type d -name __pycache__ -delete && rm Pipfile*
+
+RUN zip -r /tmp/code.zip .
+```
+
+I also like to make sure there aren't any redundant binary files. At the end I zip all the code
 from the workdir to an archive in `tmp/code.zip` awaiting to be copied out of the docker image, and 
 deployed to AWS Lambda function.
 
