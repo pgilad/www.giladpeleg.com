@@ -119,9 +119,130 @@ Several things to note about the above code:
 - Batching
 - Recreating the partition key for the failed records
 
-The above strategy can be improved even more. First, we can do the batching more efficiently. Second, we should 
-limit the number of retries on the failed records. Third, we should also create a subset of errors over which we do retry, 
-and for the rest, just log the error. Some errors are unrecoverable, so the retries are a waste.
+This naive solution is good, but AWS Kinesis has [more constraints](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecords.html)
+that we'll need to comply with:
 
-Anyway, this retry strategy has worked well for us while using 100 to 150 shards in a Kinesis Stream.
+> Each PutRecords request can support up to 500 records.
+  Each record in the request can be as large as 1 MiB, up to a limit of 5 MiB for the entire request, including partition keys.
+  Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MiB per second.
+  
+Here is a more complete solution:
+  
+```python
+import os
+import sys
+import uuid
+import logging
+from logging import Logger
+from time import sleep
 
+import boto3
+from botocore.client import BaseClient
+
+
+class KinesisSubmitter:
+    MAX_CHUNK_RETRY_ATTEMPTS = 20
+    MAX_RECORD_SIZE = 1e6
+    MAX_SUBMIT_RECORDS_LIMIT = 500
+    MAX_SUBMIT_SIZE_LIMIT = 4.5e10
+
+    kinesis_client: BaseClient
+    logger: Logger
+    stream_name: str
+
+    def __init__(self, stream_name: str) -> None:
+        self.kinesis_client = boto3.client('kinesis')
+        self.logger = logging.getLogger(__name__)
+        self.stream_name = stream_name
+        
+        self.logger.basicConfig(level=logging.INFO)
+
+    def produce_records(self, records):
+        self.logger.info('Pushing records to Kinesis stream: %s', self.stream_name)
+
+        # Kinesis stream put_records limits:
+        # Maximum 500 records
+        # Each record size cannot be more than 1MB in size
+        # Total records size in submit must not be more than 5MB in size
+
+        records_batch = []
+        total_size = 0
+
+        for record in records:
+            record_size = self.get_record_size(record)
+            if record_size > self.MAX_RECORD_SIZE:
+                self.logger.error("Record size of %d is too big to submit to Kinesis: %s",
+                                  record_size, record)
+                continue
+
+            if self.can_add_record_to_chunk(total_size, record_size, records_batch):
+                records_batch.append(record)
+                total_size += record_size
+                continue
+
+            # record will take us over the limit, submit chunk now, and keep record
+            self.submit_chunk_with_retries(records_batch)
+
+            # Assume all records in chunk were submitted or forfeited
+            records_batch = [record]
+            total_size = 0
+
+        if records_batch:
+            self.submit_chunk_with_retries(records_batch)
+
+        self.logger.debug('Done pushing records to kinesis stream %s', self.stream_name)
+
+    def can_add_record_to_chunk(self, total_size, record_size, records_chunk) -> bool:
+        if total_size + record_size >= self.MAX_SUBMIT_SIZE_LIMIT:
+            return False
+
+        return len(records_chunk) < self.MAX_SUBMIT_RECORDS_LIMIT
+
+    @staticmethod
+    def get_record_size(record):
+        return sys.getsizeof(record)
+
+    @staticmethod
+    def renew_records_partition_key(failed_records):
+        for record in failed_records:
+            record['PartitionKey'] = str(uuid.uuid4())
+            yield record
+
+    def submit_chunk_with_retries(self, records, attempt=0):
+        if attempt >= self.MAX_CHUNK_RETRY_ATTEMPTS:
+            self.logger.error("Failed %d times to submit records to kinesis, skipping them", attempt)
+            return
+
+        response = self.kinesis_client.put_records(StreamName=self.stream_name, Records=records)
+
+        failed_record_count = response.get('FailedRecordCount', 0)
+        if not failed_record_count:
+            self.logger.debug('Successfully submitted %d records to kinesis', len(records))
+            return
+
+        self.logger.warning('%d records failed have failed in kinesis.put_records; will be retried',
+                            failed_record_count)
+        self.extract_and_log_errors(response)
+
+        records_to_retry = list(
+            self.renew_records_partition_key(self.get_failed_records_by_response(records, response))
+        )
+
+        # Poor man's backoff
+        sleep(0.005 * (attempt + 1))
+
+        self.submit_chunk_with_retries(records_to_retry, attempt + 1)
+
+    @staticmethod
+    def get_failed_records_by_response(records, response):
+        return (records[i] for i, record in enumerate(response['Records']) if 'ErrorCode' in record)
+
+    def extract_and_log_errors(self, response):
+        errors = {(r.get('ErrorCode'), r.get('ErrorMessage')) for r in response['Records'] if 'ErrorCode' in r}
+        self.logger.warning('Distinct errors received from Kinesis: %s', errors)
+```
+
+The above strategy can be improved even more. We should also create a subset of errors over which we retry, 
+and just log the rest. Some errors are unrecoverable, so the retries are a waste.
+
+This retry strategy has worked well for us while pushing to 100 to 150 shards in a Kinesis Stream.
