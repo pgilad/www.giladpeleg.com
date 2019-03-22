@@ -46,7 +46,7 @@ partition your data (Again, ensuring uniform distribution), such as if you have 
 distributed by `gender`, you can use that as the partition key.
 
 In other cases, you want to batch records together in the same shard (extracting them together as well) for grouping reasons.
-[This article](https://www.eyeviewdigital.com/tech/scaling-aws-kinesis-creating-a-streaming-superhighway/) covers it really well
+[This linked article](https://www.eyeviewdigital.com/tech/scaling-aws-kinesis-creating-a-streaming-superhighway/) covers it really well
 (And other cases too).
 
 In this post I'll focus on the case where a random key works well. In particular, while searching for posts on the subject myself, and not finding them,
@@ -55,8 +55,7 @@ we'll cover how to do failure handling with Kinesis.
 In high-throughput cases with Kinesis, I've found there are sporadic failures. Errors such as `InternalFailure` happen from time to time.
 You want to be able to catch them, log them, and correctly retry the failed records.
 
-What kind of response do you receive from a kinesis `put_records` operation?
-It looks like [this](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecords.html):
+What kind of [response do you receive from a kinesis `put_records` operation]((https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecords.html))?
 
 ```json
 {
