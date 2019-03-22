@@ -56,13 +56,13 @@ module.exports = {
                             withWebp: true,
                         },
                     },
-                    {
-                        resolve: 'gatsby-remark-embed-gist',
-                        options: {
-                            username: 'pgilad',
-                            includeDefaultCss: true,
-                        },
-                    },
+                    // {
+                    //     resolve: 'gatsby-remark-embed-gist',
+                    //     options: {
+                    //         username: 'pgilad',
+                    //         includeDefaultCss: true,
+                    //     },
+                    // },
                     {
                         resolve: 'gatsby-remark-prismjs',
                         options: {
