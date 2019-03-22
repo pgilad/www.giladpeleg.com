@@ -185,7 +185,7 @@ class KinesisSubmitter:
 
             # Assume all records in chunk were submitted or forfeited
             records_batch = [record]
-            total_size = 0
+            total_size = record_size
 
         if records_batch:
             self.submit_chunk_with_retries(records_batch)
