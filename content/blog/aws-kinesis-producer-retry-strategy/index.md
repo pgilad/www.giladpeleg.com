@@ -61,8 +61,8 @@ What kind of [response do you receive from a kinesis `put_records` operation]((h
 {
    "EncryptionType": "string",
    "FailedRecordCount": number,
-   "Records": [ 
-      { 
+   "Records": [
+      {
          "ErrorCode": "string",
          "ErrorMessage": "string",
          "SequenceNumber": "string",
@@ -84,25 +84,25 @@ def submit_record_by_batch_to_kinesis(client, records, batch_limit=100):
     while records:
         batch = records[:batch_limit]
         response = client.put_records(StreamName='input_stream', Records=batch)
-        
+
         failed_record_count = response.get('FailedRecordCount', 0)
         if not failed_record_count:
             records = records[batch_limit:]
             continue
-        
+
         logger.info('%d records failed have failed in kinesis.put_records; will be retried',
                        failed_record_count)
-        
+
         # extract and log distinct errors
         errors = {(r.get('ErrorCode'), r.get('ErrorMessage')) for r in response['Records'] if 'ErrorCode' in r}
         logger.warning('Distinct errors received from Kinesis: %s', errors)
-        
+
         failed_records = [batch[i] for i, record in enumerate(response['Records']) if 'ErrorCode' in record]
-        
+
         # Recreate the partition key for each failed record
         renewed_records = renew_records_partition_key(failed_records)
         records = list(renewed_records) + records[batch_limit:]
-        
+
         time.sleep(0.005)
 
 def renew_records_partition_key(failed_records):
@@ -124,9 +124,9 @@ that we'll need to comply with:
 > Each PutRecords request can support up to 500 records.
   Each record in the request can be as large as 1 MiB, up to a limit of 5 MiB for the entire request, including partition keys.
   Each shard can support writes up to 1,000 records per second, up to a maximum data write total of 1 MiB per second.
-  
+
 Here is a more complete solution:
-  
+
 ```python
 import os
 import sys
@@ -143,7 +143,7 @@ class KinesisSubmitter:
     MAX_CHUNK_RETRY_ATTEMPTS = 20
     MAX_RECORD_SIZE = 1e6
     MAX_SUBMIT_RECORDS_LIMIT = 500
-    MAX_SUBMIT_SIZE_LIMIT = 4.5e10
+    MAX_SUBMIT_SIZE_LIMIT = 4.5e6
 
     kinesis_client: BaseClient
     logger: Logger
@@ -153,7 +153,7 @@ class KinesisSubmitter:
         self.kinesis_client = boto3.client('kinesis')
         self.logger = logging.getLogger(__name__)
         self.stream_name = stream_name
-        
+
         self.logger.basicConfig(level=logging.INFO)
 
     def produce_records(self, records):
@@ -241,7 +241,7 @@ class KinesisSubmitter:
         self.logger.warning('Distinct errors received from Kinesis: %s', errors)
 ```
 
-The above strategy can be improved even more. We should also create a subset of errors over which we retry, 
+The above strategy can be improved even more. We should also create a subset of errors over which we retry,
 and just log the rest. Some errors are unrecoverable, so the retries are a waste.
 
 This retry strategy has worked well for us while pushing to 100 to 150 shards in a Kinesis Stream.
