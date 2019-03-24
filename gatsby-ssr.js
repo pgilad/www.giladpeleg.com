@@ -13,5 +13,10 @@ export const onRenderBody = ({ setHeadComponents }) => {
             key="dns-prefetch-google-analytics"
             href="https://www.google-analytics.com"
         />,
+        <link
+            rel="preconnect"
+            key="preconnect-google-analytics"
+            href="https://www.google-analytics.com"
+        />,
     ]);
 };
