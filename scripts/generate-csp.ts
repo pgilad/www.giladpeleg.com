@@ -2,6 +2,7 @@ import * as CSP from 'csp-builder';
 
 const csp = new CSP.Builder();
 
+const googleDomain = 'https://www.google.com/analytics';
 const analyticsDomain = 'https://www.google-analytics.com';
 const ownDomain = 'https://www.giladpeleg.com';
 const reportUri = 'https://giladpeleg.report-uri.com/r/d/csp/enforce';
@@ -10,6 +11,7 @@ const githubAssets = 'https://github.githubassets.com';
 const extensiveSourceDirective = [
     CSP.PredefinedSource.Self,
     analyticsDomain,
+    googleDomain,
     ownDomain,
     CSP.SchemaSource.Data,
 ];
@@ -17,6 +19,7 @@ const extensiveSourceDirective = [
 const regularSourceDirective = [
     CSP.PredefinedSource.Self,
     analyticsDomain,
+    googleDomain,
     ownDomain,
     githubAssets,
 ];
