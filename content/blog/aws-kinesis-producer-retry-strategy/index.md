@@ -139,11 +139,11 @@ import boto3
 from botocore.client import BaseClient
 
 
-class KinesisSubmitter:
+class KinesisProducer:
     MAX_CHUNK_RETRY_ATTEMPTS = 20
-    MAX_RECORD_SIZE = 1e6
-    MAX_SUBMIT_RECORDS_LIMIT = 500
-    MAX_SUBMIT_SIZE_LIMIT = 4.5e6
+    MAX_RECORD_SIZE = 1024 * 1024
+    MAX_RECORDS_IN_BATCH = 500
+    MAX_BATCH_SIZE = MAX_RECORD_SIZE * 5
 
     kinesis_client: BaseClient
     logger: Logger
@@ -157,7 +157,7 @@ class KinesisSubmitter:
         self.logger.basicConfig(level=logging.INFO)
 
     def produce_records(self, records):
-        self.logger.info('Pushing records to Kinesis stream: %s', self.stream_name)
+        self.logger.info("Pushing records to Kinesis stream: %s", self.stream_name)
 
         # Kinesis stream put_records limits:
         # Maximum 500 records
@@ -167,39 +167,40 @@ class KinesisSubmitter:
         records_batch = []
         total_size = 0
 
-        for record in records:
-            record_size = self.get_record_size(record)
-            if record_size > self.MAX_RECORD_SIZE:
-                self.logger.error("Record size of %d is too big to submit to Kinesis: %s",
-                                  record_size, record)
+        for datum in records:
+            datum_size = self.get_record_size(datum)
+            if datum_size > self.MAX_RECORD_SIZE:
+                self.logger.error("Record size of %d is too big to submit to Kinesis: %s", datum_size, datum)
                 continue
 
-            if self.can_add_record_to_chunk(total_size, record_size, records_batch):
-                records_batch.append(record)
-                total_size += record_size
+            if self.can_add_record_to_batch(total_size, datum_size, records_batch):
+                records_batch.append(datum)
+                total_size += datum_size
                 continue
 
+            self.logger.info("Reached Kinesis submit limits at %d records", len(records_batch))
             # record will take us over the limit, submit chunk now, and keep record
             self.submit_chunk_with_retries(records_batch)
 
             # Assume all records in chunk were submitted or forfeited
-            records_batch = [record]
-            total_size = record_size
+            records_batch = [datum]
+            total_size = datum_size
 
         if records_batch:
+            self.logger.info("Finalizing Kinesis submit with %d records", len(records_batch))
             self.submit_chunk_with_retries(records_batch)
 
-        self.logger.debug('Done pushing records to kinesis stream %s', self.stream_name)
+        self.logger.debug("Done pushing records to kinesis output stream %s", self.stream_name)
 
-    def can_add_record_to_chunk(self, total_size, record_size, records_chunk) -> bool:
-        if total_size + record_size >= self.MAX_SUBMIT_SIZE_LIMIT:
+    def can_add_record_to_batch(self, total_size, record_size, records_chunk) -> bool:
+        if total_size + record_size >= self.MAX_BATCH_SIZE:
             return False
 
-        return len(records_chunk) < self.MAX_SUBMIT_RECORDS_LIMIT
+        return len(records_chunk) < self.MAX_RECORDS_IN_BATCH
 
     @staticmethod
     def get_record_size(record):
-        return sys.getsizeof(record)
+        return len(record["Data"]) + len(record["PartitionKey"])
 
     @staticmethod
     def renew_records_partition_key(failed_records):
@@ -214,31 +215,32 @@ class KinesisSubmitter:
 
         response = self.kinesis_client.put_records(StreamName=self.stream_name, Records=records)
 
-        failed_record_count = response.get('FailedRecordCount', 0)
+        failed_record_count = response.get("FailedRecordCount", 0)
         if not failed_record_count:
-            self.logger.debug('Successfully submitted %d records to kinesis', len(records))
+            self.logger.debug("Successfully submitted %d records to kinesis", len(records))
             return
 
-        self.logger.warning('%d records failed have failed in kinesis.put_records; will be retried',
-                            failed_record_count)
+        self.logger.warning(
+            "%d records failed have failed in kinesis.put_records; will be retried", failed_record_count
+        )
         self.extract_and_log_errors(response)
 
         records_to_retry = list(
             self.renew_records_partition_key(self.get_failed_records_by_response(records, response))
         )
 
-        # Poor man's backoff
+        # Poor man's back-off
         sleep(0.005 * (attempt + 1))
 
         self.submit_chunk_with_retries(records_to_retry, attempt + 1)
 
     @staticmethod
     def get_failed_records_by_response(records, response):
-        return (records[i] for i, record in enumerate(response['Records']) if 'ErrorCode' in record)
+        return (records[i] for i, record in enumerate(response["Records"]) if "ErrorCode" in record)
 
     def extract_and_log_errors(self, response):
-        errors = {(r.get('ErrorCode'), r.get('ErrorMessage')) for r in response['Records'] if 'ErrorCode' in r}
-        self.logger.warning('Distinct errors received from Kinesis: %s', errors)
+        errors = {(r.get("ErrorCode"), r.get("ErrorMessage")) for r in response["Records"] if "ErrorCode" in r}
+        self.logger.warning("Distinct errors received from Kinesis: %s", errors)
 ```
 
 The above strategy can be improved even more. We should also create a subset of errors over which we retry,
