@@ -6,9 +6,9 @@
   "author": "Gilad Peleg <gilad@giladpeleg.com> (https://www.giladpeleg.com)",
   "repo": "pgilad/www.giladpeleg.com",
   "dependencies": {
-    "gatsby": "^2.3.4",
+    "gatsby": "^2.3.9",
     "gatsby-cli": "^2.5.4",
-    "gatsby-image": "^2.0.35",
+    "gatsby-image": "^2.0.37",
     "gatsby-plugin-canonical-urls": "^2.0.12",
     "gatsby-plugin-catch-links": "^2.0.13",
     "gatsby-plugin-feed": "^2.1.0",
@@ -20,7 +20,7 @@
     "gatsby-plugin-robots-txt": "^1.4.0",
     "gatsby-plugin-sharp": "^2.0.32",
     "gatsby-plugin-sitemap": "^2.0.11",
-    "gatsby-plugin-typescript": "^2.0.11",
+    "gatsby-plugin-typescript": "^2.0.12",
     "gatsby-remark-autolink-headers": "^2.0.16",
     "gatsby-remark-copy-linked-files": "^2.0.11",
     "gatsby-remark-embed-gist": "^1.1.7",
@@ -71,7 +71,7 @@
   },
   "devDependencies": {
     "@types/eslint": "^4.16.6",
-    "@types/node": "^11.12.2",
+    "@types/node": "^11.13.0",
     "@types/prettier": "^1.16.1",
     "@types/prismjs": "^1.16.0",
     "@types/react": "^16.8.10",
@@ -94,7 +94,7 @@
     "stylelint-config-recommended": "^2.1.0",
     "stylelint-order": "^2.1.0",
     "ts-node": "^8.0.3",
-    "tslint": "^5.14.0",
+    "tslint": "^5.15.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.0.0"
   }
