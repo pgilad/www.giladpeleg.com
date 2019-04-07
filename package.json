@@ -24,7 +24,7 @@
     "gatsby-remark-autolink-headers": "^2.0.16",
     "gatsby-remark-copy-linked-files": "^2.0.11",
     "gatsby-remark-embed-gist": "^1.1.7",
-    "gatsby-remark-emojis": "^0.3.1",
+    "gatsby-remark-emojis": "^0.3.2",
     "gatsby-remark-images": "^3.0.10",
     "gatsby-remark-prismjs": "^3.2.7",
     "gatsby-source-filesystem": "^2.0.28",
@@ -35,7 +35,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
-    "typescript": "^3.4.1"
+    "typescript": "^3.4.2"
   },
   "keywords": [
     "blog",
