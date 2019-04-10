@@ -72,3 +72,5 @@ src/generated
 .netlify/
 .idea/
 *.iml
+
+schema.graphql

@@ -125,14 +125,13 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-manifest',
             options: {
+                background_color: '#663399',
+                display: 'minimal-ui',
+                icon: 'src/images/favicon.png',
                 name: 'Gilad Peleg - My Personal Page',
                 short_name: PAGE_TITLE,
                 start_url: '/',
-                background_color: '#663399',
                 theme_color: '#663399',
-                display: 'minimal-ui',
-                icon: 'src/images/favicon.png',
-                include_favicon: true,
             },
         },
         'gatsby-plugin-offline',
