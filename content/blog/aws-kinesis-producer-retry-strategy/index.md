@@ -55,7 +55,7 @@ we'll cover how to do failure handling with Kinesis.
 In high-throughput cases with Kinesis, I've found there are sporadic failures. Errors such as `InternalFailure` happen from time to time.
 You want to be able to catch them, log them, and correctly retry the failed records.
 
-What kind of [response do you receive from a kinesis `put_records` operation]((https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecords.html))?
+What kind of [response do you receive from a kinesis `put_records` operation](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecords.html)?
 
 ```json
 {
