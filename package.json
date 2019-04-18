@@ -71,7 +71,7 @@
   },
   "devDependencies": {
     "@types/eslint": "^4.16.6",
-    "@types/node": "^11.13.4",
+    "@types/node": "^11.13.5",
     "@types/prettier": "^1.16.2",
     "@types/prismjs": "^1.16.0",
     "@types/react": "^16.8.13",
@@ -87,7 +87,7 @@
     "graphql-code-generator": "^0.18.1",
     "graphql-codegen-typescript-common": "^0.18.1",
     "graphql-codegen-typescript-server": "0.18.1",
-    "netlify-cli": "^2.11.9",
+    "netlify-cli": "^2.11.10",
     "prettier": "^1.17.0",
     "source-map-support": "^0.5.12",
     "stylelint": "^10.0.1",
