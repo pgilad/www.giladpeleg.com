@@ -14,6 +14,40 @@ const getTrackingId = () => {
     return '';
 };
 
+const rssGlobalFeedQuery = `
+{
+    site {
+        siteMetadata {
+            description
+            siteUrl
+            title
+        }
+    }
+}
+`;
+
+const rssFeedQuery = `
+{
+    allMarkdownRemark(
+        limit: 1000,
+        sort: { order: DESC, fields: [frontmatter___date] },
+    ) {
+        edges {
+            node {
+                excerpt
+                html
+                fields { slug }
+                frontmatter {
+                    date
+                    tags
+                    title
+                }
+            }
+        }
+    }
+}
+`;
+
 module.exports = {
     siteMetadata: {
         author: PAGE_TITLE,
@@ -101,7 +135,34 @@ module.exports = {
         },
         'gatsby-plugin-sitemap',
         'gatsby-plugin-robots-txt',
-        'gatsby-plugin-feed',
+        {
+            resolve: 'gatsby-plugin-feed',
+            options: {
+                query: rssGlobalFeedQuery,
+                feeds: [
+                    {
+                        serialize: ctx => {
+                            const siteMetadata = ctx.query.site.siteMetadata;
+                            return ctx.query.allMarkdownRemark.edges.map(edge => {
+                                return {
+                                    author: siteMetadata.author,
+                                    categories: edge.node.frontmatter.tags,
+                                    custom_elements: [{ 'content:encoded': edge.node.html }],
+                                    date: edge.node.frontmatter.date,
+                                    description: edge.node.excerpt,
+                                    guid: siteMetadata.siteUrl + edge.node.fields.slug,
+                                    title: edge.node.frontmatter.title,
+                                    url: siteMetadata.siteUrl + edge.node.fields.slug,
+                                };
+                            });
+                        },
+                        query: rssFeedQuery,
+                        output: '/rss.xml',
+                        title: 'Gatsby RSS Feed',
+                    },
+                ],
+            },
+        },
         'gatsby-plugin-catch-links',
         'gatsby-plugin-react-helmet',
         {
