@@ -66,7 +66,7 @@ module.exports = {
                     {
                         resolve: 'gatsby-remark-prismjs',
                         options: {
-                            noInlineHighlight: false,
+                            noInlineHighlight: true,
                         },
                     },
                     {
