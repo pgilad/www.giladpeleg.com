@@ -192,7 +192,7 @@ This is found under the tab `MBeans -> org.springframework.boot -> Endpoint -> H
 
 When you click on `trace`, this invokes the `trace` endpoint using JMX, which should show you something like this:
 
-```
+```none
 traces=[
     {
         timestamp=2019-03-05T10:12:09.546199Z,
@@ -215,7 +215,7 @@ Also, needless to say, make sure you can ssh into the machine (port `22` using `
 I dislike having to manually use the remote machine's ip (or address), and enter all kinds of ssh information (username, security key), I configure
 the machine in my `~/.ssh/config` file:
 
-```
+```none
 Host server
     HostName ec2-11-11-111-111.eu-west-1.compute.amazonaws.com
     User ubuntu
@@ -309,7 +309,7 @@ Notice that we are turning of ssl, but turning on `authentication`. We also crea
 
 `jmxremote.password`:
 
-```
+```none
 monitorRole 123456
 controlRole 123456789
 ```
@@ -318,7 +318,7 @@ Notice the extra strong password we are giving the controller role :smile:
 
 `jmxremote.access`:
 
-```
+```none
 monitorRole readonly
 controlRole readwrite
 ```
