@@ -6,7 +6,7 @@
   "author": "Gilad Peleg <gilad@giladpeleg.com> (https://www.giladpeleg.com)",
   "repo": "pgilad/www.giladpeleg.com",
   "dependencies": {
-    "gatsby": "2.3.34",
+    "gatsby": "2.3.35",
     "gatsby-cli": "2.5.12",
     "gatsby-image": "2.0.41",
     "gatsby-plugin-canonical-urls": "2.0.12",
@@ -14,7 +14,7 @@
     "gatsby-plugin-feed": "2.1.2",
     "gatsby-plugin-google-analytics": "2.0.19",
     "gatsby-plugin-manifest": "2.0.29",
-    "gatsby-plugin-netlify": "2.0.15",
+    "gatsby-plugin-netlify": "2.0.16",
     "gatsby-plugin-offline": "2.0.25",
     "gatsby-plugin-react-helmet": "3.0.12",
     "gatsby-plugin-robots-txt": "1.4.0",
@@ -34,7 +34,7 @@
     "prismjs": "1.16.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-helmet": "5.2.0",
+    "react-helmet": "5.2.1",
     "typescript": "3.4.5"
   },
   "keywords": [
