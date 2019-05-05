@@ -10,14 +10,20 @@ const googleDomain = 'https://www.google.com';
 const ownDomain = 'https://www.giladpeleg.com';
 const reportUri = 'https://giladpeleg.report-uri.com/r/d/csp/enforce';
 
+const googleFontsDomain = 'https://fonts.gstatic.com';
+const googleFontsDomain2 = 'https://fonts.googleapis.com';
+
 const extensiveSourceDirective = [
     CSP.PredefinedSource.Self,
+    CSP.SchemaSource.Data,
+    githubAssets,
     googleAnalytics1,
     googleAnalytics2,
     googleAnalytics3,
     googleDomain,
+    googleFontsDomain,
+    googleFontsDomain2,
     ownDomain,
-    CSP.SchemaSource.Data,
 ];
 
 const regularSourceDirective = [
@@ -40,7 +46,7 @@ csp.addDirective(new CSP.ConnectSource().addValue(regularSourceDirective))
     )
     .addDirective(new CSP.MediaSource().addValue(localSourceDirective))
     .addDirective(new CSP.ObjectSource().addValue(CSP.PredefinedSource.None))
-    .addDirective(new CSP.PrefetchSource().addValue(regularSourceDirective))
+    .addDirective(new CSP.PrefetchSource().addValue(extensiveSourceDirective))
     .addDirective(
         new CSP.ScriptSource().addValue([
             ...regularSourceDirective,
