@@ -87,7 +87,7 @@
     "graphql-code-generator": "^0.18.1",
     "graphql-codegen-typescript-common": "^0.18.1",
     "graphql-codegen-typescript-server": "0.18.1",
-    "netlify-cli": "^2.11.16",
+    "netlify-cli": "^2.11.17",
     "prettier": "^1.17.0",
     "source-map-support": "^0.5.12",
     "stylelint": "^10.0.1",
