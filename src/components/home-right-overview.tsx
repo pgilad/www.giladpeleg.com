@@ -2,10 +2,10 @@ import { Link } from 'gatsby';
 import React from 'react';
 
 import emailIcon from '../images/icons/iconmonstr-email-2.svg';
-import feedIcon from '../images/icons/iconmonstr-rss-feed-1.svg';
 import githubIcon from '../images/icons/iconmonstr-github-1.svg';
 import linkedinIcon from '../images/icons/iconmonstr-linkedin-3.svg';
 import postsIcon from '../images/icons/iconmonstr-note-19.svg';
+import feedIcon from '../images/icons/iconmonstr-rss-feed-1.svg';
 import twitterIcon from '../images/icons/iconmonstr-twitter-1.svg';
 
 import styles from './home-right-overview.module.css';
