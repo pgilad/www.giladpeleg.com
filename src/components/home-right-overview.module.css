@@ -8,8 +8,13 @@
 }
 
 .linkIcon {
+    cursor: pointer;
     height: 20px;
     margin: 0 0 0 10px;
     vertical-align: text-bottom;
     width: 20px;
+}
+
+.linkIcon:hover {
+    filter: invert(0.5) sepia(1) hue-rotate(100deg) saturate(4) brightness(1);
 }
