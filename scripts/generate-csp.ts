@@ -28,12 +28,12 @@ const extensiveSourceDirective = [
 
 const regularSourceDirective = [
     CSP.PredefinedSource.Self,
+    githubAssets,
     googleAnalytics1,
     googleAnalytics2,
     googleAnalytics3,
     googleDomain,
     ownDomain,
-    githubAssets,
 ];
 const localSourceDirective = [CSP.PredefinedSource.Self, ownDomain];
 
@@ -41,9 +41,7 @@ csp.addDirective(new CSP.ConnectSource().addValue(regularSourceDirective))
     .addDirective(new CSP.DefaultSource().addValue(regularSourceDirective))
     .addDirective(new CSP.FontSource().addValue(extensiveSourceDirective))
     .addDirective(new CSP.FrameSource().addValue(CSP.PredefinedSource.Self))
-    .addDirective(
-        new CSP.ImageSource().addValue([...regularSourceDirective, CSP.SchemaSource.Data])
-    )
+    .addDirective(new CSP.ImageSource().addValue(extensiveSourceDirective))
     .addDirective(new CSP.MediaSource().addValue(localSourceDirective))
     .addDirective(new CSP.ObjectSource().addValue(CSP.PredefinedSource.None))
     .addDirective(new CSP.PrefetchSource().addValue(extensiveSourceDirective))
@@ -55,7 +53,7 @@ csp.addDirective(new CSP.ConnectSource().addValue(regularSourceDirective))
     )
     .addDirective(
         new CSP.StyleSource().addValue([
-            ...regularSourceDirective,
+            ...extensiveSourceDirective,
             CSP.PredefinedSource.UnsafeInline,
         ])
     )
