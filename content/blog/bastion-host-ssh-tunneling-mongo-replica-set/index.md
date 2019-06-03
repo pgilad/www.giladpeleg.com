@@ -62,7 +62,7 @@ ssh -nNT bastion-host-mongo-forward
 ```
 
 The addition of -nNT prevents us from actually connecting to the remote host (preventing TTY). Try it without it to see the difference (If you want to see the actual `ssh` commands being used, they are exactly
-the same usage like [this article](https://www.giladpeleg.com/blog/spring-boot-remote-jmx/#connecting-remotely-using-local-port-forwarding)).
+the same usage like [this article](../spring-boot-remote-jmx/#connecting-remotely-using-local-port-forwarding)).
 
 Great our ssh tunnel is now setup. All that's left it to connect our Mongo client:
 
