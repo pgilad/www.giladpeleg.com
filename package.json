@@ -6,7 +6,7 @@
     "author": "Gilad Peleg <gilad@giladpeleg.com> (https://www.giladpeleg.com)",
     "repo": "pgilad/www.giladpeleg.com",
     "dependencies": {
-        "gatsby": "2.8.2",
+        "gatsby": "2.8.3",
         "gatsby-cli": "2.6.4",
         "gatsby-image": "2.1.2",
         "gatsby-plugin-canonical-urls": "2.0.13",
@@ -87,7 +87,7 @@
         "graphql-code-generator": "^0.18.2",
         "graphql-codegen-typescript-common": "^0.18.2",
         "graphql-codegen-typescript-server": "0.18.2",
-        "netlify-cli": "^2.11.19",
+        "netlify-cli": "^2.11.20",
         "prettier": "^1.17.1",
         "source-map-support": "^0.5.12",
         "stylelint": "^10.0.1",
