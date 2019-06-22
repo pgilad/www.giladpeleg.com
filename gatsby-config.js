@@ -30,6 +30,7 @@ const rssFeedQuery = `
 {
     allMarkdownRemark(
         limit: 1000,
+        filter: { frontmatter: { draft: { ne: true }}},
         sort: { order: DESC, fields: [frontmatter___date] },
     ) {
         edges {
@@ -143,16 +144,20 @@ module.exports = {
                     {
                         serialize: ctx => {
                             const siteMetadata = ctx.query.site.siteMetadata;
-                            return ctx.query.allMarkdownRemark.edges.map(edge => {
+                            const posts = ctx.query.allMarkdownRemark.edges;
+
+                            return posts.map(edge => {
+                                const post = edge.node;
+
                                 return {
                                     author: siteMetadata.author,
-                                    categories: edge.node.frontmatter.tags,
-                                    custom_elements: [{ 'content:encoded': edge.node.html }],
-                                    date: edge.node.frontmatter.date,
-                                    description: edge.node.excerpt,
-                                    guid: siteMetadata.siteUrl + edge.node.fields.slug,
-                                    title: edge.node.frontmatter.title,
-                                    url: siteMetadata.siteUrl + edge.node.fields.slug,
+                                    categories: post.frontmatter.tags,
+                                    custom_elements: [{ 'content:encoded': post.html }],
+                                    date: post.frontmatter.date,
+                                    description: post.excerpt,
+                                    guid: siteMetadata.siteUrl + post.fields.slug,
+                                    title: post.frontmatter.title,
+                                    url: siteMetadata.siteUrl + post.fields.slug,
                                 };
                             });
                         },
