@@ -6,9 +6,9 @@ import styles from './header.module.css';
 
 const query = graphql`
     query Header {
-        topImage: file(relativePath: { eq: "top-image.png" }) {
+        headerImage: file(relativePath: { eq: "header-image.jpg" }) {
             childImageSharp {
-                fluid(maxWidth: 1280) {
+                fluid(maxWidth: 400) {
                     ...GatsbyImageSharpFluid_withWebp
                 }
             }
@@ -17,7 +17,7 @@ const query = graphql`
 `;
 
 interface Data {
-    topImage: {
+    headerImage: {
         childImageSharp: GatsbyImageProps;
     };
 }
@@ -26,7 +26,7 @@ interface Props {
     title: string;
 }
 
-const imgTitle = 'A picture of me sitting next to a melting iceberg in Landmannalaugar, Iceland';
+const imgTitle = 'My kid pointing out that line 17 is missing a semi-colon';
 
 export const Header: React.FC<Props> = props => (
     <StaticQuery
@@ -34,12 +34,14 @@ export const Header: React.FC<Props> = props => (
         render={(data: Data) => {
             return (
                 <header className={styles.header}>
-                    <Img
-                        fluid={data.topImage.childImageSharp.fluid}
-                        className={styles.topImage}
-                        alt={imgTitle}
-                        title={imgTitle}
-                    />
+                    <div style={{ backgroundColor: '#258a71' }}>
+                        <Img
+                            fluid={data.headerImage.childImageSharp.fluid}
+                            className={styles.headerImage}
+                            alt={imgTitle}
+                            title={imgTitle}
+                        />
+                    </div>
                     <Link className={styles.homeLink} title="Go to main page" to="/">
                         GP
                     </Link>

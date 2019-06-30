@@ -1,7 +1,11 @@
 .header {
     display: block;
-    height: 300px;
     position: relative;
+    border-bottom: 3px solid #258a7130;
+}
+
+.headerImage {
+    max-width: 400px;
 }
 
 .topImage {
@@ -27,34 +31,35 @@
 }
 
 .titleContainer {
-    background-color: white;
     display: inline-block;
-    left: 7%;
-    margin-right: 150px;
-    padding: 20px 50px;
-    position: relative;
-    top: 100px;
+    left: 27%;
+    margin-right: 30px;
+    padding: 0;
+    position: absolute;
+    top: 120px;
     vertical-align: middle;
 }
 
 .title {
-    color: seagreen;
+    color: white;
     margin: 0;
     text-decoration: none;
+    text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
 }
 
 @media only screen and (max-width: 1015px) {
     .title {
-        font-size: 1.5rem;
+        font-size: 2.25rem;
     }
 }
 
 @media only screen and (max-width: 750px) {
     .title {
-        font-size: 1.2rem;
+        font-size: 2rem;
     }
 
     .titleContainer {
-        margin-right: 14%;
+        margin-right: 0;
+        left: 10%;
     }
 }
