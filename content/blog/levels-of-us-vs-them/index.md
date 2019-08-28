@@ -1,6 +1,6 @@
 ---
-date: '2019-08-28T06:27:36.595Z'
-title: 'Levels of Us Vs. Them'
+date: "2019-08-28T06:27:36.595Z"
+title: "Levels of Us Vs. Them"
 draft: true
 tags:
     - leadership
@@ -8,7 +8,11 @@ tags:
     - training
     - managerial
     - improvement
+cover: "cover.jpg"
+coverAlt: "All for one and one for all: Photo by Perry Grone on Unsplash"
 ---
+
+![All for one and one for all: Photo by Perry Grone on Unsplash](cover.jpg)
 
 I've recently finished reading John C. Maxwell's [The 5 Levels of Leadership](https://amzn.to/2NMv5rJ) - an excellent analysis of the
 levels of leadership, categorized by the manager's influence reach.
