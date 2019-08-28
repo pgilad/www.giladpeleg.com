@@ -1,7 +1,7 @@
 ---
 date: "2019-08-28T06:27:36.595Z"
 title: "Levels of Us Vs. Them"
-draft: true
+draft: false
 tags:
     - leadership
     - skill
@@ -82,7 +82,7 @@ Team members sometimes leave, but it's almost never because of the leader, but r
 
 To the naïve observer, it may seen that this is the optimal leadership level for the organization. The leader makes his team happy, improves their skills by coaching and the team usually performs. But the honest truth is that leaders at this level can be very harmful to the organization. Because they solve for the local (team) maximum, it's very rare that this correlates with the global (organization) maximum. In fact I've personally experienced leaders at this level creating all sorts of havoc and chaos in the organization, while taking their team to the top.
 
-![Local Maxima Vs. Global Maxima](https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Extrema_example_original.svg/640px-Extrema_example_original.svg.png?1566978230506)
+![Local Maxima Vs. Global Maxima: Image from Wikipedia](local-maximum-global-maximum.png)
 
 Because the leaders of this level are so focused on their team, they forget about the group, and the organization. Everything justifies their cause of their team's success. This creates an atmosphere of **Us Vs. Them** for the team. The competition are other teams, other team leads, their colleagues. Accentuating their team at the expense of other teams is very common. Other signs of this behavior can be:
 
