@@ -1,6 +1,6 @@
 ---
-date: "2019-08-28T06:27:36.595Z"
-title: "Levels of Us Vs. Them"
+date: '2019-08-28T06:27:36.595Z'
+title: 'Levels of Us Vs. Them'
 draft: false
 tags:
     - leadership
@@ -8,24 +8,20 @@ tags:
     - training
     - managerial
     - improvement
-cover: "cover.jpg"
-coverAlt: "All for one and one for all: Photo by Perry Grone on Unsplash"
+cover: 'cover.jpg'
+coverAlt: 'All for one and one for all: Photo by Perry Grone on Unsplash'
 ---
 
 ![All for one and one for all: Photo by Perry Grone on Unsplash](cover.jpg)
 
 I've recently finished reading John C. Maxwell's [The 5 Levels of Leadership](https://amzn.to/2NMv5rJ) - an excellent analysis of the
-levels of leadership, categorized by the manager's influence reach.
+levels of leadership, categorized by the manager's influence.
 
 Although the author's descriptions and points are mostly spot-on, I've
 found that the book doesn't cover the interactions of the leader with
 his peers and colleagues. Leadership is not only about how well you
-lead and improve the people that report to you, it is not only about
-how well you or your team performs, but it is also about how you
-can (positively) influence the other teams and leaders that are parallel
-to you. I've personally struggled with colleagues focusing on creating
-silos, working hard on showing why their team is the best, while
-naively, or sometimes deliberately, harming their peer teams.
+lead and improve the people that report to you. Leadership is also not only about how well you or your team performs. Leadership is also about how you can (positively) influence the other teams and leaders that are parallel to you. I've personally struggled with colleagues focusing on creating silos, working hard on showing why their team is the best, while
+naïvely, or sometimes deliberately, harming their peer teams.
 
 I think the term "Us Vs. Them" neatly categorizes the mindset of the leader in respect to how they interact with subordinates and peers. This
 scale doesn't contradict Maxwell's leadership scale. They might not be correlated as well, but they are still very distinct, observable levels.
@@ -50,7 +46,7 @@ The levels of "Us Vs. Them" that I see are:
 
 ## Me Vs. You
 
-This level usually depicts novice leaders. Their mindset focuses on how they can improve themselves and their position, and how they can harness the environment to increase their influence. In fact this leader main leverage is taking. At this level the leader aims to performs and impress. The performance is usually not to the gain of the company, that's a side effect, as it is usually aimed to impress his superiors, or sometimes even intimidate his peers.
+This level usually depicts novice leaders. Their mindset focuses on how they can improve themselves and their own position, and how they can harness the environment to increase their influence. In fact this leader's main leverage is taking. At this level the leader aims to performs and impress. The performance is usually not to the gain of the company, that's a side effect, as it is usually aimed to impress his superiors, or sometimes even intimidate his peers.
 
 The signs of this leader are crystal clear:
 
@@ -104,7 +100,7 @@ In one of the companies I worked for, we've had one clear and distinct level 2 l
 
 On the opposite coin, he created fierce and unhealthy competition with other teams. It doesn't seem deliberate, but rather a consequence of the mindset that only his team matters. Members of other teams usually received bad treatment and cold shoulder from this leader. These are things he would almost never do to his own team members. Other leaders were the competition and he tried his best to increase his, and his team's influence at the company, at the expense of other teams.
 
-I've personally known 6 employees that left, mostly for other reasons, but they all had in common the fact that they specifically mentioned him as a trigger or partial reason for leaving. The fierce competition leaves causalities on the battleground. They are mostly others. I've also suffered from competition with this leader, unable to help him rise above level 2. It also didn't help that his managers were oblivious to his behavior. They ignored it by being blind to it, or being incapable to handle the situation.
+I've personally known 6 employees that left, mostly for other reasons, but they all had in common the fact that they specifically mentioned him as a trigger or partial reason for leaving. The fierce competition leaves causalities on the battlefield. They are mostly peers and other team members. I've also suffered from competition with this leader, unable to help him rise above level 2. It also didn't help that his managers were oblivious to his behavior. They ignored it by being blind to it, or being incapable of handling the situation.
 
 ## Us (Group) Vs. Them
 
