@@ -3,17 +3,17 @@ name: CI
 on: [push]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js 12
-      uses: actions/setup-node@v1
-      with:
-        node-version: "12"
-    - name: verify code
-      run: |
-        npm ci
-        npm run verify
-    - name: verify build
-      run: npm run build
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v1
+            - name: Use Node.js 12
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '12'
+            - name: verify code
+              run: |
+                  npm ci
+                  npm run verify
+            - name: verify build
+              run: npm run build
