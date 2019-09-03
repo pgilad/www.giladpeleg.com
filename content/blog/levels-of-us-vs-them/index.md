@@ -1,7 +1,7 @@
 ---
 date: '2019-08-28T06:27:36.595Z'
 title: 'Levels of Us Vs. Them'
-draft: false
+draft: true
 tags:
     - leadership
     - skill
