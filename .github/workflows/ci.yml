@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-    verify:
+    Verify:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v1
@@ -11,11 +11,11 @@ jobs:
               uses: actions/setup-node@v1
               with:
                   node-version: '12'
-            - name: install deps
+            - name: Install deps
               run: npm ci
-            - name: verify
+            - name: Verify
               run: npm run verify
-    build:
+    Build:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v1
@@ -23,7 +23,7 @@ jobs:
               uses: actions/setup-node@v1
               with:
                   node-version: '12'
-            - name: install deps
+            - name: Install deps
               run: npm ci
-            - name: build
+            - name: Build
               run: npm run build
