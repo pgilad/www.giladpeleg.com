@@ -59,6 +59,7 @@
         "develop": "gatsby develop",
         "eslint": "eslint . --fix",
         "format": "prettier --write '{src,gatsby}/**/*.{js,css,ts,tsx}' '*.js'",
+        "format-check": "prettier --check '{src,gatsby}/**/*.{js,css,ts,tsx}' '*.js'",
         "lint": "npm run eslint && npm run tslint && npm run stylelint",
         "release-prepare": "gatsby clean && npm run build",
         "release:dev": "GATSBY_ENV=staging npm run release-prepare && netlify deploy",
@@ -67,7 +68,7 @@
         "stylelint": "stylelint 'src/**/*.css' --fix",
         "tslint": "tslint '{src,gatsby}/**/*.{ts,tsx}' --fix",
         "typecheck": "tsc --project . --noEmit",
-        "verify": "npm run format && npm run lint && npm run typecheck"
+        "verify": "npm run format-check && npm run lint && npm run typecheck"
     },
     "devDependencies": {
         "@types/eslint": "^6.1.1",
