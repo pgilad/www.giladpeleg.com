@@ -27,7 +27,7 @@
     force = true
 
 [[redirects]]
-    from = "http://elastic-hamilton-a5c549.netlify.com/*"
+    from = "https://giladpeleg.netlify.com/*"
     to = "https://www.giladpeleg.com/:splat"
     status = 301
     force = true
