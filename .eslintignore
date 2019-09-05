@@ -5,6 +5,4 @@
 public/
 node_modules/
 src/generated/
-src/**/*.ts
-src/**/*.tsx
-gatsby/**/*.ts
+scripts/

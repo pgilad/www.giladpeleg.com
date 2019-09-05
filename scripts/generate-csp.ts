@@ -61,5 +61,4 @@ csp.addDirective(new CSP.ConnectSource().addValue(regularSourceDirective))
     .addDirective(new CSP.ReportUri().setValue(reportUri))
     .addDirective(new CSP.ReportTo().setValue('default'));
 
-// tslint:disable-next-line:no-console
 console.log(csp.stringify());

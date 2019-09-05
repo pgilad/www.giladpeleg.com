@@ -15,5 +15,5 @@
         "strict": true,
         "target": "esnext"
     },
-    "include": ["./src/**/*", "./gatsby/**/*"]
+    "include": ["./src/**/*", "./gatsby/**/*", "*.js"]
 }

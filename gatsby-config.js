@@ -1,3 +1,4 @@
+/* eslint-disable  */
 const pkg = require('./package');
 const PAGE_TITLE = 'Gilad Peleg';
 
