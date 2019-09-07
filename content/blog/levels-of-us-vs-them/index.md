@@ -14,17 +14,15 @@ coverAlt: 'All for one and one for all: Photo by Perry Grone on Unsplash'
 
 ![All for one and one for all: Photo by Perry Grone on Unsplash](cover.jpg)
 
-I've recently finished reading John C. Maxwell's [The 5 Levels of Leadership](https://amzn.to/2NMv5rJ) - an excellent analysis of the
-levels of leadership, categorized by the manager's influence.
+I've recently finished reading John C. Maxwell's [The 5 Levels of Leadership](https://amzn.to/2NMv5rJ) - an excellent analysis of the levels of leadership, categorized by the manager's influence.
 
 Although the author's descriptions and points are mostly spot-on, I've
 found that the book doesn't cover the interactions of the leader with
 his peers and colleagues. Leadership is not only about how well you
-lead and improve the people that report to you. Leadership is also not only about how well you or your team performs. Leadership is also about how you can (positively) influence the other teams and leaders that are parallel to you. I've personally struggled with colleagues focusing on creating silos, working hard on showing why their team is the best, while
-naïvely, or sometimes deliberately, harming their peer teams.
+lead and improve the people that report to you. It's also not only about how well you or your team performs. Leadership is also about how you can (positively) influence the other teams and leaders that are parallel to you. I've personally struggled with colleagues focusing on creating silos, working hard on showing why their team is the best, while
+naïvely, or sometimes deliberately, harming their peers' teams.
 
-I think the term "Us Vs. Them" neatly categorizes the mindset of the leader in respect to how they interact with subordinates and peers. This
-scale doesn't contradict Maxwell's leadership scale. They might not be correlated as well, but they are still very distinct, observable levels.
+I think the term "Us Vs. Them" neatly categorizes the mindset of the leader in respect to how they interact with subordinates and peers. This scale doesn't contradict Maxwell's leadership scale. They might not be correlated as well. But still, the levels are very distinct and identifiable.
 
 The levels of "Us Vs. Them" that I see are:
 
@@ -35,7 +33,7 @@ The levels of "Us Vs. Them" that I see are:
 
 3. **Us (Group) Vs. Them**: Even though the leader does not necessarily
    manage the group, that includes peer teams, he sets a mentality that the
-   group is **Us** and other groups in the organization are **Them**. The success of the group is important to the leader, almost as much as the success of his team.
+   group is **Us** and other groups in the organization are **Them**. The success of the group is important to the leader, almost as much as the success of his own team.
 
 4. **Us (Organization) Vs Them**: While not necessarily being the head
    of the organization, the leader instates that the organization is **Us**
