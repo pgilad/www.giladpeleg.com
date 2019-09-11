@@ -164,7 +164,7 @@ module.exports = {
                         },
                         query: rssFeedQuery,
                         output: '/rss.xml',
-                        title: 'Gatsby RSS Feed',
+                        title: PAGE_TITLE,
                     },
                 ],
             },
