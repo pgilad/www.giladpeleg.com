@@ -19,9 +19,19 @@ const rssGlobalFeedQuery = `
 {
     site {
         siteMetadata {
+            author
+            authorEmail
             description
+            keywords
             siteUrl
             title
+        }
+    }
+    headerImage: file(relativePath: {eq: "header-image.jpg"}) {
+        childImageSharp {
+          fixed(width: 753, height: 592) {
+            src
+          }
         }
     }
 }
@@ -53,6 +63,7 @@ const rssFeedQuery = `
 module.exports = {
     siteMetadata: {
         author: PAGE_TITLE,
+        authorEmail: 'gilad@giladpeleg.com',
         description: pkg.description,
         disqusShortName: 'gilad-peleg-blog',
         keywords: pkg.keywords,
@@ -141,8 +152,28 @@ module.exports = {
             resolve: 'gatsby-plugin-feed',
             options: {
                 query: rssGlobalFeedQuery,
+                setup(ctx) {
+                    return {
+                        title: ctx.query.site.siteMetadata.author,
+                        description: ctx.query.site.siteMetadata.description,
+                        site_url: ctx.query.site.siteMetadata.siteUrl,
+                        feed_url: `${ctx.query.site.siteMetadata.siteUrl}/rss.xml`,
+                        image_url: `${ctx.query.site.siteMetadata.siteUrl}${ctx.query.headerImage.childImageSharp.fixed.src}`,
+                        managingEditor: `${ctx.query.site.siteMetadata.authorEmail} (${ctx.query.site.siteMetadata.author})`,
+                        webMaster: ctx.query.site.siteMetadata.authorEmail,
+                        language: 'en-us',
+                        docs: 'http://www.rssboard.org/rss-specification',
+                        categories: ctx.query.site.siteMetadata.keywords,
+                        copyright: `Copyright ${new Date().getFullYear()} ${
+                            ctx.query.site.siteMetadata.author
+                        }`,
+                    };
+                },
                 feeds: [
                     {
+                        query: rssFeedQuery,
+                        output: '/rss.xml',
+                        title: PAGE_TITLE,
                         serialize: ctx => {
                             const siteMetadata = ctx.query.site.siteMetadata;
                             const posts = ctx.query.allMarkdownRemark.edges;
@@ -162,9 +193,6 @@ module.exports = {
                                 };
                             });
                         },
-                        query: rssFeedQuery,
-                        output: '/rss.xml',
-                        title: PAGE_TITLE,
                     },
                 ],
             },

@@ -13,6 +13,7 @@ export const pageQuery = graphql`
         site {
             siteMetadata {
                 author
+                disqusShortName
                 siteUrl
                 title
             }
