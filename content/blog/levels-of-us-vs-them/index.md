@@ -19,7 +19,7 @@ Although the author's descriptions and points are mostly spot-on, I've found tha
 his peers and colleagues. Leadership is not only about how well you lead and improve the people that report to you. It's also not only about how well you or your team performs. Leadership is also about how you can (positively) influence the other teams and leaders that are parallel to you. I've personally struggled with colleagues focusing on creating silos, working hard on showing why their team is the best, while
 naïvely, or sometimes deliberately, harming their peers' teams.
 
-I think the term "Us Vs. Them" neatly categorizes the mindset of the leader in respect to how they interact with subordinates and peers. This scale doesn't contradict Maxwell's leadership scale, and they might not be correlated. But still - the levels are very distinct and identifiable.
+I think the term "Us Vs. Them" neatly categorizes the mindset of the leader in respect to how they interact with subordinates and peers. This scale doesn't contradict Maxwell's leadership scale, and they might not be correlated. Still, the levels are very distinct and identifiable.
 
 The levels of "Us Vs. Them" that I see are:
 
@@ -37,7 +37,7 @@ The levels of "Us Vs. Them" that I see are:
 
 ## Me Vs. You
 
-This level usually depicts novice leaders. Their mindset focuses on how they can improve themselves and their own position, and how they can harness the environment to increase their influence. In fact this leader's main leverage is taking. At this level the leader aims to performs and impress. The performance is usually not to the gain of the company, that's a side effect, as it is usually aimed to impress his superiors, or sometimes even intimidate his peers.
+This level usually depicts novice leaders. Their mindset focuses on how they can improve themselves and their own position, and how they can harness the environment to increase their influence. In fact this leader's main leverage is taking, not giving. At this level the leader aims to perform and impress. The performance part is usually not to the gain of the company, that's a side effect, as it's usually aimed to impress his superiors, or sometimes even intimidate his peers.
 
 The signs of this leader are:
 
@@ -55,8 +55,7 @@ The signs of this leader are:
 
 -   Coaching and training of his team members is rarely and sporadically done. Only if he has to.
 
-Are leaders in this level always beginner leaders? My experience is that most of them are. But there are some leaders who don't succeed in ever growing
-beyond this level due to many possible reasons. Some have confidence (or rather lack of) issues. Some never got the proper training and could not advance on their own. Some are power driven and have some sort of "Me vs. the world" mentality they never surpass.
+Are leaders in this level always beginner leaders? My experience is that most of them are. But there are some leaders who don't succeed in ever growing beyond this level due to many possible reasons. Some have confidence (or rather lack of) issues. Some never got the proper training and could not advance on their own. Some are power driven and have some sort of "Me vs. the world" mentality they never surpass.
 
 ## Us (Team) Vs. Them
 
