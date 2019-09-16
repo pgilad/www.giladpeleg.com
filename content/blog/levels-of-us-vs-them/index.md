@@ -35,6 +35,8 @@ The levels of "Us Vs. Them" that I see are:
 
 5. **Us (Industry) Vs Them**: Industry leaders can create an effect far greater than their own organization, attracting people from all kinds of industries and professions to join their industry or profession. These are very unique kinds of leaders, that besides their usual job of CEO or other high ranking position, also create a positive vibe for their whole industry. Think about visionaries such as Steve Jobs, attracting people both to tech industry, but also paving the way for designers, creating beautiful user experience for customers.
 
+It's important to mention that a leader can partly at multiple levels, can traverse between levels, and can be at multiple levels with different people. I'm also guilty of some of the negative behavior I depict, and I've done my best to improve and grow.
+
 ## Me Vs. You
 
 This level usually depicts novice leaders. Their mindset focuses on how they can improve themselves and their own position, and how they can harness the environment to increase their influence. In fact this leader's main leverage is taking, not giving. At this level the leader aims to perform and impress. The performance part is usually not to the gain of the company, that's a side effect, as it's usually aimed to impress his superiors, or sometimes even intimidate his peers.
@@ -101,7 +103,7 @@ Leaders at this level usually present a double-edged sword to management. On one
 
 Leaders at this level are able to rise above the mindset that their team is all that counts. They understand the bigger picture, and know that they can improve their team alongside their peers and peer teams, and it will in-turn improve the organization. A leader being able to reach this level will internally count on reciprocity from peers, and believe that one needs to be the change one wants to see.
 
-The leaders at this level aim to train and coach members from all their peer teams. They strive to hold mutual team events and share knowledge with other teams. This will pay back in dividends when colleguaes and other team members will hold similiar events. It also improve cross team communication, a soft skill that software developers tend to be weaker in.
+The leaders at this level aim to train and coach members from all their peer teams. They strive to hold mutual team events and share knowledge with other teams. This will pay back in dividends when colleagues and other team members will hold similar events. It also improve cross team communication, a soft skill that software developers tend to be weaker in.
 
 The members of the group thrive. The competition between teams is healthy, and never at the expense of the greater good of the group. Members occasionally switch teams in order to learn, improve and widen their scope and practice. Mutual praises between peer leaders and teams can happen and even further improve group morale.
 
@@ -113,7 +115,7 @@ This is the "golden field" for leaders. They bring their team and group much fur
 
 The leaders in this level are rare and scarce, as it takes dedication and perspiration to reach it. And tenure. It's very difficult to simply join an organization and start at this level. Leaders must first prove themselves to their own teams, and only later to their peers.
 
-Not everyone is happy with this leader. Some peer leaders will fail to see the gain and benefit, and in turn reject any help from this leader. A helping hand reaching out can be perceived as an indication for intervention and takeover attempts. For a company I worked for, I've had a peer consistently reacting to any help I offered with a bigger pushback. For him, I was the competition, and it was a [Zero-Sum Game](https://en.wikipedia.org/wiki/Zero-sum_game). My gain is his loss.
+Not everyone is happy with this leader. Some peer leaders will fail to see the gain and benefit, and in turn reject any help from this leader. A helping hand reaching out can be perceived as an indication for intervention and takeover attempts. For a company I worked for, I've had a peer consistently reacting to any help I offered with a bigger push-back. For him, I was the competition, and it was a [Zero-Sum Game](https://en.wikipedia.org/wiki/Zero-sum_game). My gain is his loss.
 
 ## Us (Organization) Vs. Them
 
