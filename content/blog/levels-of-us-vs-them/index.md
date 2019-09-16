@@ -73,7 +73,7 @@ To the naïve observer, it may seen that this is the optimal leadership level fo
 
 ![Local Maxima Vs. Global Maxima: Image from Wikipedia](local-maximum-global-maximum.png)
 
-Because the leaders of this level are so focused on their team, they forget about the group, and the organization. Everything justifies their cause of their team's success. This creates an atmosphere of **Us Vs. Them** for the team. The competition are other teams, other team leads, their colleagues. Accentuating their team at the expense of other teams is very common. Other signs of this behavior can be:
+Because the leaders of this level are so focused on their team, they forget about the group, and the organization. Everything justifies the cause of their team's success. This creates an atmosphere of **Us Vs. Them** for the team. The competition are other teams, other team leads, their colleagues. Accentuating their team at the expense of other teams is very common. Other signs of this behavior can be:
 
 -   Creating a mindset that only the team matters. The other team can (and perhaps should) crash and burn for all they care.
 
