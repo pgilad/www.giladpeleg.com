@@ -75,7 +75,7 @@ To the naïve observer, it may seen that this is the optimal leadership level fo
 
 Because the leaders of this level are so focused on their team, they forget about the group, and the organization. Everything justifies the cause of their team's success. This creates an atmosphere of **Us Vs. Them** for the team. The competition are other teams, other team leads, their colleagues. Accentuating their team at the expense of other teams is very common. Other signs of this behavior can be:
 
--   Creating a mindset that only the team matters. The other team can (and perhaps should) crash and burn for all they care.
+-   Creating a mindset that only the team matters. The other teams can (and perhaps should) crash and burn for all they care.
 
 -   Competition with other teams can be unhealthy. All means are ok for winning.
 
@@ -91,7 +91,7 @@ Because the leaders of this level are so focused on their team, they forget abou
 
 In one of the companies I worked for, we've had one clear and distinct level 2 leader. It took him a while to switch from level 1 to level 2, but once he got there, he made his team successful. They had team events, team meets, he trained and improved his team members. In weekly meets it was common that he gave praises to his team members, usually encouraging them to speak at the bi-weekly demo.
 
-On the opposite coin, he created fierce and unhealthy competition with other teams. It doesn't seem deliberate, but rather a consequence of the mindset that only his team matters. Members of other teams usually received bad treatment and cold shoulder from this leader, and his team members learnt from him that this is the desired behavior. These are things he would almost never do to his own team members. Other leaders were the competition and he tried his best to increase his, and his team's influence at the company, at the expense of other teams.
+On the opposite coin, he created fierce and unhealthy competition with other teams. It doesn't seem deliberate, but rather a consequence of the mindset that only his team matters. Members of other teams usually received bad treatment and cold shoulder from this leader, and his team members learnt from him that this is the desired behavior. These are things he would almost never do to his own team members. Other leaders were the competition and he tried his best to increase his, and his team's, influence at the company, at the expense of other teams.
 
 I've personally known 3 employees that left, mostly for other reasons, but they all had in common the fact that they specifically mentioned him as a trigger or partial reason for leaving. The fierce competition leaves causalities on the battlefield. They are mostly peers and other team members. I've also suffered from competition with this leader, unable to help him rise above level 2. It also didn't help that his managers were oblivious to his behavior. They ignored it by being blind to it, or being incapable of handling the situation.
 
