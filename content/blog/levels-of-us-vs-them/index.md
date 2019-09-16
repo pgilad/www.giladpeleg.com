@@ -35,7 +35,7 @@ The levels of "Us Vs. Them" that I see are:
 
 5. **Us (Industry) Vs Them**: Industry leaders can create an effect far greater than their own organization, attracting people from all kinds of industries and professions to join their industry or profession. These are very unique kinds of leaders, that besides their usual job of CEO or other high ranking position, also create a positive vibe for their whole industry. Think about visionaries such as Steve Jobs, attracting people both to tech industry, but also paving the way for designers, creating beautiful user experience for customers.
 
-It's important to mention that a leader can partly at multiple levels, can traverse between levels, and can be at multiple levels with different people. I'm also guilty of some of the negative behavior I depict, and I've done my best to improve and grow.
+It's important to mention that a leader can be partly at multiple levels at once, can traverse between levels, and can be at multiple levels with different people. I'm also guilty of some of the negative behavior I depict, and I've done my best to improve and grow.
 
 ## Me Vs. You
 
