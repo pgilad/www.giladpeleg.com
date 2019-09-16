@@ -93,9 +93,9 @@
         "netlify-cli": "^2.15.0",
         "prettier": "^1.18.2",
         "source-map-support": "^0.5.13",
-        "stylelint": "^10.1.0",
-        "stylelint-config-recommended": "^2.2.0",
+        "stylelint": "^11.0.0",
+        "stylelint-config-recommended": "^3.0.0",
         "stylelint-order": "^3.1.0",
-        "ts-node": "^8.3.0"
+        "ts-node": "^8.4.1"
     }
 }
