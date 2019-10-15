@@ -1,8 +1,10 @@
 # node_modules ignored by default
 .cache/
+.github/
 .idea/
 .netlify/
-public/
+content/
 node_modules/
-src/generated/
+public/
 scripts/
+src/generated/
