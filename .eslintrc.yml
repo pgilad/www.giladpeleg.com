@@ -14,16 +14,18 @@ parserOptions:
     tsconfigRootDir: ./
     sourceType: module
     ecmaVersion: 2019
+    noWatch: true
     ecmaFeatures:
         jsx: true
 
 plugins:
-    - '@typescript-eslint/eslint-plugin'
+    - '@typescript-eslint'
     - prettier
     - react
 
 extends:
     - 'eslint:recommended'
+    - 'plugin:@typescript-eslint/eslint-recommended'
     - 'plugin:@typescript-eslint/recommended'
     - 'plugin:prettier/recommended'
     - 'plugin:react/recommended'
