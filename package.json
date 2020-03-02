@@ -61,7 +61,7 @@
         "format": "prettier --write '{src,gatsby}/**/*.{js,css,ts,tsx}' '*.js'",
         "format-check": "prettier --check '{src,gatsby}/**/*.{js,css,ts,tsx}' '*.js'",
         "lint": "npm run eslint && npm run stylelint",
-        "release-prepare": "gatsby clean && npm run build",
+        "release-prepare": "npm run build",
         "release:dev": "GATSBY_ENV=staging npm run release-prepare && netlify deploy",
         "release:prod": "GATSBY_ENV=production npm run release-prepare && netlify deploy --prod",
         "start": "npm run develop",
