@@ -12,7 +12,8 @@ const getTrackingId = () => {
     if (process.env.GATSBY_ENV === 'staging') {
         return 'UA-58310464-2';
     }
-    return '';
+    // fallback to staging
+    return 'UA-58310464-2';
 };
 
 const rssGlobalFeedQuery = `
