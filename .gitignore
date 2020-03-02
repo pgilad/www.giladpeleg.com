@@ -74,3 +74,6 @@ src/generated
 *.iml
 
 schema.graphql
+
+# Local Netlify folder
+.netlify
