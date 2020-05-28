@@ -4,8 +4,10 @@
  * See: https://www.gatsbyjs.org/docs/ssr-apis/
  */
 
-import React from 'react';
+import React from "react";
 
+// noinspection JSUnusedGlobalSymbols
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const onRenderBody = ({ setHeadComponents }) => {
     setHeadComponents([
         <link

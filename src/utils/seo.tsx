@@ -1,6 +1,6 @@
-import { Article, Data } from '../components/seo';
+import { Article, Data } from "../components/seo";
 
-import { combineURLs } from './urls';
+import { combineURLs } from "./urls";
 
 export interface OpenGraphMetaTag extends MetaTag {
     content: string;
@@ -24,34 +24,34 @@ export const getTwitterMetaTags = (options: {
     imageDescription: string;
     imageUrl: string;
     pageTitle: string;
-}) => {
+}): TwitterMetaTag[] => {
     return [
         {
-            name: 'twitter:card',
-            content: 'summary',
+            name: "twitter:card",
+            content: "summary",
         },
         {
-            name: 'twitter:creator',
+            name: "twitter:creator",
             content: options.data.site.siteMetadata.twitterUsername,
         },
         {
-            name: 'twitter:site',
+            name: "twitter:site",
             content: options.data.site.siteMetadata.twitterUsername,
         },
         {
-            name: 'twitter:title',
+            name: "twitter:title",
             content: options.pageTitle,
         },
         {
-            name: 'twitter:description',
+            name: "twitter:description",
             content: options.description,
         },
         {
-            name: 'twitter:image',
+            name: "twitter:image",
             content: options.imageUrl,
         },
         {
-            name: 'twitter:image:alt',
+            name: "twitter:image:alt",
             content: options.imageDescription,
         },
     ] as TwitterMetaTag[];
@@ -65,104 +65,104 @@ export const getOpenGraphMetaTags = (options: {
     imageUrl: string;
     pageTitle: string;
     url: string;
-}) => {
-    const openGraphImageWidth = '1200';
-    const openGraphImageHeight = '630';
+}): OpenGraphMetaTag[] => {
+    const openGraphImageWidth = "1200";
+    const openGraphImageHeight = "630";
 
     const tags: OpenGraphMetaTag[] = [
         {
-            property: 'og:title',
+            property: "og:title",
             content: options.pageTitle,
         },
         {
-            property: 'og:site_name',
+            property: "og:site_name",
             content: options.data.site.siteMetadata.title,
         },
         {
-            property: 'og:description',
+            property: "og:description",
             content: options.description,
         },
         {
-            property: 'og:url',
+            property: "og:url",
             content: options.url,
         },
         {
-            property: 'og:image',
+            property: "og:image",
             content: options.imageUrl,
         },
         {
-            property: 'og:image:alt',
+            property: "og:image:alt",
             content: options.imageDescription,
         },
         {
-            property: 'og:image:type',
-            content: 'image/png',
+            property: "og:image:type",
+            content: "image/png",
         },
         {
-            property: 'og:image:width',
+            property: "og:image:width",
             content: openGraphImageWidth,
         },
         {
-            property: 'og:image:height',
+            property: "og:image:height",
             content: openGraphImageHeight,
         },
         {
-            property: 'og:locale',
-            content: 'en_US',
+            property: "og:locale",
+            content: "en_US",
         },
     ];
 
     if (options.article) {
         tags.push(
             {
-                property: 'og:type',
-                content: 'article',
+                property: "og:type",
+                content: "article",
             },
             {
-                property: 'article:author',
+                property: "article:author",
                 content: options.data.site.siteMetadata.author,
             },
             {
-                property: 'article:published_time',
+                property: "article:published_time",
                 content: options.article.publishedDate,
             }
         );
-        new Set(options.article.tags).forEach(tag => {
+        new Set(options.article.tags).forEach((tag) => {
             tags.push({
-                property: 'article:tag',
+                property: "article:tag",
                 content: tag,
             });
         });
     } else {
         tags.push({
-            property: 'og:type',
-            content: 'website',
+            property: "og:type",
+            content: "website",
         });
     }
 
     return tags;
 };
 
-export const getGeneralMetaTags = (description: string, data: Data) => {
+export const getGeneralMetaTags = (description: string, data: Data): MetaTag[] => {
     return [
         {
-            name: 'description',
+            name: "description",
             content: description,
         },
         {
-            name: 'author',
+            name: "author",
             content: data.site.siteMetadata.author,
         },
         {
-            name: 'robots',
-            content: 'index, follow',
+            name: "robots",
+            content: "index, follow",
         },
-    ] as MetaTag[];
+    ];
 };
 
 interface Entity {
-    '@context': string;
-    '@type': string;
+    "@context": string;
+    "@type": string;
 
     [key: string]: any;
 }
@@ -172,10 +172,10 @@ export const getSchemaOrgJSONLD = (options: {
     data: Data;
     imageUrl: string;
     url: string;
-}) => {
+}): Entity[] => {
     const website = {
-        '@context': 'http://schema.org',
-        '@type': 'WebSite',
+        "@context": "http://schema.org",
+        "@type": "WebSite",
         name: options.data.site.siteMetadata.title,
         url: options.data.site.siteMetadata.siteUrl,
     };
@@ -183,10 +183,10 @@ export const getSchemaOrgJSONLD = (options: {
 
     if (options.article) {
         const blogPosting = {
-            '@context': 'http://schema.org',
-            '@type': 'BlogPosting',
+            "@context": "http://schema.org",
+            "@type": "BlogPosting",
             author: {
-                '@type': 'Person',
+                "@type": "Person",
                 name: options.data.site.siteMetadata.author,
                 url: options.data.site.siteMetadata.siteUrl,
             },
@@ -195,7 +195,7 @@ export const getSchemaOrgJSONLD = (options: {
             description: options.article.description,
             headline: options.article.title,
             image: {
-                '@type': 'ImageObject',
+                "@type": "ImageObject",
                 url: options.imageUrl,
                 width: 1200,
                 height: 630,
@@ -204,15 +204,15 @@ export const getSchemaOrgJSONLD = (options: {
             name: options.article.title,
             url: options.url,
             publisher: {
-                '@id': options.data.site.siteMetadata.siteUrl,
-                '@type': 'Organization',
+                "@id": options.data.site.siteMetadata.siteUrl,
+                "@type": "Organization",
                 name: options.data.site.siteMetadata.author,
                 url: options.data.site.siteMetadata.siteUrl,
                 logo: {
-                    '@type': 'ImageObject',
+                    "@type": "ImageObject",
                     url: combineURLs(
                         options.data.site.siteMetadata.siteUrl,
-                        '/icons/icon-48x48.png'
+                        "/icons/icon-48x48.png"
                     ),
                     width: 48,
                     height: 48,
@@ -221,14 +221,14 @@ export const getSchemaOrgJSONLD = (options: {
         };
 
         const breadcrumbList = {
-            '@context': 'http://schema.org',
-            '@type': 'BreadcrumbList',
+            "@context": "http://schema.org",
+            "@type": "BreadcrumbList",
             itemListElement: [
                 {
-                    '@type': 'ListItem',
+                    "@type": "ListItem",
                     position: 1,
                     item: {
-                        '@id': options.url,
+                        "@id": options.url,
                         image: options.imageUrl,
                         name: options.article.title,
                     },
@@ -242,7 +242,11 @@ export const getSchemaOrgJSONLD = (options: {
     return schema;
 };
 
-export const getDescription = (data: Data, overrideDescription?: string, article?: Article) => {
+export const getDescription = (
+    data: Data,
+    overrideDescription?: string,
+    article?: Article
+): string => {
     if (overrideDescription) {
         return overrideDescription;
     }

@@ -1,7 +1,7 @@
-import { Link } from 'gatsby';
-import React from 'react';
+import { Link } from "gatsby";
+import React from "react";
 
-import styles from './home-recent-posts.module.css';
+import styles from "./home-recent-posts.module.css";
 
 interface Props {
     posts: {
@@ -18,7 +18,7 @@ interface Props {
     }[];
 }
 
-export const HomeRecentPosts: React.FC<Props> = props => (
+export const HomeRecentPosts: React.FC<Props> = (props) => (
     <div className={styles.blogPostList}>
         {props.posts.map(({ node }) => {
             return (

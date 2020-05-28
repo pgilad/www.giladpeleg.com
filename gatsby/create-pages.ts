@@ -1,6 +1,6 @@
-import path from 'path';
+import path from "path";
 
-import { GatsbyCreatePages } from './types';
+import { GatsbyCreatePages } from "./types";
 
 interface Post {
     node: {
@@ -29,7 +29,7 @@ interface AllMarkdown {
 
 // noinspection JSUnusedGlobalSymbols
 export const createPages: GatsbyCreatePages = async ({ graphql, actions }) => {
-    const BlogPostTemplate = path.resolve(__dirname, '../src/templates/blog-post.tsx');
+    const BlogPostTemplate = path.resolve(__dirname, "../src/templates/blog-post.tsx");
 
     const allMarkdown: AllMarkdown = await graphql(`
         {

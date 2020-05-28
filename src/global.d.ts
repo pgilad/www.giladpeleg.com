@@ -1,14 +1,14 @@
-declare module '*.module.css' {
+declare module "*.module.css" {
     const content: { [className: string]: string };
     export = content;
 }
 
-declare module '*.svg' {
+declare module "*.svg" {
     const content: any;
     export default content;
 }
 
-declare module 'disqus-react' {
+declare module "disqus-react" {
     interface DisqusDiscussionProps {
         shortname: string;
         config: {

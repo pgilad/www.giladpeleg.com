@@ -1,6 +1,6 @@
-import { graphql, StaticQuery } from 'gatsby';
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import { graphql, StaticQuery } from "gatsby";
+import React from "react";
+import { Helmet } from "react-helmet";
 
 import {
     getDescription,
@@ -8,8 +8,8 @@ import {
     getPageTitle,
     getSchemaOrgJSONLD,
     MetaTag,
-} from '../utils/seo';
-import { combineURLs } from '../utils/urls';
+} from "../utils/seo";
+import { combineURLs } from "../utils/urls";
 
 const query = graphql`
     query SEO {
@@ -33,7 +33,7 @@ const query = graphql`
 `;
 
 const DEFAULT_IMAGE_ALT =
-    'A picture of me sitting next to a melting iceberg in Landmannalaugar, Iceland';
+    "A picture of me sitting next to a melting iceberg in Landmannalaugar, Iceland";
 
 export interface Article {
     description: string;
@@ -77,11 +77,11 @@ export const SEO: React.FC<Props> = ({
     article,
     imageAlt = null,
     imageSrc = null,
-    lang = 'en',
+    lang = "en",
     meta = [],
-    overrideDescription = '',
-    overrideTitle = '',
-    pathname = '/',
+    overrideDescription = "",
+    overrideTitle = "",
+    pathname = "/",
 }) => {
     return (
         <StaticQuery
@@ -91,7 +91,7 @@ export const SEO: React.FC<Props> = ({
                     data.site.siteMetadata.siteUrl,
                     imageSrc || data.siteImage.childImageSharp.fixed.src
                 );
-                const url = combineURLs(data.site.siteMetadata.siteUrl, pathname || '/');
+                const url = combineURLs(data.site.siteMetadata.siteUrl, pathname || "/");
 
                 const metaTags = getMetaTags({
                     article,
@@ -117,7 +117,7 @@ export const SEO: React.FC<Props> = ({
                         meta={metaTags}
                         script={[
                             {
-                                type: 'application/ld+json',
+                                type: "application/ld+json",
                                 innerHTML: JSON.stringify(schemaOrgJSONLD),
                             },
                         ]}

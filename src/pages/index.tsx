@@ -1,12 +1,12 @@
-import { graphql } from 'gatsby';
-import React from 'react';
+import { graphql } from "gatsby";
+import React from "react";
 
-import { HomeRecentPosts } from '../components/home-recent-posts';
-import { HomeRightOverview } from '../components/home-right-overview';
-import { Layout } from '../components/layout';
-import { SEO } from '../components/seo';
+import { HomeRecentPosts } from "../components/home-recent-posts";
+import { HomeRightOverview } from "../components/home-right-overview";
+import { Layout } from "../components/layout";
+import { SEO } from "../components/seo";
 
-import styles from './index.module.css';
+import styles from "./index.module.css";
 
 export const pageQuery = graphql`
     query IndexQuery {
@@ -59,7 +59,7 @@ interface Props {
     };
 }
 
-const IndexPage: React.FC<Props> = props => {
+const IndexPage: React.FC<Props> = (props) => {
     return (
         <Layout>
             <SEO />

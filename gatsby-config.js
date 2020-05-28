@@ -1,19 +1,19 @@
 /* eslint-disable  */
-const pkg = require('./package');
-const PAGE_TITLE = 'Gilad Peleg';
+const pkg = require("./package");
+const PAGE_TITLE = "Gilad Peleg";
 
-const targetAddress = new URL(process.env.TARGET_ADDRESS || 'https://www.giladpeleg.com');
-const siteUrl = targetAddress.href.replace(/\/$/, '');
+const targetAddress = new URL(process.env.TARGET_ADDRESS || "https://www.giladpeleg.com");
+const siteUrl = targetAddress.href.replace(/\/$/, "");
 
 const getTrackingId = () => {
-    if (process.env.GATSBY_ENV === 'production') {
-        return 'UA-58310464-1';
+    if (process.env.GATSBY_ENV === "production") {
+        return "UA-58310464-1";
     }
-    if (process.env.GATSBY_ENV === 'staging') {
-        return 'UA-58310464-2';
+    if (process.env.GATSBY_ENV === "staging") {
+        return "UA-58310464-2";
     }
     // fallback to staging
-    return 'UA-58310464-2';
+    return "UA-58310464-2";
 };
 
 const rssGlobalFeedQuery = `
@@ -64,40 +64,40 @@ const rssFeedQuery = `
 module.exports = {
     siteMetadata: {
         author: PAGE_TITLE,
-        authorEmail: 'gilad@giladpeleg.com',
+        authorEmail: "gilad@giladpeleg.com",
         description: pkg.description,
-        disqusShortName: 'gilad-peleg-blog',
+        disqusShortName: "gilad-peleg-blog",
         keywords: pkg.keywords,
         siteUrl: siteUrl,
         title: PAGE_TITLE,
-        twitterUsername: '@GiladPeleg',
+        twitterUsername: "@GiladPeleg",
     },
     plugins: [
-        'gatsby-plugin-typescript',
-        'gatsby-transformer-sharp',
-        'gatsby-plugin-sharp',
+        "gatsby-plugin-typescript",
+        "gatsby-transformer-sharp",
+        "gatsby-plugin-sharp",
         {
-            resolve: 'gatsby-source-filesystem',
+            resolve: "gatsby-source-filesystem",
             options: {
-                name: 'images',
+                name: "images",
                 path: `${__dirname}/src/images`,
             },
         },
         {
-            resolve: 'gatsby-source-filesystem',
+            resolve: "gatsby-source-filesystem",
             options: {
-                name: 'content',
+                name: "content",
                 path: `${__dirname}/content`,
             },
         },
         {
-            resolve: 'gatsby-transformer-remark',
+            resolve: "gatsby-transformer-remark",
             options: {
                 plugins: [
                     {
-                        resolve: 'gatsby-remark-images',
+                        resolve: "gatsby-remark-images",
                         options: {
-                            backgroundColor: 'transparent',
+                            backgroundColor: "transparent",
                             linkImagesToOriginal: true,
                             maxWidth: 590,
                             quality: 90,
@@ -112,45 +112,45 @@ module.exports = {
                     //     },
                     // },
                     {
-                        resolve: 'gatsby-remark-prismjs',
+                        resolve: "gatsby-remark-prismjs",
                         options: {
                             noInlineHighlight: true,
                         },
                     },
                     {
-                        resolve: 'gatsby-remark-emojis',
+                        resolve: "gatsby-remark-emojis",
                         options: {
                             // Deactivate the plugin globally (default: true)
                             active: true,
                             // Add a custom css class
-                            class: 'emoji-icon',
+                            class: "emoji-icon",
                             // Select the size (available size: 16, 24, 32, 64)
                             size: 64,
                             // Add custom styles
                             styles: {
-                                display: 'inline',
-                                margin: '0',
-                                'margin-top': '1px',
-                                position: 'relative',
-                                top: '5px',
-                                width: '25px',
+                                display: "inline",
+                                margin: "0",
+                                "margin-top": "1px",
+                                position: "relative",
+                                top: "5px",
+                                width: "25px",
                             },
                         },
                     },
                     {
-                        resolve: 'gatsby-remark-copy-linked-files',
+                        resolve: "gatsby-remark-copy-linked-files",
                         options: {
                             ignoreFileExtensions: [],
                         },
                     },
-                    'gatsby-remark-autolink-headers',
+                    "gatsby-remark-autolink-headers",
                 ],
             },
         },
-        'gatsby-plugin-sitemap',
-        'gatsby-plugin-robots-txt',
+        "gatsby-plugin-sitemap",
+        "gatsby-plugin-robots-txt",
         {
-            resolve: 'gatsby-plugin-feed',
+            resolve: "gatsby-plugin-feed",
             options: {
                 query: rssGlobalFeedQuery,
                 setup(ctx) {
@@ -162,8 +162,8 @@ module.exports = {
                         image_url: `${ctx.query.site.siteMetadata.siteUrl}${ctx.query.headerImage.childImageSharp.fixed.src}`,
                         managingEditor: `${ctx.query.site.siteMetadata.authorEmail} (${ctx.query.site.siteMetadata.author})`,
                         webMaster: ctx.query.site.siteMetadata.authorEmail,
-                        language: 'en-us',
-                        docs: 'http://www.rssboard.org/rss-specification',
+                        language: "en-us",
+                        docs: "http://www.rssboard.org/rss-specification",
                         categories: ctx.query.site.siteMetadata.keywords,
                         copyright: `Copyright ${new Date().getFullYear()} ${
                             ctx.query.site.siteMetadata.author
@@ -173,19 +173,19 @@ module.exports = {
                 feeds: [
                     {
                         query: rssFeedQuery,
-                        output: '/rss.xml',
+                        output: "/rss.xml",
                         title: PAGE_TITLE,
-                        serialize: ctx => {
+                        serialize: (ctx) => {
                             const siteMetadata = ctx.query.site.siteMetadata;
                             const posts = ctx.query.allMarkdownRemark.edges;
 
-                            return posts.map(edge => {
+                            return posts.map((edge) => {
                                 const post = edge.node;
 
                                 return {
                                     author: siteMetadata.author,
                                     categories: post.frontmatter.tags,
-                                    custom_elements: [{ 'content:encoded': post.html }],
+                                    custom_elements: [{ "content:encoded": post.html }],
                                     date: post.frontmatter.date,
                                     description: post.excerpt,
                                     guid: siteMetadata.siteUrl + post.fields.slug,
@@ -198,38 +198,38 @@ module.exports = {
                 ],
             },
         },
-        'gatsby-plugin-catch-links',
-        'gatsby-plugin-react-helmet',
+        "gatsby-plugin-catch-links",
+        "gatsby-plugin-react-helmet",
         {
-            resolve: 'gatsby-plugin-canonical-urls',
+            resolve: "gatsby-plugin-canonical-urls",
             options: {
                 siteUrl: siteUrl,
             },
         },
         {
-            resolve: 'gatsby-plugin-netlify',
+            resolve: "gatsby-plugin-netlify",
             options: {
                 mergeSecurityHeaders: false,
             },
         },
         {
-            resolve: 'gatsby-plugin-google-analytics',
+            resolve: "gatsby-plugin-google-analytics",
             options: {
                 trackingId: getTrackingId(),
             },
         },
         {
-            resolve: 'gatsby-plugin-manifest',
+            resolve: "gatsby-plugin-manifest",
             options: {
-                background_color: '#663399',
-                display: 'minimal-ui',
-                icon: 'src/images/favicon.png',
-                name: 'Gilad Peleg - My Personal Page',
+                background_color: "#663399",
+                display: "minimal-ui",
+                icon: "src/images/favicon.png",
+                name: "Gilad Peleg - My Personal Page",
                 short_name: PAGE_TITLE,
-                start_url: '/',
-                theme_color: '#663399',
+                start_url: "/",
+                theme_color: "#663399",
             },
         },
-        'gatsby-plugin-offline',
+        "gatsby-plugin-offline",
     ],
 };

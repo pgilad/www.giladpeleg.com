@@ -5,5 +5,5 @@
  */
 
 // You can delete this file if you're not using it
-require('./src/styles/global.css');
-require('prism-themes/themes/prism-xonokai.css');
+require("./src/styles/global.css");
+require("prism-themes/themes/prism-xonokai.css");

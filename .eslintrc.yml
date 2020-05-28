@@ -38,10 +38,12 @@ rules:
         - unix
     quotes:
         - error
-        - single
+        - double
     semi:
         - error
         - always
     '@typescript-eslint/camelcase': 0
     '@typescript-eslint/no-var-requires': 0
     '@typescript-eslint/explicit-function-return-type': 0
+    '@typescript-eslint/no-explicit-any': 0
+    'react/prop-types': 0

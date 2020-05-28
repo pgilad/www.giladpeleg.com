@@ -1,12 +1,12 @@
-import { graphql, Link } from 'gatsby';
-import React from 'react';
+import { graphql, Link } from "gatsby";
+import React from "react";
 
-import { Layout } from '../components/layout';
-import { PostTags } from '../components/post-tags';
-import { SEO } from '../components/seo';
-import { combineURLs } from '../utils/urls';
+import { Layout } from "../components/layout";
+import { PostTags } from "../components/post-tags";
+import { SEO } from "../components/seo";
+import { combineURLs } from "../utils/urls";
 
-import styles from './blog-post.module.css';
+import styles from "./blog-post.module.css";
 
 export const pageQuery = graphql`
     query BlogPostQuery($slug: String!) {
@@ -87,12 +87,12 @@ interface Props {
     };
 }
 
-const GITHUB_CONTENT_URL = 'https://github.com/pgilad/www.giladpeleg.com/blob/master/content';
+const GITHUB_CONTENT_URL = "https://github.com/pgilad/www.giladpeleg.com/blob/master/content";
 
-const BlogTemplate: React.FC<Props> = props => {
+const BlogTemplate: React.FC<Props> = (props) => {
     const post = props.data.markdownRemark;
     const { previous, next, slug } = props.pageContext;
-    const githubEditUrl = combineURLs(GITHUB_CONTENT_URL, combineURLs(slug, 'index.md'));
+    const githubEditUrl = combineURLs(GITHUB_CONTENT_URL, combineURLs(slug, "index.md"));
 
     const seoImageSource = post.frontmatter.cover
         ? post.frontmatter.cover.childImageSharp.fixed.src

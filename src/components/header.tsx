@@ -1,8 +1,8 @@
-import { graphql, Link, StaticQuery } from 'gatsby';
-import Img, { GatsbyImageProps } from 'gatsby-image';
-import React from 'react';
+import { graphql, Link, StaticQuery } from "gatsby";
+import Img, { GatsbyImageProps } from "gatsby-image";
+import React from "react";
 
-import styles from './header.module.css';
+import styles from "./header.module.css";
 
 const query = graphql`
     query Header {
@@ -26,15 +26,15 @@ interface Props {
     title: string;
 }
 
-const imgTitle = 'My kid pointing out that line 17 is missing a semi-colon';
+const imgTitle = "My kid pointing out that line 17 is missing a semi-colon";
 
-export const Header: React.FC<Props> = props => (
+export const Header: React.FC<Props> = (props) => (
     <StaticQuery
         query={query}
         render={(data: Data) => {
             return (
                 <header className={styles.header}>
-                    <div style={{ backgroundColor: '#258a71' }}>
+                    <div style={{ backgroundColor: "#258a71" }}>
                         <Img
                             fluid={data.headerImage.childImageSharp.fluid}
                             className={styles.headerImage}
