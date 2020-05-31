@@ -1,6 +1,7 @@
-import { Article, Data } from "../components/seo";
+import { Article } from "../components/seo";
 
 import { combineURLs } from "./urls";
+import { SeoQuery } from "../generated/graphql";
 
 export interface OpenGraphMetaTag extends MetaTag {
     content: string;
@@ -19,7 +20,7 @@ export interface MetaTag {
 }
 
 export const getTwitterMetaTags = (options: {
-    data: Data;
+    data: SeoQuery;
     description: string;
     imageDescription: string;
     imageUrl: string;
@@ -32,11 +33,11 @@ export const getTwitterMetaTags = (options: {
         },
         {
             name: "twitter:creator",
-            content: options.data.site.siteMetadata.twitterUsername,
+            content: options.data!.site!.siteMetadata!.twitterUsername,
         },
         {
             name: "twitter:site",
-            content: options.data.site.siteMetadata.twitterUsername,
+            content: options.data!.site!.siteMetadata!.twitterUsername,
         },
         {
             name: "twitter:title",
@@ -59,7 +60,7 @@ export const getTwitterMetaTags = (options: {
 
 export const getOpenGraphMetaTags = (options: {
     article?: Article;
-    data: Data;
+    data: SeoQuery;
     description: string;
     imageDescription: string;
     imageUrl: string;
@@ -76,7 +77,7 @@ export const getOpenGraphMetaTags = (options: {
         },
         {
             property: "og:site_name",
-            content: options.data.site.siteMetadata.title,
+            content: options.data!.site!.siteMetadata!.title!,
         },
         {
             property: "og:description",
@@ -120,7 +121,7 @@ export const getOpenGraphMetaTags = (options: {
             },
             {
                 property: "article:author",
-                content: options.data.site.siteMetadata.author,
+                content: options.data!.site!.siteMetadata!.author!,
             },
             {
                 property: "article:published_time",
@@ -143,7 +144,7 @@ export const getOpenGraphMetaTags = (options: {
     return tags;
 };
 
-export const getGeneralMetaTags = (description: string, data: Data): MetaTag[] => {
+export const getGeneralMetaTags = (description: string, data: SeoQuery): MetaTag[] => {
     return [
         {
             name: "description",
@@ -151,7 +152,7 @@ export const getGeneralMetaTags = (description: string, data: Data): MetaTag[] =
         },
         {
             name: "author",
-            content: data.site.siteMetadata.author,
+            content: data.site!.siteMetadata!.author!,
         },
         {
             name: "robots",
@@ -169,15 +170,15 @@ interface Entity {
 
 export const getSchemaOrgJSONLD = (options: {
     article?: Article;
-    data: Data;
+    data: SeoQuery;
     imageUrl: string;
     url: string;
 }): Entity[] => {
     const website = {
         "@context": "http://schema.org",
         "@type": "WebSite",
-        name: options.data.site.siteMetadata.title,
-        url: options.data.site.siteMetadata.siteUrl,
+        name: options.data!.site!.siteMetadata!.title,
+        url: options.data!.site!.siteMetadata!.siteUrl,
     };
     const schema: Entity[] = [website];
 
@@ -187,8 +188,8 @@ export const getSchemaOrgJSONLD = (options: {
             "@type": "BlogPosting",
             author: {
                 "@type": "Person",
-                name: options.data.site.siteMetadata.author,
-                url: options.data.site.siteMetadata.siteUrl,
+                name: options.data!.site!.siteMetadata!.author,
+                url: options.data!.site!.siteMetadata!.siteUrl,
             },
             dateModified: options.article.publishedDate,
             datePublished: options.article.publishedDate,
@@ -204,14 +205,14 @@ export const getSchemaOrgJSONLD = (options: {
             name: options.article.title,
             url: options.url,
             publisher: {
-                "@id": options.data.site.siteMetadata.siteUrl,
+                "@id": options.data!.site!.siteMetadata!.siteUrl,
                 "@type": "Organization",
-                name: options.data.site.siteMetadata.author,
-                url: options.data.site.siteMetadata.siteUrl,
+                name: options.data.site!.siteMetadata!.author,
+                url: options.data.site!.siteMetadata!.siteUrl,
                 logo: {
                     "@type": "ImageObject",
                     url: combineURLs(
-                        options.data.site.siteMetadata.siteUrl,
+                        options.data!.site!.siteMetadata!.siteUrl!,
                         "/icons/icon-48x48.png"
                     ),
                     width: 48,
@@ -243,7 +244,7 @@ export const getSchemaOrgJSONLD = (options: {
 };
 
 export const getDescription = (
-    data: Data,
+    data: SeoQuery,
     overrideDescription?: string,
     article?: Article
 ): string => {
@@ -253,22 +254,22 @@ export const getDescription = (
     if (article) {
         return article.description;
     }
-    return data.site.siteMetadata.description;
+    return data.site!.siteMetadata!.description!;
 };
 
-export const getPageTitle = (data: Data, article?: Article, overrideTitle?: string): string => {
+export const getPageTitle = (data: SeoQuery, article?: Article, overrideTitle?: string): string => {
     if (overrideTitle) {
-        return `${overrideTitle} | ${data.site.siteMetadata.title}`;
+        return `${overrideTitle} | ${data.site!.siteMetadata!.title}`;
     }
     if (article) {
-        return `${article.title} | ${data.site.siteMetadata.title}`;
+        return `${article.title} | ${data.site!.siteMetadata!.title}`;
     }
-    return data.site.siteMetadata.title;
+    return data.site!.siteMetadata!.title!;
 };
 
 export const getMetaTags = (options: {
     article?: Article;
-    data: Data;
+    data: SeoQuery;
     description: string;
     imageDescription: string;
     imageUrl: string;

@@ -10,6 +10,8 @@ import {
     MetaTag,
 } from "../utils/seo";
 import { combineURLs } from "../utils/urls";
+import { SeoQuery } from "../generated/graphql";
+import assert from "assert";
 
 const query = graphql`
     query SEO {
@@ -86,7 +88,10 @@ export const SEO: React.FC<Props> = ({
     return (
         <StaticQuery
             query={query}
-            render={(data: Data) => {
+            render={(data: SeoQuery) => {
+                assert(data.site?.siteMetadata?.siteUrl);
+                assert(data.siteImage?.childImageSharp?.fixed);
+
                 const imageUrl = combineURLs(
                     data.site.siteMetadata.siteUrl,
                     imageSrc || data.siteImage.childImageSharp.fixed.src

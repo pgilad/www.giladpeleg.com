@@ -1,15 +1,18 @@
 import { graphql, Link } from "gatsby";
 import React from "react";
+import assert from "assert";
 
 import { Layout } from "../components/layout";
 import { PostTags } from "../components/post-tags";
 import { SEO } from "../components/seo";
 import { combineURLs } from "../utils/urls";
+import { BlogPostQuery, CreatePagesQuery } from "../generated/graphql";
 
 import styles from "./blog-post.module.css";
 
+// noinspection JSUnusedGlobalSymbols
 export const pageQuery = graphql`
-    query BlogPostQuery($slug: String!) {
+    query BlogPost($slug: String!) {
         site {
             siteMetadata {
                 author
@@ -40,51 +43,19 @@ export const pageQuery = graphql`
     }
 `;
 
-interface Page {
-    frontmatter: {
-        cover?: {
-            childImageSharp: {
-                fixed: {
-                    src: string;
-                };
-            };
-        };
-        coverAlt?: string;
-        date: string;
-        description?: string;
-        isoDate: string;
-        tags?: string[];
-        title: string;
-    };
-    id: string;
-    excerpt: string;
-    html: string;
-}
+type Page = CreatePagesQuery["allMarkdownRemark"]["edges"][0]["node"] | null;
 
-interface ExternalPage {
-    fields: {
-        slug: string;
-    };
-    frontmatter: {
-        title: string;
-    };
+export interface PageContext {
+    next: Page;
+    previous: Page;
+    slug: string;
+    tags: string[];
 }
 
 interface Props {
-    data: {
-        markdownRemark: Page;
-        site: {
-            siteMetadata: {
-                disqusShortName: string;
-                siteUrl: string;
-            };
-        };
-    };
-    pageContext: {
-        next?: ExternalPage;
-        previous?: ExternalPage;
-        slug: string;
-    };
+    data: BlogPostQuery;
+    // Received from createPage
+    pageContext: PageContext;
 }
 
 const GITHUB_CONTENT_URL = "https://github.com/pgilad/www.giladpeleg.com/blob/master/content";
@@ -94,11 +65,15 @@ const BlogTemplate: React.FC<Props> = (props) => {
     const { previous, next, slug } = props.pageContext;
     const githubEditUrl = combineURLs(GITHUB_CONTENT_URL, combineURLs(slug, "index.md"));
 
-    const seoImageSource = post.frontmatter.cover
-        ? post.frontmatter.cover.childImageSharp.fixed.src
-        : undefined;
+    assert(post);
+    assert(post.excerpt);
+    assert(post.frontmatter);
+    assert(post.frontmatter.tags);
+    assert(post.frontmatter.title);
+
+    const seoImageSource = post?.frontmatter?.cover?.childImageSharp?.fixed?.src;
     const seoArticleMetadata = {
-        description: post.frontmatter.description || post.excerpt,
+        description: post.excerpt,
         publishedDate: post.frontmatter.isoDate,
         tags: post.frontmatter.tags,
         title: post.frontmatter.title,
@@ -113,7 +88,7 @@ const BlogTemplate: React.FC<Props> = (props) => {
                 pathname={props.pageContext.slug}
             />
             <h2 className={styles.postDate}>{post.frontmatter.date}</h2>
-            <div className={styles.blogContent} dangerouslySetInnerHTML={{ __html: post.html }} />
+            <div className={styles.blogContent} dangerouslySetInnerHTML={{ __html: post.html! }} />
             <PostTags tags={post.frontmatter.tags} />
             <a
                 className={styles.suggestAnEdit}
@@ -124,14 +99,14 @@ const BlogTemplate: React.FC<Props> = (props) => {
             <hr className={styles.bottomSeparator} />
             <ul className={styles.postNavigation}>
                 <li>
-                    {previous && previous.fields && (
+                    {previous?.fields?.slug && previous?.frontmatter?.title && (
                         <Link to={previous.fields.slug} rel="prev">
                             ← {previous.frontmatter.title}
                         </Link>
                     )}
                 </li>
                 <li>
-                    {next && next.fields && (
+                    {next?.fields?.slug && next?.frontmatter?.title && (
                         <Link to={next.fields.slug} rel="next">
                             {next.frontmatter.title} →
                         </Link>
@@ -142,4 +117,5 @@ const BlogTemplate: React.FC<Props> = (props) => {
     );
 };
 
+// noinspection JSUnusedGlobalSymbols
 export default BlogTemplate;

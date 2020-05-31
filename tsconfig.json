@@ -1,19 +1,25 @@
 {
-    "compilerOptions": {
-        "esModuleInterop": true,
-        "isolatedModules": false,
-        "jsx": "react",
-        "lib": ["dom", "es2015", "es2017"],
-        "module": "commonjs",
-        "noEmit": true,
-        "noImplicitAny": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "preserveConstEnums": true,
-        "removeComments": false,
-        "skipLibCheck": true,
-        "strict": true,
-        "target": "esnext"
-    },
-    "include": ["./src/**/*", "./gatsby/**/*", "*.js"]
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "isolatedModules": false,
+    "jsx": "react",
+    "lib": [
+      "dom", "esnext"
+    ],
+    "module": "commonjs",
+    "noEmit": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "esnext"
+  },
+  "include": [
+    "./src/**/*",
+    "./src/gatsby/**/*",
+    "*.js"
+  ]
 }

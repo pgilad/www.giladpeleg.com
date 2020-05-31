@@ -5,16 +5,12 @@ import { HomeRecentPosts } from "../components/home-recent-posts";
 import { HomeRightOverview } from "../components/home-right-overview";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
+import { IndexPageQuery } from "../generated/graphql";
 
 import styles from "./index.module.css";
 
 export const pageQuery = graphql`
-    query IndexQuery {
-        site {
-            siteMetadata {
-                title
-            }
-        }
+    query IndexPage {
         allMarkdownRemark(
             limit: 1000
             filter: { frontmatter: { draft: { ne: true } } }
@@ -35,31 +31,11 @@ export const pageQuery = graphql`
     }
 `;
 
-interface Props {
-    data: {
-        site: {
-            siteMetadata: {
-                title: string;
-            };
-        };
-        allMarkdownRemark: {
-            edges: {
-                node: {
-                    excerpt: string;
-                    frontmatter: {
-                        title: string;
-                        date: string;
-                    };
-                    fields: {
-                        slug: string;
-                    };
-                };
-            }[];
-        };
-    };
-}
+type IndexData = {
+    data: IndexPageQuery;
+};
 
-const IndexPage: React.FC<Props> = (props) => {
+const IndexPage: React.FC<IndexData> = (props) => {
     return (
         <Layout>
             <SEO />

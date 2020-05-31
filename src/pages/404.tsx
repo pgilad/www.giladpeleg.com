@@ -15,4 +15,5 @@ const NotFoundPage: React.FC = () => (
     </Layout>
 );
 
+// noinspection JSUnusedGlobalSymbols
 export default NotFoundPage;

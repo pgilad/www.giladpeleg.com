@@ -1,8 +1,10 @@
 import { graphql, Link, StaticQuery } from "gatsby";
-import Img, { GatsbyImageProps } from "gatsby-image";
+import Img, { FluidObject } from "gatsby-image";
 import React from "react";
 
 import styles from "./header.module.css";
+import { HeaderQuery } from "../generated/graphql";
+import assert from "assert";
 
 const query = graphql`
     query Header {
@@ -16,12 +18,6 @@ const query = graphql`
     }
 `;
 
-interface Data {
-    headerImage: {
-        childImageSharp: GatsbyImageProps;
-    };
-}
-
 interface Props {
     title: string;
 }
@@ -31,12 +27,14 @@ const imgTitle = "My kid pointing out that line 17 is missing a semi-colon";
 export const Header: React.FC<Props> = (props) => (
     <StaticQuery
         query={query}
-        render={(data: Data) => {
+        render={(data: HeaderQuery) => {
+            assert(data.headerImage?.childImageSharp?.fluid);
+
             return (
                 <header className={styles.header}>
                     <div style={{ backgroundColor: "#258a71" }}>
                         <Img
-                            fluid={data.headerImage.childImageSharp.fluid}
+                            fluid={data.headerImage.childImageSharp.fluid as FluidObject}
                             className={styles.headerImage}
                             alt={imgTitle}
                             title={imgTitle}

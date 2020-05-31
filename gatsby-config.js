@@ -6,14 +6,14 @@ const targetAddress = new URL(process.env.TARGET_ADDRESS || "https://www.giladpe
 const siteUrl = targetAddress.href.replace(/\/$/, "");
 
 const getTrackingId = () => {
-    if (process.env.GATSBY_ENV === "production") {
-        return "UA-58310464-1";
+    switch (process.env.GATSBY_ENV) {
+        case "production":
+            return "UA-58310464-1";
+        case "staging":
+            return "UA-58310464-2";
+        default:
+            return "UA-58310464-2";
     }
-    if (process.env.GATSBY_ENV === "staging") {
-        return "UA-58310464-2";
-    }
-    // fallback to staging
-    return "UA-58310464-2";
 };
 
 const rssGlobalFeedQuery = `

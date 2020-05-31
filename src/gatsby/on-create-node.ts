@@ -1,8 +1,8 @@
 import { createFilePath } from "gatsby-source-filesystem";
 
-import { GatsbyCreateNode } from "./types";
+import { GatsbyNode } from "gatsby";
 
-export const onCreateNode: GatsbyCreateNode = ({ node, actions, getNode }) => {
+export const onCreateNode: GatsbyNode["onCreateNode"] = ({ node, actions, getNode }) => {
     if (node.internal.type === "MarkdownRemark") {
         const value = createFilePath({ node, getNode });
 

@@ -1,15 +1,11 @@
 import path from "path";
+import assert from "assert";
 
-import { GatsbyCreatePages } from "./types";
+import { GatsbyNode } from "gatsby";
+import { CreatePagesQuery } from "../generated/graphql";
+import { PageContext } from "../templates/blog-post";
 
-interface Post {
-    node: {
-        fields: {
-            slug: string;
-            tags: string[];
-        };
-    };
-}
+type Post = CreatePagesQuery["allMarkdownRemark"]["edges"][0];
 
 const getPreviousPost = (index: number, posts: Post[]) => {
     return index === posts.length - 1 ? null : posts[index + 1].node;
@@ -18,21 +14,11 @@ const getNextPost = (index: number, posts: Post[]) => {
     return index === 0 ? null : posts[index - 1].node;
 };
 
-interface AllMarkdown {
-    errors?: string[];
-    data: {
-        allMarkdownRemark: {
-            edges: Post[];
-        };
-    };
-}
+export const createPages: GatsbyNode["createPages"] = async ({ graphql, actions }) => {
+    const BlogPostTemplate = path.resolve(__dirname, "../templates/blog-post.tsx");
 
-// noinspection JSUnusedGlobalSymbols
-export const createPages: GatsbyCreatePages = async ({ graphql, actions }) => {
-    const BlogPostTemplate = path.resolve(__dirname, "../src/templates/blog-post.tsx");
-
-    const allMarkdown: AllMarkdown = await graphql(`
-        {
+    const allMarkdown = await graphql<CreatePagesQuery>(`
+        query CreatePages {
             allMarkdownRemark(
                 limit: 1000
                 filter: { frontmatter: { draft: { ne: true } } }
@@ -44,8 +30,8 @@ export const createPages: GatsbyCreatePages = async ({ graphql, actions }) => {
                             slug
                         }
                         frontmatter {
-                            tags
                             title
+                            tags
                         }
                     }
                 }
@@ -57,18 +43,21 @@ export const createPages: GatsbyCreatePages = async ({ graphql, actions }) => {
         throw allMarkdown.errors;
     }
 
-    const markdownFiles = allMarkdown.data.allMarkdownRemark.edges;
+    const markdownFiles = allMarkdown?.data?.allMarkdownRemark.edges || [];
 
     // Generate blog pages
     markdownFiles.forEach((post, index: number) => {
-        actions.createPage({
+        assert(post.node.fields?.slug);
+        assert(post.node.frontmatter?.tags);
+
+        actions.createPage<PageContext>({
             component: BlogPostTemplate,
             path: post.node.fields.slug,
             context: {
                 next: getNextPost(index, markdownFiles),
                 previous: getPreviousPost(index, markdownFiles),
                 slug: post.node.fields.slug,
-                tags: post.node.fields.tags,
+                tags: post.node.frontmatter.tags,
             },
         });
     });
