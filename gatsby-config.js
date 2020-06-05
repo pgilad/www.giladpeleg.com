@@ -147,6 +147,7 @@ module.exports = {
                 ],
             },
         },
+        "gatsby-plugin-extract-schema",
         "gatsby-plugin-sitemap",
         "gatsby-plugin-robots-txt",
         {
