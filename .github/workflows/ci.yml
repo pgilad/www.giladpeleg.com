@@ -16,6 +16,7 @@ jobs:
             - name: verify & build
               run: |
                   npm run develop 2>&1 &
+                  sleep 30
                   npm run codegen
                   npm run verify
                   npm run build
