@@ -13,7 +13,9 @@ jobs:
                   node-version: '14'
             - name: install deps
               run: npm ci
-            - name: verify
-              run: npm run verify
-            - name: build
-              run: npm run build
+            - name: verify & build
+              run: |
+                  npm run develop 2>&1 &
+                  npm run codegen
+                  npm run verify
+                  npm run build
