@@ -7,4 +7,4 @@ content/
 node_modules/
 public/
 scripts/
-src/generated/
+src/graphql.ts
