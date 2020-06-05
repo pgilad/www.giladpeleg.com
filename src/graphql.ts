@@ -6,10 +6,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /**
-   * A date string, such as 2007-12-03, compliant with the ISO 8601 standard for
-   * representation of dates and times using the Gregorian calendar.
-   */
+  /** A date string, such as 2007-12-03, compliant with the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   Date: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
@@ -2503,10 +2500,12 @@ export type SitePageContextNextFilterInput = {
 
 export type SitePageContextNextFrontmatter = {
   __typename?: 'SitePageContextNextFrontmatter';
+  title?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type SitePageContextNextFrontmatterFilterInput = {
+  title?: Maybe<StringQueryOperatorInput>;
   tags?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -2532,10 +2531,12 @@ export type SitePageContextPreviousFilterInput = {
 
 export type SitePageContextPreviousFrontmatter = {
   __typename?: 'SitePageContextPreviousFrontmatter';
+  title?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type SitePageContextPreviousFrontmatterFilterInput = {
+  title?: Maybe<StringQueryOperatorInput>;
   tags?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -2640,8 +2641,10 @@ export enum SitePageFieldsEnum {
   internal___type = 'internal___type',
   isCreatedByStatefulCreatePages = 'isCreatedByStatefulCreatePages',
   context___next___fields___slug = 'context___next___fields___slug',
+  context___next___frontmatter___title = 'context___next___frontmatter___title',
   context___next___frontmatter___tags = 'context___next___frontmatter___tags',
   context___previous___fields___slug = 'context___previous___fields___slug',
+  context___previous___frontmatter___title = 'context___previous___frontmatter___title',
   context___previous___frontmatter___tags = 'context___previous___frontmatter___tags',
   context___slug = 'context___slug',
   context___tags = 'context___tags',

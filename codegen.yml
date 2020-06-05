@@ -9,7 +9,7 @@ documents:
     - ./src/**/*.{ts,tsx}
     - ./node_modules/gatsby*/!(node_modules)/**/*.js
 generates:
-    src/generated/graphql.ts:
+    src/graphql.ts:
         plugins:
             - typescript
             - typescript-operations
