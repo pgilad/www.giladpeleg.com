@@ -1,7 +1,7 @@
 import { Article } from "../components/seo";
 
 import { combineURLs } from "./urls";
-import { SeoQuery } from "../generated/graphql";
+import { SeoQuery } from "../graphql";
 
 export interface OpenGraphMetaTag extends MetaTag {
     content: string;

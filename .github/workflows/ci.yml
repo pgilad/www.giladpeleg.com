@@ -16,5 +16,4 @@ jobs:
             - name: verify & build
               run: |
                   npm run build
-                  SCHEMA_PATH=schema.json npm run codegen
                   npm run verify

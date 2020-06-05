@@ -3,7 +3,7 @@ import Img, { FluidObject } from "gatsby-image";
 import React from "react";
 
 import styles from "./header.module.css";
-import { HeaderQuery } from "../generated/graphql";
+import { HeaderQuery } from "../graphql";
 import assert from "assert";
 
 const query = graphql`

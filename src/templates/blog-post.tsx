@@ -6,7 +6,7 @@ import { Layout } from "../components/layout";
 import { PostTags } from "../components/post-tags";
 import { SEO } from "../components/seo";
 import { combineURLs } from "../utils/urls";
-import { BlogPostQuery, CreatePagesQuery } from "../generated/graphql";
+import { BlogPostQuery, CreatePagesQuery } from "../graphql";
 
 import styles from "./blog-post.module.css";
 

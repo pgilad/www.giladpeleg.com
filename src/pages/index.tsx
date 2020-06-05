@@ -5,7 +5,7 @@ import { HomeRecentPosts } from "../components/home-recent-posts";
 import { HomeRightOverview } from "../components/home-right-overview";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
-import { IndexPageQuery } from "../generated/graphql";
+import { IndexPageQuery } from "../graphql";
 
 import styles from "./index.module.css";
 

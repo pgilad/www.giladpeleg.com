@@ -2,7 +2,7 @@ import { Link } from "gatsby";
 import React from "react";
 
 import styles from "./home-recent-posts.module.css";
-import { IndexPageQuery } from "../generated/graphql";
+import { IndexPageQuery } from "../graphql";
 import assert from "assert";
 
 type Post = IndexPageQuery["allMarkdownRemark"]["edges"][0];

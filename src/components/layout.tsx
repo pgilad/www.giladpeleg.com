@@ -2,7 +2,7 @@ import { graphql, Link, StaticQuery } from "gatsby";
 import React from "react";
 
 import { Header } from "./header";
-import { LayoutQuery } from "../generated/graphql";
+import { LayoutQuery } from "../graphql";
 import assert from "assert";
 
 const query = graphql`

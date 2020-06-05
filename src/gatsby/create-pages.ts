@@ -2,7 +2,7 @@ import path from "path";
 import assert from "assert";
 
 import { GatsbyNode } from "gatsby";
-import { CreatePagesQuery } from "../generated/graphql";
+import { CreatePagesQuery } from "../graphql";
 import { PageContext } from "../templates/blog-post";
 
 type Post = CreatePagesQuery["allMarkdownRemark"]["edges"][0];

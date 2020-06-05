@@ -10,7 +10,7 @@ import {
     MetaTag,
 } from "../utils/seo";
 import { combineURLs } from "../utils/urls";
-import { SeoQuery } from "../generated/graphql";
+import { SeoQuery } from "../graphql";
 import assert from "assert";
 
 const query = graphql`
