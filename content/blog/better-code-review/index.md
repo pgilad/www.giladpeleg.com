@@ -4,7 +4,8 @@ title: "A Better Code Review"
 tags:
     - code-review
     - development
-draft: false
+cover: "freezing-in-lapland.jpg"
+coverAlt: "A beautiful snow shot in Lapland, Finland"
 ---
 
 > "Everyone gets the experience. Some get the lesson." T.S. Eliot
