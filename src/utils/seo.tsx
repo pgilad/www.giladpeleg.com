@@ -226,6 +226,8 @@ const getBreadcrumbListSchema = (options: {
 }) => ({
     "@context": "http://schema.org",
     "@type": "BreadcrumbList",
+    "@id": options.data!.site!.siteMetadata!.siteUrl,
+    name: options.data!.site!.siteMetadata!.title,
     itemListElement: [
         {
             "@type": "ListItem",
