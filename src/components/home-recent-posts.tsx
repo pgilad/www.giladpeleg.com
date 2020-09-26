@@ -13,6 +13,7 @@ type Props = {
 
 export const HomeRecentPosts: React.FC<Props> = (props) => (
     <div className={styles.blogPostList}>
+        <h2 className={styles.recentPosts}>Recent posts</h2>
         {props.posts.map(({ node }) => {
             assert(node.fields);
             assert(node.fields.slug);
