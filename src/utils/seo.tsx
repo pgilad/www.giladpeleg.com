@@ -1,7 +1,6 @@
 import { Article } from "../components/seo";
-
-import { combineURLs } from "./urls";
 import { SeoQuery } from "../graphql";
+import { combineURLs } from "./urls";
 
 export interface OpenGraphMetaTag extends MetaTag {
     content: string;
@@ -168,76 +167,101 @@ interface Entity {
     [key: string]: any;
 }
 
+const getWebsiteSchema = (options: {
+    article?: Article;
+    data: SeoQuery;
+    imageUrl: string;
+    url: string;
+}) => ({
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    publisher: {
+        "@type": "Organization",
+        name: options.data!.site!.siteMetadata!.title,
+        url: options.data!.site!.siteMetadata!.siteUrl,
+        logo: {
+            type: "ImageObject",
+            url: combineURLs(options.data!.site!.siteMetadata!.siteUrl!, "/icons/icon-48x48.png"),
+            width: 48,
+            height: 48,
+        },
+    },
+    url: options.data!.site!.siteMetadata!.siteUrl,
+    mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": options.data!.site!.siteMetadata!.siteUrl,
+    },
+    description: options.data!.site!.siteMetadata!.description,
+});
+
+const getBlogPostingSchema = (options: {
+    article?: Article;
+    data: SeoQuery;
+    imageUrl: string;
+    url: string;
+}) => ({
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    author: {
+        "@type": "Person",
+        name: options.data!.site!.siteMetadata!.author,
+        url: options.data!.site!.siteMetadata!.siteUrl,
+    },
+    dateModified: options.article!.publishedDate,
+    datePublished: options.article!.publishedDate,
+    description: options.article!.description,
+    headline: options.article!.title,
+    image: [options.imageUrl],
+    mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": options.url,
+    },
+});
+
+const getBreadcrumbListSchema = (options: {
+    article?: Article;
+    data: SeoQuery;
+    imageUrl: string;
+    url: string;
+}) => ({
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+        {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: options.data!.site!.siteMetadata!.siteUrl,
+        },
+        {
+            "@type": "ListItem",
+            position: 2,
+            name: "Blog",
+        },
+        {
+            "@type": "ListItem",
+            position: 3,
+            name: options.article!.title,
+            item: options.url,
+        },
+    ],
+});
+
 export const getSchemaOrgJSONLD = (options: {
     article?: Article;
     data: SeoQuery;
     imageUrl: string;
     url: string;
 }): Entity[] => {
-    const website = {
-        "@context": "http://schema.org",
-        "@type": "WebSite",
-        name: options.data!.site!.siteMetadata!.title,
-        url: options.data!.site!.siteMetadata!.siteUrl,
-    };
-    const schema: Entity[] = [website];
+    const schema: Entity[] = [];
 
     if (options.article) {
-        const blogPosting = {
-            "@context": "http://schema.org",
-            "@type": "BlogPosting",
-            author: {
-                "@type": "Person",
-                name: options.data!.site!.siteMetadata!.author,
-                url: options.data!.site!.siteMetadata!.siteUrl,
-            },
-            dateModified: options.article.publishedDate,
-            datePublished: options.article.publishedDate,
-            description: options.article.description,
-            headline: options.article.title,
-            image: {
-                "@type": "ImageObject",
-                url: options.imageUrl,
-                width: 1200,
-                height: 630,
-            },
-            mainEntityOfPage: options.url,
-            name: options.article.title,
-            url: options.url,
-            publisher: {
-                "@id": options.data!.site!.siteMetadata!.siteUrl,
-                "@type": "Organization",
-                name: options.data.site!.siteMetadata!.author,
-                url: options.data.site!.siteMetadata!.siteUrl,
-                logo: {
-                    "@type": "ImageObject",
-                    url: combineURLs(
-                        options.data!.site!.siteMetadata!.siteUrl!,
-                        "/icons/icon-48x48.png"
-                    ),
-                    width: 48,
-                    height: 48,
-                },
-            },
-        };
-
-        const breadcrumbList = {
-            "@context": "http://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-                {
-                    "@type": "ListItem",
-                    position: 1,
-                    item: {
-                        "@id": options.url,
-                        image: options.imageUrl,
-                        name: options.article.title,
-                    },
-                },
-            ],
-        };
-
+        const blogPosting = getBlogPostingSchema(options);
+        const breadcrumbList = getBreadcrumbListSchema(options);
         schema.push(breadcrumbList, blogPosting);
+    } else {
+        const website = getWebsiteSchema(options);
+        schema.push(website);
     }
 
     return schema;
