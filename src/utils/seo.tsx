@@ -237,6 +237,7 @@ const getBreadcrumbListSchema = (options: {
             "@type": "ListItem",
             position: 2,
             name: "Blog",
+            item: options.data!.site!.siteMetadata!.siteUrl,
         },
         {
             "@type": "ListItem",
