@@ -26,7 +26,7 @@ Spring Boot is a powerful framework built on top of Spring, allowing easy, out-o
 Another awesome feature of Spring Boot is it's vast range of plugins. A very helpful one is [Spring Boot Actuator](https://www.baeldung.com/spring-boot-actuators).
 It adds numerous debug and management endpoints, controlled via HTTP or JMX beans.
 
-In this article we'll bootstrap a Spring Boot web application with a single endpoint. We'll run and test it locally, including using JConsole 
+In this article we'll bootstrap a Spring Boot web application with a single endpoint. We'll run and test it locally, including using JConsole
 to profile the application. Then we'll spin up a remote machine (I'll use an AWS EC2 machine), copy the packaged JAR to it, and redo the previous
 steps, but now remotely.
 
@@ -42,7 +42,7 @@ We are not going to deep dive into any of these modules, so feel free to pick yo
 
 Click on "Generate Project" - you will download a `demo.zip` which you should unzip somewhere. This will be our working directory.
 
-I use [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/) as my IDE of choice, but feel free to use your favorite editor. 
+I use [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/) as my IDE of choice, but feel free to use your favorite editor.
 Opening this project in IntelliJ IDEA should be a breeze (Everything is automatically setup for you). This should be your directory structure:
 
 ![Project initial directory structure](directory-structure.png "Project initial directory structure")
@@ -274,7 +274,7 @@ We will examine 2 ways to connect remotely:
 - Over the internet using an IP
 - Using local port forwarding (a.k.a tunneling)
 
-For both of them, as an extra precaution, we'll setup remote JMX authentication. If you connect over the internet (using an IP)  
+For both of them, as an extra precaution, we'll setup remote JMX authentication. If you connect over the internet (using an IP)
 I also recommend you setup SSL as well.
 
 ### Connecting remotely over an IP
@@ -338,7 +338,7 @@ Our application is running and also available for management. Let's now boot up 
 local process, choose the "Remote Process" option, and enter `<remote_ip>:9010` as the remote address, and our selected
 username and password, `controlRole` and `123456789` if you haven't changed it.
 
-You should connect, just as before, and get the overview information about the application. This is all working remotely, and 
+You should connect, just as before, and get the overview information about the application. This is all working remotely, and
 we can use the MBeans to remotely diagnose and control our server.
 
 If you've got this far, great success :clap:
@@ -384,16 +384,16 @@ We do the same on port `9011`.
 
 The addition of `-nNT` prevents us from actually connecting to the remote host (preventing TTY). Try it without it to see the difference.
 
-Don't forget to the connect to the remote machine and run `./app/run-tunnel.sh`.
+Don't forget to connect to the remote machine and run `./app/run-tunnel.sh`.
 
 Now we can connect with `jconsole`, but this time, on the remote process address write: `localhost:9010` and re-use the same
 username and password from before (`controlRole` or `monitorRole`). It should work the same as before.
 
-Great Success again!! :bangbang:
+Great success again!! :bangbang:
 
 ## Concluding Thoughts
 
-Well that was fun. The next steps would be off course to reproduce this setup on a server running in Docker/Kubernetes, 
+Well that was fun. The next steps would be off course to reproduce this setup on a server running in Docker/Kubernetes,
 which is pretty much how anyone runs a server nowadays. Another experiment to run is to test how much of a resource drag
 this setup creates on the machine as compared to running with `jmxremote`, and especially once you connect to the machine
 to remote JMX.
@@ -401,8 +401,8 @@ to remote JMX.
 A future article I want to dive in to, is running this alongside with [Java Flight Recorder](https://dzone.com/articles/using-java-flight-recorder-with-openjdk-11-1)
 for the ultimate production setup, where you can inspect the JVM process not only when running, but also after it crashes.
 
-Off course today APM tools such as [NewRelic](https://newrelic.com/) allow one to easily monitor their Java process remotely.
-They only require you to install their agent, and they take care of the rest. This solution is great if you have a lot of processes, 
+Nowadays, APM tools such as [NewRelic](https://newrelic.com/) allow one to easily monitor their Java process remotely.
+They only require you to install their agent, and they take care of the rest. This solution is great if you have a lot of processes,
 and don't want to deal with the overhead of monitoring your systems. The downside is that you have to install their agent which might
 drain system resources, is usually unmaintained or doesn't support your current framework/setup, and is very expensive for a small startup.
 
