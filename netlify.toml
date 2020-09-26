@@ -1,47 +1,47 @@
 [build]
-    publish = "public/"
-    command = "gatsby build"
+publish = "public/"
+command = "gatsby build"
 
 [[redirects]]
-    from = "http://giladpeleg.com/*"
-    to = "https://www.giladpeleg.com/:splat"
-    status = 301
-    force = true
+from = "http://giladpeleg.com/*"
+to = "https://www.giladpeleg.com/:splat"
+status = 301
+force = true
 
 [[redirects]]
-    from = "https://giladpeleg.com/*"
-    to = "https://www.giladpeleg.com/:splat"
-    status = 301
-    force = true
+from = "https://giladpeleg.com/*"
+to = "https://www.giladpeleg.com/:splat"
+status = 301
+force = true
 
 [[redirects]]
-    from = "http://www.giladpeleg.com/*"
-    to = "https://www.giladpeleg.com/:splat"
-    status = 301
-    force = true
+from = "http://www.giladpeleg.com/*"
+to = "https://www.giladpeleg.com/:splat"
+status = 301
+force = true
 
 [[redirects]]
-    from = "https://www.giladpeleg.com/feed"
-    to = "https://www.giladpeleg.com/rss.xml"
-    status = 301
-    force = true
+from = "https://www.giladpeleg.com/feed"
+to = "https://www.giladpeleg.com/rss.xml"
+status = 301
+force = true
 
 [[redirects]]
-    from = "https://giladpeleg.netlify.com/*"
-    to = "https://www.giladpeleg.com/:splat"
-    status = 301
-    force = true
+from = "https://giladpeleg.netlify.com/*"
+to = "https://www.giladpeleg.com/:splat"
+status = 301
+force = true
 
 [[headers]]
-  for = "/*"
+for = "/*"
 
-  [headers.values]
-    Content-Security-Policy = "connect-src 'self' https://github.githubassets.com https://www.google-analytics.com https://www.google.com/analytics https://marketingplatform.google.com https://www.google.com https://www.giladpeleg.com; default-src 'self' https://github.githubassets.com https://www.google-analytics.com https://www.google.com/analytics https://marketingplatform.google.com https://www.google.com https://www.giladpeleg.com; font-src 'self' data: https://github.githubassets.com https://www.google-analytics.com https://www.google.com/analytics https://marketingplatform.google.com https://www.google.com https://fonts.gstatic.com https://fonts.googleapis.com https://www.giladpeleg.com; frame-src 'self'; img-src 'self' data: https://github.githubassets.com https://www.google-analytics.com https://www.google.com/analytics https://marketingplatform.google.com https://www.google.com https://fonts.gstatic.com https://fonts.googleapis.com https://www.giladpeleg.com; media-src 'self' https://www.giladpeleg.com; object-src 'none'; prefetch-src 'self' data: https://github.githubassets.com https://www.google-analytics.com https://www.google.com/analytics https://marketingplatform.google.com https://www.google.com https://fonts.gstatic.com https://fonts.googleapis.com https://www.giladpeleg.com; script-src 'self' https://github.githubassets.com https://www.google-analytics.com https://www.google.com/analytics https://marketingplatform.google.com https://www.google.com https://www.giladpeleg.com 'unsafe-inline'; style-src 'self' data: https://github.githubassets.com https://www.google-analytics.com https://www.google.com/analytics https://marketingplatform.google.com https://www.google.com https://fonts.gstatic.com https://fonts.googleapis.com https://www.giladpeleg.com 'unsafe-inline'; worker-src 'self' https://www.giladpeleg.com; report-uri https://giladpeleg.report-uri.com/r/d/csp/enforce; report-to default;"
-    Feature-Policy = "fullscreen 'self'"
-    Referrer-Policy = "no-referrer-when-downgrade"
-    Report-To = '{"group":"default","max_age":31536000,"endpoints":[{"url":"https://giladpeleg.report-uri.com/a/d/g"}],"include_subdomains":true}'
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "DENY"
-    X-UA-Compatible = "IE=Edge,chrome=1"
-    X-XSS-Protection = "1; mode=block"
+[headers.values]
+Content-Security-Policy = "connect-src 'self' https://github.githubassets.com https://www.google-analytics.com https://www.google.com/analytics https://marketingplatform.google.com https://www.google.com https://www.giladpeleg.com; default-src 'self' https://github.githubassets.com https://www.google-analytics.com https://www.google.com/analytics https://marketingplatform.google.com https://www.google.com https://www.giladpeleg.com; font-src 'self' data: https://github.githubassets.com https://www.google-analytics.com https://www.google.com/analytics https://marketingplatform.google.com https://www.google.com https://fonts.gstatic.com https://fonts.googleapis.com https://www.giladpeleg.com; frame-src 'self'; img-src 'self' data: https://github.githubassets.com https://www.google-analytics.com https://www.google.com/analytics https://marketingplatform.google.com https://www.google.com https://fonts.gstatic.com https://fonts.googleapis.com https://www.giladpeleg.com; media-src 'self' https://www.giladpeleg.com; object-src 'none'; prefetch-src 'self' data: https://github.githubassets.com https://www.google-analytics.com https://www.google.com/analytics https://marketingplatform.google.com https://www.google.com https://fonts.gstatic.com https://fonts.googleapis.com https://www.giladpeleg.com; script-src 'self' https://github.githubassets.com https://www.google-analytics.com https://www.google.com/analytics https://marketingplatform.google.com https://www.google.com https://www.giladpeleg.com 'unsafe-inline'; style-src 'self' data: https://github.githubassets.com https://www.google-analytics.com https://www.google.com/analytics https://marketingplatform.google.com https://www.google.com https://fonts.gstatic.com https://fonts.googleapis.com https://www.giladpeleg.com 'unsafe-inline'; worker-src 'self' https://www.giladpeleg.com; report-uri https://giladpeleg.report-uri.com/r/d/csp/enforce; report-to default;"
+Permission-Policy = "fullscreen=(self)"
+Referrer-Policy = "no-referrer-when-downgrade"
+Report-To = '{"group":"default","max_age":31536000,"endpoints":[{"url":"https://giladpeleg.report-uri.com/a/d/g"}],"include_subdomains":true}'
+Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+X-Content-Type-Options = "nosniff"
+X-Frame-Options = "DENY"
+X-UA-Compatible = "IE=Edge,chrome=1"
+X-XSS-Protection = "1; mode=block"
