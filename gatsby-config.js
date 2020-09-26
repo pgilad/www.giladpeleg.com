@@ -228,6 +228,12 @@ module.exports = {
                 short_name: PAGE_TITLE,
                 start_url: "/",
                 theme_color: "#663399",
+                icon_options: {
+                    // For all the options available, please see:
+                    // https://developer.mozilla.org/en-US/docs/Web/Manifest
+                    // https://w3c.github.io/manifest/#purpose-member
+                    purpose: `maskable`,
+                },
             },
         },
         "gatsby-plugin-offline",
