@@ -5,7 +5,7 @@ const PAGE_TITLE = "Gilad Peleg";
 const targetAddress = new URL(process.env.TARGET_ADDRESS || "https://www.giladpeleg.com");
 const siteUrl = targetAddress.href.replace(/\/$/, "");
 
-const getTrackingId = () => {
+const getAnalyticsTrackingId = () => {
     switch (process.env.GATSBY_ENV) {
         case "production":
             return "UA-58310464-1";
@@ -213,9 +213,13 @@ module.exports = {
             },
         },
         {
-            resolve: "gatsby-plugin-google-analytics",
+            resolve: "gatsby-plugin-google-gtag",
             options: {
-                trackingId: getTrackingId(),
+                trackingIds: [getAnalyticsTrackingId()],
+                pluginConfig: {
+                    head: false,
+                    respectDNT: true,
+                },
             },
         },
         {
