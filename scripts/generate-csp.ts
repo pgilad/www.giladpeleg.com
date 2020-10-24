@@ -9,6 +9,7 @@ const googleAnalytics3 = 'https://marketingplatform.google.com';
 const googleDomain = 'https://www.google.com';
 const ownDomain = 'https://www.giladpeleg.com';
 const reportUri = 'https://giladpeleg.report-uri.com/r/d/csp/enforce';
+const tagManager = 'https://www.googletagmanager.com';
 
 const googleFontsDomain = 'https://fonts.gstatic.com';
 const googleFontsDomain2 = 'https://fonts.googleapis.com';
@@ -24,6 +25,7 @@ const extensiveSourceDirective = [
     googleFontsDomain,
     googleFontsDomain2,
     ownDomain,
+    tagManager
 ];
 
 const regularSourceDirective = [
@@ -34,6 +36,7 @@ const regularSourceDirective = [
     googleAnalytics3,
     googleDomain,
     ownDomain,
+    tagManager
 ];
 const localSourceDirective = [CSP.PredefinedSource.Self, ownDomain];
 
