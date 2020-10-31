@@ -184,8 +184,14 @@ Click on "Insecure Connection" when you are bothered with a confirm window. You 
 
 ![Local process application overview in JConsole](local-jar-jconsole-overview.png)
 
-Another very interesting feature, is the MBeans (managed beans). This will allow us to interact with our Actuator endpoints. For example if we
-invoke our `ping` endpoint (Don't forget to swap the password to the new password), then we can see a list of recent traces that Spring Boot Actuator traced.
+Another very interesting feature, is the MBeans (managed beans). This will allow us to interact with our Actuator endpoints.
+
+> Please notice that Spring Boot > 2.2.x disables JMX exposure
+> by default and that you will need to add the following
+> setting to make it work: `spring.jmx.enabled=true`
+> (Thanks Christian Bach who added this tip :pray:)
+
+For example if we invoke our `ping` endpoint (Don't forget to swap the password to the new password), then we can see a list of recent traces that Spring Boot Actuator traced.
 This is found under the tab `MBeans -> org.springframework.boot -> Endpoint -> Httptrace -> Operations`.
 
 ![MBeans Actuator trace](jconsole-mbeans-trace.png)
