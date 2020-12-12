@@ -213,13 +213,11 @@ module.exports = {
             },
         },
         {
-            resolve: "gatsby-plugin-google-gtag",
+            resolve: "gatsby-plugin-google-analytics",
             options: {
-                trackingIds: [getAnalyticsTrackingId()],
-                pluginConfig: {
-                    head: false,
-                    respectDNT: true,
-                },
+                trackingId: getAnalyticsTrackingId(),
+                respectDNT: true,
+                defer: true
             },
         },
         {
