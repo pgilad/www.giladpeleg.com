@@ -217,7 +217,7 @@ module.exports = {
             options: {
                 trackingId: getAnalyticsTrackingId(),
                 respectDNT: true,
-                defer: true
+                defer: true,
             },
         },
         {
