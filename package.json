@@ -104,7 +104,7 @@
         "ts-node": "9.1.1"
     },
     "browserslist": [
-        ">0.6%",
+        ">1%",
         "not dead",
         "not op_mini all",
         "not ie <= 11",
