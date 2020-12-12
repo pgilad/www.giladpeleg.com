@@ -223,7 +223,7 @@ module.exports = {
             },
         },
         {
-            resolve: "gatsby-plugin-preact"
+            resolve: "gatsby-plugin-preact",
         },
         {
             resolve: "gatsby-plugin-manifest",
