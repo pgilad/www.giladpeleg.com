@@ -223,6 +223,9 @@ module.exports = {
             },
         },
         {
+            resolve: "gatsby-plugin-preact"
+        },
+        {
             resolve: "gatsby-plugin-manifest",
             options: {
                 background_color: "#663399",
