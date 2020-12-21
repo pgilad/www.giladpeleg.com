@@ -7,7 +7,8 @@ config:
         enumValues: keep
 documents:
     - ./src/**/*.{ts,tsx}
-    - ./node_modules/gatsby*/!(node_modules)/**/*.js
+    - ./node_modules/gatsby-transformer-sharp/!(node_modules)/**/*.js
+#    - ./node_modules/gatsby*/!(node_modules)/**/*.js
 generates:
     src/graphql.ts:
         plugins:

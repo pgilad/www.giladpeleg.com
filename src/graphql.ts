@@ -1,4 +1,7 @@
 export type Maybe<T> = T;
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -10,6 +13,16 @@ export type Scalars = {
   Date: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
+};
+
+export type BlurredOptions = {
+  /** Width of the generated low-res preview. Default is 20px */
+  width?: Maybe<Scalars['Int']>;
+  /**
+   * Force the output format for the low-res preview. Default is to use the same
+   * format as the input. You should rarely need to change this
+   */
+  toFormat?: Maybe<ImageFormat>;
 };
 
 export type BooleanQueryOperatorInput = {
@@ -553,6 +566,7 @@ export enum FileFieldsEnum {
   childImageSharp___sizes___originalName = 'childImageSharp___sizes___originalName',
   childImageSharp___sizes___presentationWidth = 'childImageSharp___sizes___presentationWidth',
   childImageSharp___sizes___presentationHeight = 'childImageSharp___sizes___presentationHeight',
+  childImageSharp___gatsbyImageData = 'childImageSharp___gatsbyImageData',
   childImageSharp___original___width = 'childImageSharp___original___width',
   childImageSharp___original___height = 'childImageSharp___original___height',
   childImageSharp___original___src = 'childImageSharp___original___src',
@@ -876,9 +890,23 @@ export enum ImageFit {
 
 export enum ImageFormat {
   NO_CHANGE = 'NO_CHANGE',
+  AUTO = 'AUTO',
   JPG = 'JPG',
   PNG = 'PNG',
   WEBP = 'WEBP'
+}
+
+export enum ImageLayout {
+  FIXED = 'FIXED',
+  FLUID = 'FLUID',
+  CONSTRAINED = 'CONSTRAINED'
+}
+
+export enum ImagePlaceholder {
+  DOMINANT_COLOR = 'DOMINANT_COLOR',
+  TRACED_SVG = 'TRACED_SVG',
+  BLURRED = 'BLURRED',
+  NONE = 'NONE'
 }
 
 export type ImageSharp = Node & {
@@ -889,6 +917,7 @@ export type ImageSharp = Node & {
   fluid?: Maybe<ImageSharpFluid>;
   /** @deprecated Sizes was deprecated in Gatsby v2. It's been renamed to "fluid" https://example.com/write-docs-and-fix-this-example-link */
   sizes?: Maybe<ImageSharpSizes>;
+  gatsbyImageData: Scalars['JSON'];
   original?: Maybe<ImageSharpOriginal>;
   resize?: Maybe<ImageSharpResize>;
   id: Scalars['ID'];
@@ -994,6 +1023,27 @@ export type ImageSharpSizesArgs = {
 };
 
 
+export type ImageSharpGatsbyImageDataArgs = {
+  layout?: Maybe<ImageLayout>;
+  maxWidth?: Maybe<Scalars['Int']>;
+  maxHeight?: Maybe<Scalars['Int']>;
+  width?: Maybe<Scalars['Int']>;
+  height?: Maybe<Scalars['Int']>;
+  placeholder?: Maybe<ImagePlaceholder>;
+  blurredOptions?: Maybe<BlurredOptions>;
+  tracedSVGOptions?: Maybe<Potrace>;
+  formats?: Maybe<Array<Maybe<ImageFormat>>>;
+  outputPixelDensities?: Maybe<Array<Maybe<Scalars['Float']>>>;
+  sizes?: Maybe<Scalars['String']>;
+  quality?: Maybe<Scalars['Int']>;
+  jpgOptions?: Maybe<JpgOptions>;
+  pngOptions?: Maybe<PngOptions>;
+  webpOptions?: Maybe<WebPOptions>;
+  transformOptions?: Maybe<TransformOptions>;
+  background?: Maybe<Scalars['String']>;
+};
+
+
 export type ImageSharpResizeArgs = {
   width?: Maybe<Scalars['Int']>;
   height?: Maybe<Scalars['Int']>;
@@ -1090,6 +1140,7 @@ export enum ImageSharpFieldsEnum {
   sizes___originalName = 'sizes___originalName',
   sizes___presentationWidth = 'sizes___presentationWidth',
   sizes___presentationHeight = 'sizes___presentationHeight',
+  gatsbyImageData = 'gatsbyImageData',
   original___width = 'original___width',
   original___height = 'original___height',
   original___src = 'original___src',
@@ -1192,6 +1243,7 @@ export type ImageSharpFilterInput = {
   resolutions?: Maybe<ImageSharpResolutionsFilterInput>;
   fluid?: Maybe<ImageSharpFluidFilterInput>;
   sizes?: Maybe<ImageSharpSizesFilterInput>;
+  gatsbyImageData?: Maybe<JsonQueryOperatorInput>;
   original?: Maybe<ImageSharpOriginalFilterInput>;
   resize?: Maybe<ImageSharpResizeFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -1397,6 +1449,11 @@ export type IntQueryOperatorInput = {
   nin?: Maybe<Array<Maybe<Scalars['Int']>>>;
 };
 
+export type JpgOptions = {
+  quality?: Maybe<Scalars['Int']>;
+  progressive?: Maybe<Scalars['Boolean']>;
+};
+
 
 export type JsonQueryOperatorInput = {
   eq?: Maybe<Scalars['JSON']>;
@@ -1558,6 +1615,7 @@ export enum MarkdownRemarkFieldsEnum {
   frontmatter___cover___blksize = 'frontmatter___cover___blksize',
   frontmatter___cover___blocks = 'frontmatter___cover___blocks',
   frontmatter___cover___publicURL = 'frontmatter___cover___publicURL',
+  frontmatter___cover___childImageSharp___gatsbyImageData = 'frontmatter___cover___childImageSharp___gatsbyImageData',
   frontmatter___cover___childImageSharp___id = 'frontmatter___cover___childImageSharp___id',
   frontmatter___cover___childImageSharp___children = 'frontmatter___cover___childImageSharp___children',
   frontmatter___cover___id = 'frontmatter___cover___id',
@@ -1798,6 +1856,11 @@ export type PageInfo = {
   totalCount: Scalars['Int'];
 };
 
+export type PngOptions = {
+  quality?: Maybe<Scalars['Int']>;
+  compressionSpeed?: Maybe<Scalars['Int']>;
+};
+
 export type Potrace = {
   turnPolicy?: Maybe<PotraceTurnPolicy>;
   turdSize?: Maybe<Scalars['Float']>;
@@ -1825,10 +1888,10 @@ export type Query = {
   allFile: FileConnection;
   directory?: Maybe<Directory>;
   allDirectory: DirectoryConnection;
-  sitePage?: Maybe<SitePage>;
-  allSitePage: SitePageConnection;
   site?: Maybe<Site>;
   allSite: SiteConnection;
+  sitePage?: Maybe<SitePage>;
+  allSitePage: SitePageConnection;
   imageSharp?: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
   markdownRemark?: Maybe<MarkdownRemark>;
@@ -1941,6 +2004,28 @@ export type QueryAllDirectoryArgs = {
 };
 
 
+export type QuerySiteArgs = {
+  buildTime?: Maybe<DateQueryOperatorInput>;
+  siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
+  port?: Maybe<IntQueryOperatorInput>;
+  host?: Maybe<StringQueryOperatorInput>;
+  polyfill?: Maybe<BooleanQueryOperatorInput>;
+  pathPrefix?: Maybe<StringQueryOperatorInput>;
+  id?: Maybe<StringQueryOperatorInput>;
+  parent?: Maybe<NodeFilterInput>;
+  children?: Maybe<NodeFilterListInput>;
+  internal?: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllSiteArgs = {
+  filter?: Maybe<SiteFilterInput>;
+  sort?: Maybe<SiteSortInput>;
+  skip?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
+
 export type QuerySitePageArgs = {
   path?: Maybe<StringQueryOperatorInput>;
   component?: Maybe<StringQueryOperatorInput>;
@@ -1967,33 +2052,12 @@ export type QueryAllSitePageArgs = {
 };
 
 
-export type QuerySiteArgs = {
-  buildTime?: Maybe<DateQueryOperatorInput>;
-  siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
-  port?: Maybe<DateQueryOperatorInput>;
-  host?: Maybe<StringQueryOperatorInput>;
-  polyfill?: Maybe<BooleanQueryOperatorInput>;
-  pathPrefix?: Maybe<StringQueryOperatorInput>;
-  id?: Maybe<StringQueryOperatorInput>;
-  parent?: Maybe<NodeFilterInput>;
-  children?: Maybe<NodeFilterListInput>;
-  internal?: Maybe<InternalFilterInput>;
-};
-
-
-export type QueryAllSiteArgs = {
-  filter?: Maybe<SiteFilterInput>;
-  sort?: Maybe<SiteSortInput>;
-  skip?: Maybe<Scalars['Int']>;
-  limit?: Maybe<Scalars['Int']>;
-};
-
-
 export type QueryImageSharpArgs = {
   fixed?: Maybe<ImageSharpFixedFilterInput>;
   resolutions?: Maybe<ImageSharpResolutionsFilterInput>;
   fluid?: Maybe<ImageSharpFluidFilterInput>;
   sizes?: Maybe<ImageSharpSizesFilterInput>;
+  gatsbyImageData?: Maybe<JsonQueryOperatorInput>;
   original?: Maybe<ImageSharpOriginalFilterInput>;
   resize?: Maybe<ImageSharpResizeFilterInput>;
   id?: Maybe<StringQueryOperatorInput>;
@@ -2084,7 +2148,7 @@ export type Site = Node & {
   __typename?: 'Site';
   buildTime?: Maybe<Scalars['Date']>;
   siteMetadata?: Maybe<SiteSiteMetadata>;
-  port?: Maybe<Scalars['Date']>;
+  port?: Maybe<Scalars['Int']>;
   host?: Maybe<Scalars['String']>;
   polyfill?: Maybe<Scalars['Boolean']>;
   pathPrefix?: Maybe<Scalars['String']>;
@@ -2096,14 +2160,6 @@ export type Site = Node & {
 
 
 export type SiteBuildTimeArgs = {
-  formatString?: Maybe<Scalars['String']>;
-  fromNow?: Maybe<Scalars['Boolean']>;
-  difference?: Maybe<Scalars['String']>;
-  locale?: Maybe<Scalars['String']>;
-};
-
-
-export type SitePortArgs = {
   formatString?: Maybe<Scalars['String']>;
   fromNow?: Maybe<Scalars['Boolean']>;
   difference?: Maybe<Scalars['String']>;
@@ -2300,13 +2356,13 @@ export type SiteEdge = {
 
 export enum SiteFieldsEnum {
   buildTime = 'buildTime',
+  siteMetadata___title = 'siteMetadata___title',
+  siteMetadata___description = 'siteMetadata___description',
   siteMetadata___author = 'siteMetadata___author',
   siteMetadata___authorEmail = 'siteMetadata___authorEmail',
-  siteMetadata___description = 'siteMetadata___description',
   siteMetadata___disqusShortName = 'siteMetadata___disqusShortName',
   siteMetadata___keywords = 'siteMetadata___keywords',
   siteMetadata___siteUrl = 'siteMetadata___siteUrl',
-  siteMetadata___title = 'siteMetadata___title',
   siteMetadata___twitterUsername = 'siteMetadata___twitterUsername',
   port = 'port',
   host = 'host',
@@ -2403,7 +2459,7 @@ export enum SiteFieldsEnum {
 export type SiteFilterInput = {
   buildTime?: Maybe<DateQueryOperatorInput>;
   siteMetadata?: Maybe<SiteSiteMetadataFilterInput>;
-  port?: Maybe<DateQueryOperatorInput>;
+  port?: Maybe<IntQueryOperatorInput>;
   host?: Maybe<StringQueryOperatorInput>;
   polyfill?: Maybe<BooleanQueryOperatorInput>;
   pathPrefix?: Maybe<StringQueryOperatorInput>;
@@ -2694,9 +2750,17 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___plugins___id = 'pluginCreator___pluginOptions___plugins___id',
   pluginCreator___pluginOptions___plugins___name = 'pluginCreator___pluginOptions___plugins___name',
   pluginCreator___pluginOptions___plugins___version = 'pluginCreator___pluginOptions___plugins___version',
+  pluginCreator___pluginOptions___plugins___nodeAPIs = 'pluginCreator___pluginOptions___plugins___nodeAPIs',
   pluginCreator___pluginOptions___plugins___browserAPIs = 'pluginCreator___pluginOptions___plugins___browserAPIs',
   pluginCreator___pluginOptions___plugins___ssrAPIs = 'pluginCreator___pluginOptions___plugins___ssrAPIs',
   pluginCreator___pluginOptions___plugins___pluginFilepath = 'pluginCreator___pluginOptions___plugins___pluginFilepath',
+  pluginCreator___pluginOptions___isTSX = 'pluginCreator___pluginOptions___isTSX',
+  pluginCreator___pluginOptions___jsxPragma = 'pluginCreator___pluginOptions___jsxPragma',
+  pluginCreator___pluginOptions___allExtensions = 'pluginCreator___pluginOptions___allExtensions',
+  pluginCreator___pluginOptions___base64Width = 'pluginCreator___pluginOptions___base64Width',
+  pluginCreator___pluginOptions___stripMetadata = 'pluginCreator___pluginOptions___stripMetadata',
+  pluginCreator___pluginOptions___defaultQuality = 'pluginCreator___pluginOptions___defaultQuality',
+  pluginCreator___pluginOptions___failOnError = 'pluginCreator___pluginOptions___failOnError',
   pluginCreator___pluginOptions___name = 'pluginCreator___pluginOptions___name',
   pluginCreator___pluginOptions___path = 'pluginCreator___pluginOptions___path',
   pluginCreator___pluginOptions___backgroundColor = 'pluginCreator___pluginOptions___backgroundColor',
@@ -2704,10 +2768,9 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___maxWidth = 'pluginCreator___pluginOptions___maxWidth',
   pluginCreator___pluginOptions___quality = 'pluginCreator___pluginOptions___quality',
   pluginCreator___pluginOptions___withWebp = 'pluginCreator___pluginOptions___withWebp',
-  pluginCreator___pluginOptions___pathPrefix = 'pluginCreator___pluginOptions___pathPrefix',
-  pluginCreator___pluginOptions___wrapperStyle = 'pluginCreator___pluginOptions___wrapperStyle',
   pluginCreator___pluginOptions___showCaptions = 'pluginCreator___pluginOptions___showCaptions',
   pluginCreator___pluginOptions___markdownCaptions = 'pluginCreator___pluginOptions___markdownCaptions',
+  pluginCreator___pluginOptions___sizeByPixelDensity = 'pluginCreator___pluginOptions___sizeByPixelDensity',
   pluginCreator___pluginOptions___tracedSVG = 'pluginCreator___pluginOptions___tracedSVG',
   pluginCreator___pluginOptions___loading = 'pluginCreator___pluginOptions___loading',
   pluginCreator___pluginOptions___disableBgImageOnAlpha = 'pluginCreator___pluginOptions___disableBgImageOnAlpha',
@@ -2722,6 +2785,10 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___styles___position = 'pluginCreator___pluginOptions___styles___position',
   pluginCreator___pluginOptions___styles___top = 'pluginCreator___pluginOptions___styles___top',
   pluginCreator___pluginOptions___styles___width = 'pluginCreator___pluginOptions___styles___width',
+  pluginCreator___pluginOptions___offsetY = 'pluginCreator___pluginOptions___offsetY',
+  pluginCreator___pluginOptions___className = 'pluginCreator___pluginOptions___className',
+  pluginCreator___pluginOptions___output = 'pluginCreator___pluginOptions___output',
+  pluginCreator___pluginOptions___createLinkInHead = 'pluginCreator___pluginOptions___createLinkInHead',
   pluginCreator___pluginOptions___query = 'pluginCreator___pluginOptions___query',
   pluginCreator___pluginOptions___feeds = 'pluginCreator___pluginOptions___feeds',
   pluginCreator___pluginOptions___feeds___query = 'pluginCreator___pluginOptions___feeds___query',
@@ -2730,16 +2797,23 @@ export enum SitePageFieldsEnum {
   pluginCreator___pluginOptions___siteUrl = 'pluginCreator___pluginOptions___siteUrl',
   pluginCreator___pluginOptions___mergeSecurityHeaders = 'pluginCreator___pluginOptions___mergeSecurityHeaders',
   pluginCreator___pluginOptions___trackingId = 'pluginCreator___pluginOptions___trackingId',
+  pluginCreator___pluginOptions___respectDNT = 'pluginCreator___pluginOptions___respectDNT',
+  pluginCreator___pluginOptions___defer = 'pluginCreator___pluginOptions___defer',
+  pluginCreator___pluginOptions___head = 'pluginCreator___pluginOptions___head',
+  pluginCreator___pluginOptions___anonymize = 'pluginCreator___pluginOptions___anonymize',
+  pluginCreator___pluginOptions___pageTransitionDelay = 'pluginCreator___pluginOptions___pageTransitionDelay',
   pluginCreator___pluginOptions___background_color = 'pluginCreator___pluginOptions___background_color',
   pluginCreator___pluginOptions___display = 'pluginCreator___pluginOptions___display',
   pluginCreator___pluginOptions___icon = 'pluginCreator___pluginOptions___icon',
   pluginCreator___pluginOptions___short_name = 'pluginCreator___pluginOptions___short_name',
   pluginCreator___pluginOptions___start_url = 'pluginCreator___pluginOptions___start_url',
   pluginCreator___pluginOptions___theme_color = 'pluginCreator___pluginOptions___theme_color',
-  pluginCreator___pluginOptions___cache_busting_mode = 'pluginCreator___pluginOptions___cache_busting_mode',
-  pluginCreator___pluginOptions___include_favicon = 'pluginCreator___pluginOptions___include_favicon',
+  pluginCreator___pluginOptions___icon_options___purpose = 'pluginCreator___pluginOptions___icon_options___purpose',
   pluginCreator___pluginOptions___legacy = 'pluginCreator___pluginOptions___legacy',
   pluginCreator___pluginOptions___theme_color_in_head = 'pluginCreator___pluginOptions___theme_color_in_head',
+  pluginCreator___pluginOptions___cache_busting_mode = 'pluginCreator___pluginOptions___cache_busting_mode',
+  pluginCreator___pluginOptions___crossOrigin = 'pluginCreator___pluginOptions___crossOrigin',
+  pluginCreator___pluginOptions___include_favicon = 'pluginCreator___pluginOptions___include_favicon',
   pluginCreator___pluginOptions___cacheDigest = 'pluginCreator___pluginOptions___cacheDigest',
   pluginCreator___pluginOptions___pathCheck = 'pluginCreator___pluginOptions___pathCheck',
   pluginCreator___nodeAPIs = 'pluginCreator___nodeAPIs',
@@ -2943,10 +3017,9 @@ export enum SitePluginFieldsEnum {
   pluginOptions___plugins___pluginOptions___maxWidth = 'pluginOptions___plugins___pluginOptions___maxWidth',
   pluginOptions___plugins___pluginOptions___quality = 'pluginOptions___plugins___pluginOptions___quality',
   pluginOptions___plugins___pluginOptions___withWebp = 'pluginOptions___plugins___pluginOptions___withWebp',
-  pluginOptions___plugins___pluginOptions___pathPrefix = 'pluginOptions___plugins___pluginOptions___pathPrefix',
-  pluginOptions___plugins___pluginOptions___wrapperStyle = 'pluginOptions___plugins___pluginOptions___wrapperStyle',
   pluginOptions___plugins___pluginOptions___showCaptions = 'pluginOptions___plugins___pluginOptions___showCaptions',
   pluginOptions___plugins___pluginOptions___markdownCaptions = 'pluginOptions___plugins___pluginOptions___markdownCaptions',
+  pluginOptions___plugins___pluginOptions___sizeByPixelDensity = 'pluginOptions___plugins___pluginOptions___sizeByPixelDensity',
   pluginOptions___plugins___pluginOptions___tracedSVG = 'pluginOptions___plugins___pluginOptions___tracedSVG',
   pluginOptions___plugins___pluginOptions___loading = 'pluginOptions___plugins___pluginOptions___loading',
   pluginOptions___plugins___pluginOptions___disableBgImageOnAlpha = 'pluginOptions___plugins___pluginOptions___disableBgImageOnAlpha',
@@ -2955,9 +3028,19 @@ export enum SitePluginFieldsEnum {
   pluginOptions___plugins___pluginOptions___active = 'pluginOptions___plugins___pluginOptions___active',
   pluginOptions___plugins___pluginOptions___class = 'pluginOptions___plugins___pluginOptions___class',
   pluginOptions___plugins___pluginOptions___size = 'pluginOptions___plugins___pluginOptions___size',
+  pluginOptions___plugins___pluginOptions___offsetY = 'pluginOptions___plugins___pluginOptions___offsetY',
+  pluginOptions___plugins___pluginOptions___className = 'pluginOptions___plugins___pluginOptions___className',
+  pluginOptions___plugins___nodeAPIs = 'pluginOptions___plugins___nodeAPIs',
   pluginOptions___plugins___browserAPIs = 'pluginOptions___plugins___browserAPIs',
   pluginOptions___plugins___ssrAPIs = 'pluginOptions___plugins___ssrAPIs',
   pluginOptions___plugins___pluginFilepath = 'pluginOptions___plugins___pluginFilepath',
+  pluginOptions___isTSX = 'pluginOptions___isTSX',
+  pluginOptions___jsxPragma = 'pluginOptions___jsxPragma',
+  pluginOptions___allExtensions = 'pluginOptions___allExtensions',
+  pluginOptions___base64Width = 'pluginOptions___base64Width',
+  pluginOptions___stripMetadata = 'pluginOptions___stripMetadata',
+  pluginOptions___defaultQuality = 'pluginOptions___defaultQuality',
+  pluginOptions___failOnError = 'pluginOptions___failOnError',
   pluginOptions___name = 'pluginOptions___name',
   pluginOptions___path = 'pluginOptions___path',
   pluginOptions___backgroundColor = 'pluginOptions___backgroundColor',
@@ -2965,10 +3048,9 @@ export enum SitePluginFieldsEnum {
   pluginOptions___maxWidth = 'pluginOptions___maxWidth',
   pluginOptions___quality = 'pluginOptions___quality',
   pluginOptions___withWebp = 'pluginOptions___withWebp',
-  pluginOptions___pathPrefix = 'pluginOptions___pathPrefix',
-  pluginOptions___wrapperStyle = 'pluginOptions___wrapperStyle',
   pluginOptions___showCaptions = 'pluginOptions___showCaptions',
   pluginOptions___markdownCaptions = 'pluginOptions___markdownCaptions',
+  pluginOptions___sizeByPixelDensity = 'pluginOptions___sizeByPixelDensity',
   pluginOptions___tracedSVG = 'pluginOptions___tracedSVG',
   pluginOptions___loading = 'pluginOptions___loading',
   pluginOptions___disableBgImageOnAlpha = 'pluginOptions___disableBgImageOnAlpha',
@@ -2983,6 +3065,10 @@ export enum SitePluginFieldsEnum {
   pluginOptions___styles___position = 'pluginOptions___styles___position',
   pluginOptions___styles___top = 'pluginOptions___styles___top',
   pluginOptions___styles___width = 'pluginOptions___styles___width',
+  pluginOptions___offsetY = 'pluginOptions___offsetY',
+  pluginOptions___className = 'pluginOptions___className',
+  pluginOptions___output = 'pluginOptions___output',
+  pluginOptions___createLinkInHead = 'pluginOptions___createLinkInHead',
   pluginOptions___query = 'pluginOptions___query',
   pluginOptions___feeds = 'pluginOptions___feeds',
   pluginOptions___feeds___query = 'pluginOptions___feeds___query',
@@ -2991,16 +3077,23 @@ export enum SitePluginFieldsEnum {
   pluginOptions___siteUrl = 'pluginOptions___siteUrl',
   pluginOptions___mergeSecurityHeaders = 'pluginOptions___mergeSecurityHeaders',
   pluginOptions___trackingId = 'pluginOptions___trackingId',
+  pluginOptions___respectDNT = 'pluginOptions___respectDNT',
+  pluginOptions___defer = 'pluginOptions___defer',
+  pluginOptions___head = 'pluginOptions___head',
+  pluginOptions___anonymize = 'pluginOptions___anonymize',
+  pluginOptions___pageTransitionDelay = 'pluginOptions___pageTransitionDelay',
   pluginOptions___background_color = 'pluginOptions___background_color',
   pluginOptions___display = 'pluginOptions___display',
   pluginOptions___icon = 'pluginOptions___icon',
   pluginOptions___short_name = 'pluginOptions___short_name',
   pluginOptions___start_url = 'pluginOptions___start_url',
   pluginOptions___theme_color = 'pluginOptions___theme_color',
-  pluginOptions___cache_busting_mode = 'pluginOptions___cache_busting_mode',
-  pluginOptions___include_favicon = 'pluginOptions___include_favicon',
+  pluginOptions___icon_options___purpose = 'pluginOptions___icon_options___purpose',
   pluginOptions___legacy = 'pluginOptions___legacy',
   pluginOptions___theme_color_in_head = 'pluginOptions___theme_color_in_head',
+  pluginOptions___cache_busting_mode = 'pluginOptions___cache_busting_mode',
+  pluginOptions___crossOrigin = 'pluginOptions___crossOrigin',
+  pluginOptions___include_favicon = 'pluginOptions___include_favicon',
   pluginOptions___cacheDigest = 'pluginOptions___cacheDigest',
   pluginOptions___pathCheck = 'pluginOptions___pathCheck',
   nodeAPIs = 'nodeAPIs',
@@ -3123,6 +3216,13 @@ export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 export type SitePluginPluginOptions = {
   __typename?: 'SitePluginPluginOptions';
   plugins?: Maybe<Array<Maybe<SitePluginPluginOptionsPlugins>>>;
+  isTSX?: Maybe<Scalars['Boolean']>;
+  jsxPragma?: Maybe<Scalars['String']>;
+  allExtensions?: Maybe<Scalars['Boolean']>;
+  base64Width?: Maybe<Scalars['Int']>;
+  stripMetadata?: Maybe<Scalars['Boolean']>;
+  defaultQuality?: Maybe<Scalars['Int']>;
+  failOnError?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
   backgroundColor?: Maybe<Scalars['String']>;
@@ -3130,10 +3230,9 @@ export type SitePluginPluginOptions = {
   maxWidth?: Maybe<Scalars['Int']>;
   quality?: Maybe<Scalars['Int']>;
   withWebp?: Maybe<Scalars['Boolean']>;
-  pathPrefix?: Maybe<Scalars['String']>;
-  wrapperStyle?: Maybe<Scalars['String']>;
   showCaptions?: Maybe<Scalars['Boolean']>;
   markdownCaptions?: Maybe<Scalars['Boolean']>;
+  sizeByPixelDensity?: Maybe<Scalars['Boolean']>;
   tracedSVG?: Maybe<Scalars['Boolean']>;
   loading?: Maybe<Scalars['String']>;
   disableBgImageOnAlpha?: Maybe<Scalars['Boolean']>;
@@ -3143,21 +3242,32 @@ export type SitePluginPluginOptions = {
   class?: Maybe<Scalars['String']>;
   size?: Maybe<Scalars['Int']>;
   styles?: Maybe<SitePluginPluginOptionsStyles>;
+  offsetY?: Maybe<Scalars['Int']>;
+  className?: Maybe<Scalars['String']>;
+  output?: Maybe<Scalars['String']>;
+  createLinkInHead?: Maybe<Scalars['Boolean']>;
   query?: Maybe<Scalars['String']>;
   feeds?: Maybe<Array<Maybe<SitePluginPluginOptionsFeeds>>>;
   siteUrl?: Maybe<Scalars['String']>;
   mergeSecurityHeaders?: Maybe<Scalars['Boolean']>;
   trackingId?: Maybe<Scalars['String']>;
+  respectDNT?: Maybe<Scalars['Boolean']>;
+  defer?: Maybe<Scalars['Boolean']>;
+  head?: Maybe<Scalars['Boolean']>;
+  anonymize?: Maybe<Scalars['Boolean']>;
+  pageTransitionDelay?: Maybe<Scalars['Int']>;
   background_color?: Maybe<Scalars['String']>;
   display?: Maybe<Scalars['String']>;
   icon?: Maybe<Scalars['String']>;
   short_name?: Maybe<Scalars['String']>;
   start_url?: Maybe<Scalars['String']>;
   theme_color?: Maybe<Scalars['String']>;
-  cache_busting_mode?: Maybe<Scalars['String']>;
-  include_favicon?: Maybe<Scalars['Boolean']>;
+  icon_options?: Maybe<SitePluginPluginOptionsIcon_Options>;
   legacy?: Maybe<Scalars['Boolean']>;
   theme_color_in_head?: Maybe<Scalars['Boolean']>;
+  cache_busting_mode?: Maybe<Scalars['String']>;
+  crossOrigin?: Maybe<Scalars['String']>;
+  include_favicon?: Maybe<Scalars['Boolean']>;
   cacheDigest?: Maybe<Scalars['String']>;
   pathCheck?: Maybe<Scalars['Boolean']>;
 };
@@ -3181,6 +3291,13 @@ export type SitePluginPluginOptionsFeedsFilterListInput = {
 
 export type SitePluginPluginOptionsFilterInput = {
   plugins?: Maybe<SitePluginPluginOptionsPluginsFilterListInput>;
+  isTSX?: Maybe<BooleanQueryOperatorInput>;
+  jsxPragma?: Maybe<StringQueryOperatorInput>;
+  allExtensions?: Maybe<BooleanQueryOperatorInput>;
+  base64Width?: Maybe<IntQueryOperatorInput>;
+  stripMetadata?: Maybe<BooleanQueryOperatorInput>;
+  defaultQuality?: Maybe<IntQueryOperatorInput>;
+  failOnError?: Maybe<BooleanQueryOperatorInput>;
   name?: Maybe<StringQueryOperatorInput>;
   path?: Maybe<StringQueryOperatorInput>;
   backgroundColor?: Maybe<StringQueryOperatorInput>;
@@ -3188,10 +3305,9 @@ export type SitePluginPluginOptionsFilterInput = {
   maxWidth?: Maybe<IntQueryOperatorInput>;
   quality?: Maybe<IntQueryOperatorInput>;
   withWebp?: Maybe<BooleanQueryOperatorInput>;
-  pathPrefix?: Maybe<StringQueryOperatorInput>;
-  wrapperStyle?: Maybe<StringQueryOperatorInput>;
   showCaptions?: Maybe<BooleanQueryOperatorInput>;
   markdownCaptions?: Maybe<BooleanQueryOperatorInput>;
+  sizeByPixelDensity?: Maybe<BooleanQueryOperatorInput>;
   tracedSVG?: Maybe<BooleanQueryOperatorInput>;
   loading?: Maybe<StringQueryOperatorInput>;
   disableBgImageOnAlpha?: Maybe<BooleanQueryOperatorInput>;
@@ -3201,23 +3317,43 @@ export type SitePluginPluginOptionsFilterInput = {
   class?: Maybe<StringQueryOperatorInput>;
   size?: Maybe<IntQueryOperatorInput>;
   styles?: Maybe<SitePluginPluginOptionsStylesFilterInput>;
+  offsetY?: Maybe<IntQueryOperatorInput>;
+  className?: Maybe<StringQueryOperatorInput>;
+  output?: Maybe<StringQueryOperatorInput>;
+  createLinkInHead?: Maybe<BooleanQueryOperatorInput>;
   query?: Maybe<StringQueryOperatorInput>;
   feeds?: Maybe<SitePluginPluginOptionsFeedsFilterListInput>;
   siteUrl?: Maybe<StringQueryOperatorInput>;
   mergeSecurityHeaders?: Maybe<BooleanQueryOperatorInput>;
   trackingId?: Maybe<StringQueryOperatorInput>;
+  respectDNT?: Maybe<BooleanQueryOperatorInput>;
+  defer?: Maybe<BooleanQueryOperatorInput>;
+  head?: Maybe<BooleanQueryOperatorInput>;
+  anonymize?: Maybe<BooleanQueryOperatorInput>;
+  pageTransitionDelay?: Maybe<IntQueryOperatorInput>;
   background_color?: Maybe<StringQueryOperatorInput>;
   display?: Maybe<StringQueryOperatorInput>;
   icon?: Maybe<StringQueryOperatorInput>;
   short_name?: Maybe<StringQueryOperatorInput>;
   start_url?: Maybe<StringQueryOperatorInput>;
   theme_color?: Maybe<StringQueryOperatorInput>;
-  cache_busting_mode?: Maybe<StringQueryOperatorInput>;
-  include_favicon?: Maybe<BooleanQueryOperatorInput>;
+  icon_options?: Maybe<SitePluginPluginOptionsIcon_OptionsFilterInput>;
   legacy?: Maybe<BooleanQueryOperatorInput>;
   theme_color_in_head?: Maybe<BooleanQueryOperatorInput>;
+  cache_busting_mode?: Maybe<StringQueryOperatorInput>;
+  crossOrigin?: Maybe<StringQueryOperatorInput>;
+  include_favicon?: Maybe<BooleanQueryOperatorInput>;
   cacheDigest?: Maybe<StringQueryOperatorInput>;
   pathCheck?: Maybe<BooleanQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsIcon_Options = {
+  __typename?: 'SitePluginPluginOptionsIcon_options';
+  purpose?: Maybe<Scalars['String']>;
+};
+
+export type SitePluginPluginOptionsIcon_OptionsFilterInput = {
+  purpose?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsPlugins = {
@@ -3227,6 +3363,7 @@ export type SitePluginPluginOptionsPlugins = {
   name?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
   pluginOptions?: Maybe<SitePluginPluginOptionsPluginsPluginOptions>;
+  nodeAPIs?: Maybe<Array<Maybe<Scalars['String']>>>;
   browserAPIs?: Maybe<Array<Maybe<Scalars['String']>>>;
   ssrAPIs?: Maybe<Array<Maybe<Scalars['String']>>>;
   pluginFilepath?: Maybe<Scalars['String']>;
@@ -3238,6 +3375,7 @@ export type SitePluginPluginOptionsPluginsFilterInput = {
   name?: Maybe<StringQueryOperatorInput>;
   version?: Maybe<StringQueryOperatorInput>;
   pluginOptions?: Maybe<SitePluginPluginOptionsPluginsPluginOptionsFilterInput>;
+  nodeAPIs?: Maybe<StringQueryOperatorInput>;
   browserAPIs?: Maybe<StringQueryOperatorInput>;
   ssrAPIs?: Maybe<StringQueryOperatorInput>;
   pluginFilepath?: Maybe<StringQueryOperatorInput>;
@@ -3254,10 +3392,9 @@ export type SitePluginPluginOptionsPluginsPluginOptions = {
   maxWidth?: Maybe<Scalars['Int']>;
   quality?: Maybe<Scalars['Int']>;
   withWebp?: Maybe<Scalars['Boolean']>;
-  pathPrefix?: Maybe<Scalars['String']>;
-  wrapperStyle?: Maybe<Scalars['String']>;
   showCaptions?: Maybe<Scalars['Boolean']>;
   markdownCaptions?: Maybe<Scalars['Boolean']>;
+  sizeByPixelDensity?: Maybe<Scalars['Boolean']>;
   tracedSVG?: Maybe<Scalars['Boolean']>;
   loading?: Maybe<Scalars['String']>;
   disableBgImageOnAlpha?: Maybe<Scalars['Boolean']>;
@@ -3267,6 +3404,8 @@ export type SitePluginPluginOptionsPluginsPluginOptions = {
   class?: Maybe<Scalars['String']>;
   size?: Maybe<Scalars['Int']>;
   styles?: Maybe<SitePluginPluginOptionsPluginsPluginOptionsStyles>;
+  offsetY?: Maybe<Scalars['Int']>;
+  className?: Maybe<Scalars['String']>;
 };
 
 export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
@@ -3275,10 +3414,9 @@ export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
   maxWidth?: Maybe<IntQueryOperatorInput>;
   quality?: Maybe<IntQueryOperatorInput>;
   withWebp?: Maybe<BooleanQueryOperatorInput>;
-  pathPrefix?: Maybe<StringQueryOperatorInput>;
-  wrapperStyle?: Maybe<StringQueryOperatorInput>;
   showCaptions?: Maybe<BooleanQueryOperatorInput>;
   markdownCaptions?: Maybe<BooleanQueryOperatorInput>;
+  sizeByPixelDensity?: Maybe<BooleanQueryOperatorInput>;
   tracedSVG?: Maybe<BooleanQueryOperatorInput>;
   loading?: Maybe<StringQueryOperatorInput>;
   disableBgImageOnAlpha?: Maybe<BooleanQueryOperatorInput>;
@@ -3288,6 +3426,8 @@ export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
   class?: Maybe<StringQueryOperatorInput>;
   size?: Maybe<IntQueryOperatorInput>;
   styles?: Maybe<SitePluginPluginOptionsPluginsPluginOptionsStylesFilterInput>;
+  offsetY?: Maybe<IntQueryOperatorInput>;
+  className?: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsPluginsPluginOptionsStyles = {
@@ -3335,24 +3475,24 @@ export type SitePluginSortInput = {
 
 export type SiteSiteMetadata = {
   __typename?: 'SiteSiteMetadata';
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
   author?: Maybe<Scalars['String']>;
   authorEmail?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
   disqusShortName?: Maybe<Scalars['String']>;
   keywords?: Maybe<Array<Maybe<Scalars['String']>>>;
   siteUrl?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
   twitterUsername?: Maybe<Scalars['String']>;
 };
 
 export type SiteSiteMetadataFilterInput = {
+  title?: Maybe<StringQueryOperatorInput>;
+  description?: Maybe<StringQueryOperatorInput>;
   author?: Maybe<StringQueryOperatorInput>;
   authorEmail?: Maybe<StringQueryOperatorInput>;
-  description?: Maybe<StringQueryOperatorInput>;
   disqusShortName?: Maybe<StringQueryOperatorInput>;
   keywords?: Maybe<StringQueryOperatorInput>;
   siteUrl?: Maybe<StringQueryOperatorInput>;
-  title?: Maybe<StringQueryOperatorInput>;
   twitterUsername?: Maybe<StringQueryOperatorInput>;
 };
 
@@ -3373,6 +3513,19 @@ export type StringQueryOperatorInput = {
   nin?: Maybe<Array<Maybe<Scalars['String']>>>;
   regex?: Maybe<Scalars['String']>;
   glob?: Maybe<Scalars['String']>;
+};
+
+export type TransformOptions = {
+  grayscale?: Maybe<Scalars['Boolean']>;
+  duotone?: Maybe<DuotoneGradient>;
+  rotate?: Maybe<Scalars['Int']>;
+  trim?: Maybe<Scalars['Float']>;
+  cropFocus?: Maybe<ImageCropFocus>;
+  fit?: Maybe<ImageFit>;
+};
+
+export type WebPOptions = {
+  quality?: Maybe<Scalars['Int']>;
 };
 
 export type GatsbyImageSharpFixedFragment = (
@@ -3500,21 +3653,7 @@ export type GatsbyImageSharpSizes_WithWebp_NoBase64Fragment = (
   & Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>
 );
 
-export type PagesQueryQueryVariables = {};
-
-
-export type PagesQueryQuery = (
-  { __typename?: 'Query' }
-  & { allSitePage: (
-    { __typename?: 'SitePageConnection' }
-    & { nodes: Array<(
-      { __typename?: 'SitePage' }
-      & Pick<SitePage, 'path'>
-    )> }
-  ) }
-);
-
-export type HeaderQueryVariables = {};
+export type HeaderQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type HeaderQuery = (
@@ -3531,7 +3670,7 @@ export type HeaderQuery = (
   )> }
 );
 
-export type LayoutQueryVariables = {};
+export type LayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type LayoutQuery = (
@@ -3545,7 +3684,7 @@ export type LayoutQuery = (
   )> }
 );
 
-export type SeoQueryVariables = {};
+export type SeoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type SeoQuery = (
@@ -3568,7 +3707,7 @@ export type SeoQuery = (
   )> }
 );
 
-export type CreatePagesQueryVariables = {};
+export type CreatePagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type CreatePagesQuery = (
@@ -3591,7 +3730,7 @@ export type CreatePagesQuery = (
   ) }
 );
 
-export type IndexPageQueryVariables = {};
+export type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type IndexPageQuery = (
@@ -3614,9 +3753,9 @@ export type IndexPageQuery = (
   ) }
 );
 
-export type BlogPostQueryVariables = {
+export type BlogPostQueryVariables = Exact<{
   slug: Scalars['String'];
-};
+}>;
 
 
 export type BlogPostQuery = (
