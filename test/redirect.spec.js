@@ -3,7 +3,7 @@
 const axios = require("axios");
 const { expect } = require("chai");
 
-describe("Domain Redirect Test", function() {
+describe("Domain Redirect Test", function () {
     this.slow(500);
 
     // Define an array of redirect tests, where each test has an initial URL and an expected URL
@@ -22,7 +22,7 @@ describe("Domain Redirect Test", function() {
                 maxRedirects: 0,
                 validateStatus: (status) => {
                     return status > 200 && status < 400;
-                }
+                },
             });
 
             // Ensure a 301 status code
