@@ -1,5 +1,6 @@
 .link {
     margin-top: 10px;
+    display: inline-block;
 }
 
 .meTag {
@@ -10,9 +11,14 @@
 .linkIcon {
     cursor: pointer;
     height: 20px;
-    margin: 0 0 0 10px;
     vertical-align: text-bottom;
     width: 20px;
+    margin: 0 3px 0 10px;
+}
+
+.separator {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .linkIcon:hover {

@@ -1,14 +1,12 @@
 import { graphql, Link } from "gatsby";
+import { getSrc, ImageDataLike } from "gatsby-plugin-image";
 import React from "react";
-import assert from "assert";
 
 import { Layout } from "../components/layout";
 import { PostTags } from "../components/post-tags";
-import { SEO } from "../components/seo";
+import { Article, PageHead } from "../components/seo";
 import { combineURLs } from "../utils/urls";
-import { BlogPostQuery, CreatePagesQuery } from "../graphql";
-
-import styles from "./blog-post.module.css";
+import * as styles from "./blog-post.module.css";
 
 // noinspection JSUnusedGlobalSymbols
 export const pageQuery = graphql`
@@ -27,15 +25,13 @@ export const pageQuery = graphql`
             html
             frontmatter {
                 date(formatString: "MMMM DD, YYYY")
-                isoDate: date
+                isoDate: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
                 title
                 tags
                 coverAlt
                 cover {
                     childImageSharp {
-                        fixed(width: 1200, height: 630) {
-                            src
-                        }
+                        gatsbyImageData(layout: FIXED, width: 1200, height: 630)
                     }
                 }
             }
@@ -43,53 +39,44 @@ export const pageQuery = graphql`
     }
 `;
 
-type Page = CreatePagesQuery["allMarkdownRemark"]["edges"][0]["node"] | null;
-
 export interface PageContext {
-    next: Page;
-    previous: Page;
+    next: Queries.AllMarkdownFilesQuery["allMarkdownRemark"]["edges"][0]["node"];
+    previous: Queries.AllMarkdownFilesQuery["allMarkdownRemark"]["edges"][0]["node"];
     slug: string;
     tags: string[];
 }
 
 interface Props {
-    data: BlogPostQuery;
+    data: Queries.BlogPostQuery;
     // Received from createPage
     pageContext: PageContext;
 }
 
 const GITHUB_CONTENT_URL = "https://github.com/pgilad/www.giladpeleg.com/blob/master/content";
 
-const BlogTemplate: React.FC<Props> = (props) => {
-    const post = props.data.markdownRemark;
+const BlogTemplate: React.FC<Props> = ({ data, ...props }) => {
+    const post = data.markdownRemark;
     const { previous, next, slug } = props.pageContext;
     const githubEditUrl = combineURLs(GITHUB_CONTENT_URL, combineURLs(slug, "index.md"));
 
-    assert(post);
-    assert(post.excerpt);
-    assert(post.frontmatter);
-    assert(post.frontmatter.tags);
-    assert(post.frontmatter.title);
+    if (
+        !post ||
+        !post.excerpt ||
+        !post.frontmatter ||
+        !post.frontmatter.tags ||
+        !post.frontmatter.title
+    ) {
+        throw new Error("Invalid fields");
+    }
 
-    const seoImageSource = post?.frontmatter?.cover?.childImageSharp?.fixed?.src;
-    const seoArticleMetadata = {
-        description: post.excerpt,
-        publishedDate: post.frontmatter.isoDate,
-        tags: post.frontmatter.tags,
-        title: post.frontmatter.title,
-    };
+    const tags = post.frontmatter.tags.filter(Boolean) as string[];
 
     return (
         <Layout headerTitle={post.frontmatter.title}>
-            <SEO
-                article={seoArticleMetadata}
-                imageAlt={post.frontmatter.coverAlt || undefined}
-                imageSrc={seoImageSource}
-                pathname={props.pageContext.slug}
-            />
+            <h1 className={styles.postTitle}>{post.frontmatter.title}</h1>
             <h2 className={styles.postDate}>{post.frontmatter.date}</h2>
             <div className={styles.blogContent} dangerouslySetInnerHTML={{ __html: post.html! }} />
-            <PostTags tags={post.frontmatter.tags} />
+            <PostTags tags={tags} />
             <a
                 className={styles.suggestAnEdit}
                 title="Suggest an edit to this post on Github"
@@ -114,6 +101,47 @@ const BlogTemplate: React.FC<Props> = (props) => {
                 </li>
             </ul>
         </Layout>
+    );
+};
+
+// noinspection JSUnusedGlobalSymbols
+export const Head: React.FC<Props> = ({ data, ...props }) => {
+    const post = data.markdownRemark;
+
+    if (
+        !post ||
+        !post.excerpt ||
+        !post.frontmatter ||
+        !post.frontmatter.tags ||
+        !post.frontmatter.title ||
+        !post.frontmatter.isoDate
+    ) {
+        throw new Error("Invalid fields");
+    }
+
+    const tags = post.frontmatter.tags.filter(Boolean) as string[];
+
+    if (!post.frontmatter.cover?.childImageSharp) {
+        // throw new Error("Missing cover");
+    }
+
+    const seoImageSource = post.frontmatter.cover
+        ? getSrc(post.frontmatter.cover as ImageDataLike)
+        : null;
+    const seoArticleMetadata: Article = {
+        description: post.excerpt,
+        publishedDate: post.frontmatter.isoDate,
+        tags: tags,
+        title: post.frontmatter.title,
+    };
+
+    return (
+        <PageHead
+            article={seoArticleMetadata}
+            imageAlt={post.frontmatter.coverAlt || undefined}
+            imageSrc={seoImageSource}
+            pathname={props.pageContext.slug}
+        />
     );
 };
 

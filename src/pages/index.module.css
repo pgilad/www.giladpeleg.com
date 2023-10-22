@@ -1,7 +1,10 @@
 .mainWrapper {
-    display: flex;
-    flex-direction: row;
     padding-top: 40px;
+}
+
+.recentPosts {
+    color: #444;
+    margin-top: 10px;
 }
 
 @media only screen and (max-width: 860px) {

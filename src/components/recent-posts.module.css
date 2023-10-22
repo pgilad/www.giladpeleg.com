@@ -1,6 +1,10 @@
 .blogPostLink {
     box-shadow: none;
     color: seagreen;
+    text-decoration: none;
+}
+
+.blogPostLink:hover {
     text-decoration: underline;
 }
 
@@ -14,6 +18,7 @@
 
 .blogPostTitle {
     margin-bottom: 0.4375rem;
+    font-weight: 200;
 }
 
 .recentPosts {

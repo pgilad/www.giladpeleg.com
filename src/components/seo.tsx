@@ -1,6 +1,6 @@
-import { graphql, StaticQuery } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
+import { getSrc, ImageDataLike } from "gatsby-plugin-image";
 import React from "react";
-import { Helmet } from "react-helmet";
 
 import {
     getDescription,
@@ -10,8 +10,6 @@ import {
     MetaTag,
 } from "../utils/seo";
 import { combineURLs } from "../utils/urls";
-import { SeoQuery } from "../graphql";
-import assert from "assert";
 
 const query = graphql`
     query SEO {
@@ -26,9 +24,7 @@ const query = graphql`
         }
         siteImage: file(relativePath: { eq: "top-image.png" }) {
             childImageSharp {
-                fixed(width: 1200, height: 630) {
-                    ...GatsbyImageSharpFixed
-                }
+                gatsbyImageData(width: 1200, height: 630, layout: FIXED)
             }
         }
     }
@@ -48,7 +44,7 @@ export interface Article {
 interface Props {
     article?: Article;
     imageAlt?: string;
-    imageSrc?: string;
+    imageSrc?: string | null;
     lang?: string;
     meta?: MetaTag[];
     overrideDescription?: string;
@@ -56,80 +52,61 @@ interface Props {
     pathname?: string;
 }
 
-export interface Data {
-    siteImage: {
-        childImageSharp: {
-            fixed: {
-                src: string;
-            };
-        };
-    };
-    site: {
-        siteMetadata: {
-            author: string;
-            description: string;
-            siteUrl: string;
-            title: string;
-            twitterUsername: string;
-        };
-    };
-}
-
-export const SEO: React.FC<Props> = ({
+export const PageHead: React.FC<Props> = ({
     article,
     imageAlt = null,
     imageSrc = null,
-    lang = "en",
     meta = [],
     overrideDescription = "",
     overrideTitle = "",
     pathname = "/",
 }) => {
+    const data: Queries.SEOQuery = useStaticQuery(query);
+    if (!data.site?.siteMetadata?.siteUrl || !data.siteImage?.childImageSharp) {
+        throw new Error("Invalid fields");
+    }
+
+    const imageUrl = imageSrc || getSrc(data.siteImage as ImageDataLike);
+    if (!imageUrl) {
+        throw new Error("Oh no");
+    }
+    // const imageUrl = combineURLs(
+    //     data.site.siteMetadata.siteUrl,
+    //     imageSrc || data.siteImage.childImageSharp.gatsbyImageData.images.sources[0]
+    // );
+    const url = combineURLs(data.site.siteMetadata.siteUrl, pathname || "/");
+
+    const metaTags = getMetaTags({
+        article,
+        data,
+        description: getDescription(data, overrideDescription, article),
+        imageDescription: imageAlt || DEFAULT_IMAGE_ALT,
+        imageUrl,
+        meta,
+        pageTitle: getPageTitle(data, article, overrideTitle),
+        url,
+    });
+
+    const schemaOrgJSONLD = getSchemaOrgJSONLD({
+        article,
+        data,
+        imageUrl,
+        url,
+    });
+
     return (
-        <StaticQuery
-            query={query}
-            render={(data: SeoQuery) => {
-                assert(data.site?.siteMetadata?.siteUrl);
-                assert(data.siteImage?.childImageSharp?.fixed);
-
-                const imageUrl = combineURLs(
-                    data.site.siteMetadata.siteUrl,
-                    imageSrc || data.siteImage.childImageSharp.fixed.src
-                );
-                const url = combineURLs(data.site.siteMetadata.siteUrl, pathname || "/");
-
-                const metaTags = getMetaTags({
-                    article,
-                    data,
-                    description: getDescription(data, overrideDescription, article),
-                    imageDescription: imageAlt || DEFAULT_IMAGE_ALT,
-                    imageUrl,
-                    meta,
-                    pageTitle: getPageTitle(data, article, overrideTitle),
-                    url,
-                });
-
-                const schemaOrgJSONLD = getSchemaOrgJSONLD({
-                    article,
-                    data,
-                    imageUrl,
-                    url,
-                });
-
-                return (
-                    <Helmet
-                        htmlAttributes={{ lang }}
-                        meta={metaTags}
-                        script={[
-                            {
-                                type: "application/ld+json",
-                                innerHTML: JSON.stringify(schemaOrgJSONLD),
-                            },
-                        ]}
-                        title={getPageTitle(data, article, overrideTitle)}
-                    />
-                );
-            }}
-        />
+        <>
+            <title>{getPageTitle(data, article, overrideTitle)}</title>
+            <meta name="description" content="Hello World" />
+            {metaTags.map((tag) => (
+                <meta
+                    key={tag.name || `${tag.property}::${tag.content}`}
+                    name={tag.name}
+                    property={tag.property}
+                    content={tag.content}
+                />
+            ))}
+            <script type="application/ld+json">{JSON.stringify(schemaOrgJSONLD)}</script>
+        </>
     );
 };

@@ -3,4 +3,4 @@
 .netlify/
 node_modules/
 public/
-src/graphql.ts
+src/gatsby-types.d.ts

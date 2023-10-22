@@ -1,14 +1,12 @@
-/**
- * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/ssr-apis/
- */
-
+import { GatsbySSR } from "gatsby";
 import React from "react";
 
 // noinspection JSUnusedGlobalSymbols
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const onRenderBody = ({ setHeadComponents }) => {
+export const onRenderBody: GatsbySSR["onRenderBody"] = ({
+    setHeadComponents,
+    setHtmlAttributes,
+}) => {
+    setHtmlAttributes({ lang: "en" });
     setHeadComponents([
         <link
             rel="preconnect dns-prefetch"

@@ -1,5 +1,4 @@
 import { Article } from "../components/seo";
-import { SeoQuery } from "../graphql";
 import { combineURLs } from "./urls";
 
 export interface OpenGraphMetaTag extends MetaTag {
@@ -19,7 +18,7 @@ export interface MetaTag {
 }
 
 export const getTwitterMetaTags = (options: {
-    data: SeoQuery;
+    data: Queries.SEOQuery;
     description: string;
     imageDescription: string;
     imageUrl: string;
@@ -59,7 +58,7 @@ export const getTwitterMetaTags = (options: {
 
 export const getOpenGraphMetaTags = (options: {
     article?: Article;
-    data: SeoQuery;
+    data: Queries.SEOQuery;
     description: string;
     imageDescription: string;
     imageUrl: string;
@@ -125,7 +124,7 @@ export const getOpenGraphMetaTags = (options: {
             {
                 property: "article:published_time",
                 content: options.article.publishedDate,
-            }
+            },
         );
         new Set(options.article.tags).forEach((tag) => {
             tags.push({
@@ -143,7 +142,7 @@ export const getOpenGraphMetaTags = (options: {
     return tags;
 };
 
-export const getGeneralMetaTags = (description: string, data: SeoQuery): MetaTag[] => {
+export const getGeneralMetaTags = (description: string, data: Queries.SEOQuery): MetaTag[] => {
     return [
         {
             name: "description",
@@ -169,11 +168,11 @@ interface Entity {
 
 const getWebsiteSchema = (options: {
     article?: Article;
-    data: SeoQuery;
+    data: Queries.SEOQuery;
     imageUrl: string;
     url: string;
 }) => ({
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "WebSite",
     publisher: {
         "@type": "Organization",
@@ -196,11 +195,11 @@ const getWebsiteSchema = (options: {
 
 const getBlogPostingSchema = (options: {
     article?: Article;
-    data: SeoQuery;
+    data: Queries.SEOQuery;
     imageUrl: string;
     url: string;
 }) => ({
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "BlogPosting",
     author: {
         "@type": "Person",
@@ -220,11 +219,11 @@ const getBlogPostingSchema = (options: {
 
 const getBreadcrumbListSchema = (options: {
     article?: Article;
-    data: SeoQuery;
+    data: Queries.SEOQuery;
     imageUrl: string;
     url: string;
 }) => ({
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "@id": options.data!.site!.siteMetadata!.siteUrl,
     name: options.data!.site!.siteMetadata!.title,
@@ -252,7 +251,7 @@ const getBreadcrumbListSchema = (options: {
 
 export const getSchemaOrgJSONLD = (options: {
     article?: Article;
-    data: SeoQuery;
+    data: Queries.SEOQuery;
     imageUrl: string;
     url: string;
 }): Entity[] => {
@@ -271,9 +270,9 @@ export const getSchemaOrgJSONLD = (options: {
 };
 
 export const getDescription = (
-    data: SeoQuery,
+    data: Queries.SEOQuery,
     overrideDescription?: string,
-    article?: Article
+    article?: Article,
 ): string => {
     if (overrideDescription) {
         return overrideDescription;
@@ -284,7 +283,11 @@ export const getDescription = (
     return data.site!.siteMetadata!.description!;
 };
 
-export const getPageTitle = (data: SeoQuery, article?: Article, overrideTitle?: string): string => {
+export const getPageTitle = (
+    data: Queries.SEOQuery,
+    article?: Article,
+    overrideTitle?: string,
+): string => {
     if (overrideTitle) {
         return `${overrideTitle} | ${data.site!.siteMetadata!.title}`;
     }
@@ -296,7 +299,7 @@ export const getPageTitle = (data: SeoQuery, article?: Article, overrideTitle?: 
 
 export const getMetaTags = (options: {
     article?: Article;
-    data: SeoQuery;
+    data: Queries.SEOQuery;
     description: string;
     imageDescription: string;
     imageUrl: string;

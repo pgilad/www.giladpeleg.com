@@ -1,23 +1,18 @@
 import { Link } from "gatsby";
 import React from "react";
 
-import styles from "./home-recent-posts.module.css";
-import { IndexPageQuery } from "../graphql";
-import assert from "assert";
-
-type Post = IndexPageQuery["allMarkdownRemark"]["edges"][0];
+import * as styles from "./recent-posts.module.css";
 
 type Props = {
-    posts: Post[];
+    posts: Queries.PostsPageQuery["allMarkdownRemark"]["edges"];
 };
 
-export const HomeRecentPosts: React.FC<Props> = (props) => (
+export const RecentPosts = (props: Props) => (
     <div className={styles.blogPostList}>
-        <h2 className={styles.recentPosts}>Recent posts</h2>
         {props.posts.map(({ node }) => {
-            assert(node.fields);
-            assert(node.fields.slug);
-            assert(node.frontmatter);
+            if (!node.fields || !node.fields.slug || !node.frontmatter) {
+                throw new Error("Invalid fields");
+            }
 
             return (
                 <div key={node.fields.slug} className={styles.blogPost}>
@@ -27,6 +22,7 @@ export const HomeRecentPosts: React.FC<Props> = (props) => (
                             {node.frontmatter.title || node.fields.slug}
                         </Link>
                     </h3>
+                    <div>{node.excerpt}</div>
                 </div>
             );
         })}

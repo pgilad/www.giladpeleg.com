@@ -1,9 +1,9 @@
 import React from "react";
 
-import styles from "./post-tags.module.css";
+import * as styles from "./post-tags.module.css";
 
 interface Props {
-    tags?: string[];
+    tags: string[];
 }
 
 export const PostTags: React.FC<Props> = (props) => {

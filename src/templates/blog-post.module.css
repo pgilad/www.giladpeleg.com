@@ -7,6 +7,10 @@
     padding: 0;
 }
 
+.postTitle {
+    margin-top: 20px;
+}
+
 .postDate {
     display: block;
     font-size: 1.1rem;

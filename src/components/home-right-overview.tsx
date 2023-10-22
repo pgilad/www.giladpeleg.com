@@ -6,19 +6,15 @@ import githubIcon from "../images/icons/iconmonstr-github-1.svg";
 import linkedinIcon from "../images/icons/iconmonstr-linkedin-3.svg";
 import postsIcon from "../images/icons/iconmonstr-note-19.svg";
 import feedIcon from "../images/icons/iconmonstr-rss-feed-1.svg";
-import twitterIcon from "../images/icons/iconmonstr-twitter-1.svg";
+// import twitterIcon from "../images/icons/iconmonstr-twitter-1.svg";
+import * as styles from "./home-right-overview.module.css";
 
-import styles from "./home-right-overview.module.css";
-
-export const HomeRightOverview = (): JSX.Element => {
+export const HomeRightOverview = () => {
     return (
         <div style={{ minWidth: "250px" }}>
-            <Link to="/">Gilad Peleg</Link>
-            <div className={styles.meTag}>Developer and manager.</div>
             <div className={styles.link}>
-                See my code:{" "}
                 <a href="https://github.com/pgilad">
-                    Github{" "}
+                    Github
                     <img
                         height="20"
                         width="20"
@@ -28,23 +24,10 @@ export const HomeRightOverview = (): JSX.Element => {
                     />
                 </a>
             </div>
+            <span className={styles.separator}>/</span>
             <div className={styles.link}>
-                Follow me at:{" "}
-                <a href="https://twitter.com/GiladPeleg">
-                    Twitter{" "}
-                    <img
-                        height="20"
-                        width="20"
-                        src={twitterIcon}
-                        className={styles.linkIcon}
-                        alt="Twitter icon"
-                    />
-                </a>
-            </div>
-            <div className={styles.link}>
-                See my resume:{" "}
                 <a href="https://www.linkedin.com/in/giladpeleg">
-                    LinkedIn{" "}
+                    LinkedIn
                     <img
                         height="20"
                         width="20"
@@ -54,10 +37,10 @@ export const HomeRightOverview = (): JSX.Element => {
                     />
                 </a>
             </div>
+            <span className={styles.separator}>/</span>
             <div className={styles.link}>
-                Send me a pigeon:{" "}
                 <a href="mailto:gilad@giladpeleg.com">
-                    Email{" "}
+                    Email
                     <img
                         height="20"
                         width="20"
@@ -67,10 +50,10 @@ export const HomeRightOverview = (): JSX.Element => {
                     />
                 </a>
             </div>
+            <span className={styles.separator}>/</span>
             <div className={styles.link}>
-                Things I write about:{" "}
                 <Link to="/">
-                    Posts{" "}
+                    Posts
                     <img
                         height="20"
                         width="20"
@@ -80,8 +63,8 @@ export const HomeRightOverview = (): JSX.Element => {
                     />
                 </Link>
             </div>
+            <span className={styles.separator}>/</span>
             <div className={styles.link}>
-                Follow this blog:{" "}
                 <a rel="alternate" type="application/rss+xml" href="/rss.xml">
                     RSS
                     <img

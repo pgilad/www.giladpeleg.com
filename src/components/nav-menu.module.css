@@ -1,0 +1,20 @@
+.navContainer {
+    position: absolute;
+    right: 10px;
+}
+
+.navMenu {
+    display: inline-block;
+    margin-right: 50px;
+}
+
+.navLink {
+    color: black;
+    font-weight: 600;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.navLink:hover {
+    text-decoration: underline;
+}
