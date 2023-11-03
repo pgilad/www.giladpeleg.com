@@ -68,7 +68,7 @@ const rssFeedQuery = `
 `;
 
 const configuration: GatsbyConfig = {
-    trailingSlash: "never",
+    trailingSlash: "always",
     graphqlTypegen: {
         typesOutputPath: "src/gatsby-types.d.ts",
         generateOnBuild: false,
@@ -247,12 +247,6 @@ const configuration: GatsbyConfig = {
                 siteUrl: siteUrl,
             },
         },
-        // {
-        //     resolve: "gatsby-plugin-netlify",
-        //     options: {
-        //         mergeSecurityHeaders: false,
-        //     },
-        // },
         {
             resolve: "gatsby-plugin-cloudflare-pages",
             options: {
@@ -272,18 +266,6 @@ const configuration: GatsbyConfig = {
                 },
             },
         },
-        // {
-        //     resolve: "gatsby-plugin-google-gtag",
-        //     options: {
-        //         trackingIds: [getAnalyticsTrackingId()],
-        //         gtagConfig: {
-        //             send_page_view: true
-        //         },
-        //         pluginConfig: {
-        //             respectDNT: true,
-        //         },
-        //     },
-        // },
         {
             resolve: "gatsby-plugin-manifest",
             options: {

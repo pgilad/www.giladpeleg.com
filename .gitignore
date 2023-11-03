@@ -75,6 +75,5 @@ yarn-error.log
 schema.graphql
 
 # Local Netlify folder
-.netlify
 schema.json
 /src/gatsby-types.d.ts
