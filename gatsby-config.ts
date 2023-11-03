@@ -71,7 +71,7 @@ const configuration: GatsbyConfig = {
     trailingSlash: "always",
     graphqlTypegen: {
         typesOutputPath: "src/gatsby-types.d.ts",
-        generateOnBuild: false,
+        generateOnBuild: true,
         documentSearchPaths: [
             "./gatsby-config.ts",
             "./gatsby-node.ts",
