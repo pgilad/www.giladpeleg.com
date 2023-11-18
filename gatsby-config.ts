@@ -260,8 +260,7 @@ const configuration: GatsbyConfig = {
                         "Strict-Transport-Security: max-age=31536000; includeSubDomains; preload",
                         "X-Content-Type-Options: nosniff",
                         "X-Frame-Options: DENY",
-                        "X-UA-Compatible: IE=Edge,chrome=1",
-                        "X-XSS-Protection: 1; mode=block",
+                        "X-UA-Compatible: IE=Edge,chrome=1"
                     ],
                 },
             },
