@@ -99,7 +99,7 @@
         "stylelint-config-recommended": "13.0.0",
         "stylelint-order": "6.0.3",
         "ts-node": "10.9.1",
-        "wrangler": "3.18.0"
+        "wrangler": "3.19.0"
     },
     "browserslist": [
         ">1%",
