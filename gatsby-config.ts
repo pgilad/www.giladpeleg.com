@@ -175,7 +175,7 @@ const configuration: GatsbyConfig = {
                     "https://www.giladpeleg.com/sitemap-0.xml",
                 ],
                 policy: [
-                    { userAgent: "GPTBot", disallow: "*" },
+                    { userAgent: "GPTBot", disallow: "/" },
                     { userAgent: "*", allow: "/" },
                     { userAgent: "*", disallow: "/cdn-cgi/" },
                 ],
